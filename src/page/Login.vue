@@ -19,7 +19,7 @@ const login = async () => {
       message: 'Login Successfully!',
       center: true,
     });
-    router.push('/');
+    await router.push('/');
   } catch(e) {
     console.log(e);
   }

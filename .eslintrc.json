@@ -35,10 +35,7 @@
             2
         ],
         "@typescript-eslint/type-annotation-spacing": "error",
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "linebreak-style": "off",
         "quotes": [
             "error",
             "single"
