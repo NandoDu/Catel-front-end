@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PriceContainer from '../component/PriceContainer.vue';
+import DatePicker from '../component/datePicker.vue';
 import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
 import {RoomInfoO} from '../api/userApi';
@@ -13,6 +14,7 @@ store.dispatch('room/roomInfo', {id: 1}).then(() => {
 </script>
 <template>
   <div style="display:flex;flex-direction:column;align-items: center">
+    <DatePicker />
     <PriceContainer
       v-for="item in roomInfoList"
       :key="item.id"

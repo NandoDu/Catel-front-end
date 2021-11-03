@@ -32,7 +32,7 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
                         <el-icon
                           v-for="i in Array(maxPeople)"
                           :key="i"
-                          size="20"
+                          :size="20"
                           color="black"
                         >
                           <avatar style="width: 20px!important;height: 20px!important;" />
@@ -99,14 +99,14 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
 .main-container {
   background-color: white;
   height: 160px;
-  width: 960px;
+  width: 1160px;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   border-radius: 8px;
 }
 
 .room-container {
   padding-top: 24px;
-  padding-left: 24px;
+  padding-left: 54px;
   padding-right: 24px;
   /*position: relative;*/
   
@@ -179,7 +179,7 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
 }
 
 .room-sale-people {
-  width: 206px;
+  width: 260px;
   padding-right: 16px;
   box-sizing: border-box;
 }
@@ -189,13 +189,14 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
 }
 
 .people-icon {
-  width: 80px;
+  width: 120px;
   height: 100%;
   padding-right: 21px;
 }
 
 .bed-info {
   flex: 1;
+  width: 120px;
   color: #0f294d;
 }
 
@@ -214,13 +215,13 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
 }
 
 .room-sale-other {
-  width: 102px;
+  width: 140px;
   padding-right: 16px;
   box-sizing: border-box;
 }
 
 .room-sale-policy {
-  width: 160px;
+  width: 180px;
   padding-right: 30px;
   box-sizing: border-box;
 }
@@ -248,6 +249,6 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
   justify-content: center;
   align-items: center;
   width: 80px;
-  margin-right: -0px;
+  margin-right: 10px;
 }
 </style>
