@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-defineProps<{ hotelId: number, roomId: number }>();
+defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumber: number, roomPrice: number, maxPeople: number }>();
 
 
 </script>
@@ -18,7 +18,7 @@ defineProps<{ hotelId: number, roomId: number }>();
             >
           </div>
           <div class="room-panel-name">
-            繁花似锦201-南苑
+            {{ hotelName+'-'+roomType }}
           </div>
         </div>
         <div class="room-sale">
@@ -30,18 +30,8 @@ defineProps<{ hotelId: number, roomId: number }>();
                     <div class="people-icon">
                       <div style="height: 100px">
                         <el-icon
-                          size="20"
-                          color="black"
-                        >
-                          <avatar style="width: 20px!important;height: 20px!important;" />
-                        </el-icon>
-                        <el-icon
-                          size="20"
-                          color="black"
-                        >
-                          <avatar style="width: 20px!important;height: 20px!important;" />
-                        </el-icon>
-                        <el-icon
+                          v-for="i in Array(maxPeople)"
+                          :key="i"
                           size="20"
                           color="black"
                         >
@@ -51,17 +41,17 @@ defineProps<{ hotelId: number, roomId: number }>();
                     </div>
                     <div class="bed-info">
                       <div class="bed-info-span">
-                        3张单人床
+                        {{ roomType }}
                       </div>
                       <div class="bed-info-span-blue">
-                        3份早餐
+                        {{ breakfast?'包含早餐':'不包含早餐' }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="room-sale-other">
                   <div style="display: block;margin-bottom: 6px">
-                    剩余30间
+                    剩余{{ roomNumber }}间
                   </div>
                 </div>
                 <div class="room-sale-policy">
@@ -73,7 +63,7 @@ defineProps<{ hotelId: number, roomId: number }>();
                   </div>
                 </div>
                 <div class="room-sale-promotion">
-                  <el-tag>闪住</el-tag>
+                  <el-tag>可用优惠</el-tag>
                 </div>
                 <div style="flex: 1 1 0;" />
                 <div class="room-sale-price">
@@ -84,7 +74,7 @@ defineProps<{ hotelId: number, roomId: number }>();
                     <div
                       style="line-height: 28px;color: #0086f6;font-size: 24px;display: inline-block;font-weight: 600;"
                     >
-                      ￥356
+                      ￥{{ roomPrice }}
                     </div>
                   </div>
                   <div class="sale-button">
@@ -107,9 +97,10 @@ defineProps<{ hotelId: number, roomId: number }>();
 
 <style scoped>
 .main-container {
-  height: 178px;
+  background-color: white;
+  height: 160px;
   width: 960px;
-  border: 1px solid silver;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   border-radius: 8px;
 }
 
@@ -122,7 +113,7 @@ defineProps<{ hotelId: number, roomId: number }>();
 }
 
 .room-info {
-  height: 130px;
+  height: 112px;
   width: 100%;
   display: flex;
   padding-bottom: 24px;
@@ -141,7 +132,7 @@ defineProps<{ hotelId: number, roomId: number }>();
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 35px;
 }
 
 .room-panel-pic {
@@ -188,7 +179,7 @@ defineProps<{ hotelId: number, roomId: number }>();
 }
 
 .room-sale-people {
-  width: 236px;
+  width: 206px;
   padding-right: 16px;
   box-sizing: border-box;
 }
@@ -257,6 +248,6 @@ defineProps<{ hotelId: number, roomId: number }>();
   justify-content: center;
   align-items: center;
   width: 80px;
-  margin-right: -20px;
+  margin-right: -0px;
 }
 </style>
