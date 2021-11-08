@@ -4,7 +4,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {path: '/', component: Home},
-  {path: '/login', component: Login},
+  {path: '/login', component: Login}
 ];
 
 export default routes;
