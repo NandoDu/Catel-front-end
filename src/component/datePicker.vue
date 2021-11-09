@@ -13,8 +13,6 @@ const setDate=()=>{
 };
 setDate();
 const disabledDate = (select: Date) => {
-  // Can not select days before today and today
-  // (current && current < moment().subtract(1, "days")) ||
   let now = new Date().getTime();
   console.log(select.getTime());
   return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
