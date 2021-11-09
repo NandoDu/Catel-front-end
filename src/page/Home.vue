@@ -18,7 +18,7 @@
           trigger="click"
           height="350px"
           style="width: 500px"
-          autoplay="false"
+          :autoplay="false"
           arrow="never"
           indicator-position="outside"
         >
@@ -27,7 +27,10 @@
             :key="item"
           >
             <div>
-              <div v-for="(card, index) in cards">
+              <div
+                v-for="(card, index) in cards"
+                :key="card.img"
+              >
                 <div
                   class="cardHotel"
                   :class="{'firstCardHotel' : index % 3 === 0}"
@@ -80,7 +83,10 @@
       精选酒店
     </h3>
     <div class="hotelListFirst">
-      <div v-for="(hotel, index) in hotels_first">
+      <div
+        v-for="(hotel, index) in hotels_first"
+        :key="hotel.img"
+      >
         <div
           class="hotelItemFirst"
           :class="{'hotelItemFirstHead' : index === 0}"
@@ -96,7 +102,10 @@
       </div>
     </div>
     <div class="hotelListSecond">
-      <div v-for="(hotel, index) in hotels_second">
+      <div
+        v-for="(hotel, index) in hotels_second"
+        :key="hotel.img"
+      >
         <div
           class="hotelItemSecond"
           :class="{'hotelItemSecondHead' : index === 0}"
@@ -120,7 +129,10 @@
       合作品牌
     </h3>
     <div class="brandList">
-      <div v-for="(brand, index) in brands">
+      <div
+        v-for="(brand, index) in brands"
+        :key="brand.img"
+      >
         <div
           class="brandItem"
           :class="{'brandItemHead': index === 0}"
