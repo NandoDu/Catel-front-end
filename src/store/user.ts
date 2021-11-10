@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { loginAPI, LoginO } from '../api/userApi';
+import {loginAPI, LoginO} from '../api/userApi';
 import actCon from './actCon';
 
 interface UserState {

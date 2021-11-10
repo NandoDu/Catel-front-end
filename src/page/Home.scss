@@ -1,0 +1,87 @@
+.recommendPng {
+  height: 339px;
+  border-radius: 10px;
+}
+.recommendTxt {
+  color: #383838;
+  font-weight: bolder
+}
+.recommendArea {
+  margin-right: 20px;
+}
+.displayArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.el-carousel__item h3 {
+  color: white;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+  text-align: center;
+}
+.el-carousel__item:nth-child(n) {
+  //background-color: #99a9bf;
+}
+
+.hotelListFirst {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -70px;
+}
+.hotelItemFirst {
+  height: 350px;
+  width: 199px;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+.hotelItemFirstHead {
+  height: 350px;
+  width: 199px;
+  border-radius: 10px;
+  margin-left: 0px;
+}
+.hotelListSecond {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.hotelItemSecond {
+  margin-top: 20px;
+  height: 350px;
+  width: 199px;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+.hotelItemSecondHead {
+  height: 350px;
+  width: 199px;
+  border-radius: 10px;
+  margin-left: 0px;
+}
+.brandList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.brandItem {
+  height: 80px;
+  width: 99px;
+  background-color: #f6f6f6;
+  margin-left: 10px;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.brandItemHead {
+  height: 80px;
+  width: 99px;
+  background-color: #f6f6f6;
+  margin-left: 0px;
+  margin-bottom: 100px;
+}
