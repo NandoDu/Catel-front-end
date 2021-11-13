@@ -25,14 +25,14 @@
             <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-location"></i></div>
             <span class="position_info">
               <span class="position_text">中国，上海，嘉定区，马陆镇宝安公路3138-3148号</span>
-              <span class="position_show_more">显示地图</span>
+<!--              <span class="position_show_more">显示地图</span>-->
             </span>
           </div>
-          <div class="desc">
-            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-office-building"></i></div>
-            <span class="desc_context">开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。</span>
-            <span class="desc_show_more">查看更多</span>
-          </div>
+<!--          <div class="desc">-->
+<!--            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-office-building"></i></div>-->
+<!--            <span class="desc_context">开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。</span>-->
+<!--&lt;!&ndash;            <span class="desc_show_more">查看更多</span>&ndash;&gt;-->
+<!--          </div>-->
         </div>
       </div>
       <div class="price_container">
@@ -45,15 +45,15 @@
       <div class="head_album">
         <div class="album_box" style="position: absolute;top: 0;bottom: 0;right: 0;left: 0">
           <div class="big_pic">
-            <div style="position: absolute; inset: 0;">
+            <div style="position: absolute; inset: 0;padding-bottom: 8px">
               <img class="bigpic_img" alt="酒店图片" src="//ak-d.tripcdn.com/images/fd/hotel/g3/M07/8F/43/CggYGVX55jyAWTnGAA0-M7m4m2s797_R_600_400_R5_D.jpg" style="height: 100%;width: 100%">
             </div>
-            <div class="focus_mask">
-              <span class="more_pics">查看全部的377张图片</span>
-            </div>
-            <div class="collect">
-              <i class="el-icon-star-on"></i>
-            </div>
+<!--            <div class="focus_mask">-->
+<!--              <span class="more_pics">查看全部的377张图片</span>-->
+<!--            </div>-->
+<!--            <div class="collect">-->
+<!--              <i class="el-icon-star-on"></i>-->
+<!--            </div>-->
           </div>
           <div class="child_box">
             <div class="album_item">
@@ -91,22 +91,22 @@
       </div>
       <div class="head_context">
         <div class="review_container">
-          <div class="review_container_tab" style="width: 98%;margin-top: 10px;">
-            <div class="review_info" style="display: flex;justify-content: flex-start;align-items: center">
-              <div class="review_sum" style="width: calc(55% - 15px);display: flex;flex-direction: column">
-                <p style="margin-bottom: 4px">
+          <div class="review_container_tab" style="width: 98%;">
+            <div class="review_info" style="display: flex;justify-content: flex-start;align-items: center;margin-bottom: 4px">
+              <div class="review_sum" style="width: calc(55% - 4px);display: flex;flex-direction: column">
+                <p style="margin-bottom: 8px;margin-top: 0">
                   <span class="score_box">
                     <b class="score_value" style="color: #fff;font-size: 20px;margin-right: 2px">4.4</b>
                     <span style="font-size: 16px;line-height: 22px;color: #fff;font-weight: 500;opacity: .6;">分</span>
                   </span>
                   <span class="score_text">很好</span>
                 </p>
-                <p class="review_all">显示全部522条评论</p>
-                <p class="review_quality">
+                <p class="review_all" style="margin-bottom: 10px;margin-top: 10px">显示全部522条评论</p>
+                <p class="review_quality" style="margin-bottom:4px;margin-top: 8px">
                   环境优雅、房间很大
                 </p>
               </div>
-              <div class="review_box" style="position: relative;width: 45%;float:right">
+              <div class="review_box" style="position: relative;width: 45%;right:0">
                 <div class="review_bubble"></div>
                 <div class="review_content">
                   <div class="review_content_context">
@@ -120,33 +120,36 @@
           </div>
         </div>
         <div class="traffic_container">
-          <div class="map_icon"></div>
-          <div class="map_detail">
-            <div>
-              <ul class="traffic_list" style="display: flex;justify-content: flex-start;list-style: none;padding-left: 10px">
-                <li style="margin-right: 30px;list-style: none;display: list-item">
-                  <span style="font-size: 20px;">
-                    <i class="el-icon-s-promotion"></i>
-                    <span class="item_distance">49.18公里</span>
-                  </span>
-                </li>
-                <li style="margin-right: 30px;list-style: none">
-                  <span style="font-size: 20px">
-                    <i class="el-icon-truck"></i>
-                    <span class="item_distance">31.77公里</span>
-                  </span>
-                </li>
-              </ul>
-              <div class="traffic_desc" style="overflow: hidden;margin-bottom: 4px;padding-left: 10px">
-                <div class="traffic_desc_text">附近1公里内有3个景点，距离市中心45.6千米</div>
-              </div>
-              <div>
-                <span class="map_show_more">
-                  查看地图
-                </span>
-              </div>
-            </div>
-          </div>
+          <span class="hotel_desc">
+            开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。
+          </span>
+<!--          <div class="map_icon"></div>-->
+<!--          <div class="map_detail">-->
+<!--            <div>-->
+<!--              <ul class="traffic_list" style="display: flex;justify-content: flex-start;list-style: none;padding-left: 10px">-->
+<!--                <li style="margin-right: 30px;list-style: none;display: list-item">-->
+<!--                  <span style="font-size: 20px;">-->
+<!--                    <i class="el-icon-s-promotion"></i>-->
+<!--                    <span class="item_distance">49.18公里</span>-->
+<!--                  </span>-->
+<!--                </li>-->
+<!--                <li style="margin-right: 30px;list-style: none">-->
+<!--                  <span style="font-size: 20px">-->
+<!--                    <i class="el-icon-truck"></i>-->
+<!--                    <span class="item_distance">31.77公里</span>-->
+<!--                  </span>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--              <div class="traffic_desc" style="overflow: hidden;margin-bottom: 4px;padding-left: 10px">-->
+<!--                <div class="traffic_desc_text">附近1公里内有3个景点，距离市中心45.6千米</div>-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <span class="map_show_more">-->
+<!--                  查看地图-->
+<!--                </span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <div class="amenity_container">
           <div class="amenity_list">
@@ -172,6 +175,9 @@
 </template>
 
 <style scoped>
+section{
+  width:1160px;
+}
 body{
   font: 12px/1.5 Helvetica Neue,Helvetica,Arial,sans-serif;
 }
@@ -180,7 +186,7 @@ body{
 }
 .content{
   display: flex;
-  margin: 8px 0;
+  margin: 0;
   padding: 4px;
 }
 .head_album{
@@ -284,17 +290,18 @@ body{
 .head_context{
   max-width: 43%;
   flex: auto;
-  padding: 0 0 8px 16px;
+  padding: 0 0 0 16px;
   position: relative;
 }
 .review_container{
   display: flex;
   align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f0f2f5;
-  margin-bottom: 12px;
+  /*padding-bottom: 12px;*/
+  border-bottom: 2px solid #f0f2f5;
+  /*margin-bottom: 12px;*/
   /*max-width: 460px;*/
-  justify-content: flex-end;
+  justify-content: flex-start;
+  /*margin-left: 12px;*/
 }
 .score_box{
   background-color: #4978ce;
@@ -381,12 +388,26 @@ body{
 .traffic_container{
   display: flex;
   justify-content: space-between;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f0f2f5;
-  margin-bottom: 12px;
-  margin-left: 12px;
-  max-width: 460px;
+  /*padding-bottom: 12px;*/
+  border-bottom: 2px solid #f0f2f5;
+  /*margin-bottom: 12px;*/
+  /*padding-left: 12px;*/
+  /*margin-left: 12px;*/
+  /*max-width: 460px;*/
   cursor: pointer;
+}
+.traffic_container .hotel_desc{
+  display: block;
+  justify-content: space-between;
+  margin: 13px 3px 13px 0;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-align: left;
+  line-height: 30px;
+  word-break: break-all;
+  width: 100%;
+  color: #455873;
+  font-family: PingFangSC-Regular,serif;
 }
 .map_icon{
   background: url("src/asset/虚假的地图.jpg") 50%/cover;
@@ -409,7 +430,7 @@ body{
   line-height: 18px;
   margin-left: 4px;
   cursor: pointer;
-  border-bottom: 1px dotted #0f294d;
+  border-bottom: 2px dotted #0f294d;
 }
 .traffic_desc_text{
   font-size: 14px;
@@ -450,10 +471,10 @@ body{
   overflow: hidden;
   /*vertical-align: sub;*/
   height: 28px;
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-left: 10px;
-  margin-right:12px;
+  /*margin-top: 10px;*/
+  /*padding-top: 10px;*/
+  /*padding-left: 10px;*/
+  /*margin-right:12px;*/
 }
 .amenity_list{
   flex-shrink: 0;
@@ -510,7 +531,7 @@ body{
   margin-bottom: 6px;
 }
 .title .hotel_name{
-  font-size: 20px;
+  font-size: 24px;
   color:#0f294d;
   display: inline;
   margin-right: 8px;
@@ -533,11 +554,11 @@ body{
   justify-content: center;
   text-align: center;
 }
-.address .desc{
-  display: flex;
-  align-items: baseline;
-  font-size: 14px;
-}
+/*.address .desc{*/
+/*  display: flex;*/
+/*  align-items: baseline;*/
+/*  font-size: 14px;*/
+/*}*/
 .position_info{
   font-size: 14px;
   color: #455873;
@@ -550,14 +571,14 @@ body{
   align-items: baseline;
   justify-content: center;
 }
-.position_show_more,.desc_show_more{
-  font-size: 14px;
-  color: #287dfa;
-  font-weight: 700;
-  cursor: pointer;
-  word-break: keep-all;
-  padding-left: 6px;
-}
+/*.position_show_more,.desc_show_more{*/
+/*  font-size: 14px;*/
+/*  color: #287dfa;*/
+/*  font-weight: 700;*/
+/*  cursor: pointer;*/
+/*  word-break: keep-all;*/
+/*  padding-left: 6px;*/
+/*}*/
 .desc_context{
   line-height: 22px;
   overflow: hidden;
