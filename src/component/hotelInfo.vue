@@ -1,38 +1,43 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {HotelInfoO} from '../api/userApi';
+
+
+defineProps<{ info: HotelInfoO}>();
+
+const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
+
+</script>
 <template>
   <section id="hotel_info_card">
     <div class="headline">
       <div class="detail">
         <div class="title">
           <h1 class="hotel_name">
-            上海岳麓花园酒店
+            {{ info.name }}
           </h1>
-          <div class="star">
-            <i class="el-icon-star-on"></i>
-          </div>
-          <div class="star">
-            <i class="el-icon-star-on"></i>
-          </div>
-          <div class="star">
-            <i class="el-icon-star-on"></i>
-          </div>
-          <div class="star">
-            <i class="el-icon-star-on"></i>
+          <div
+            class="star"
+            v-for="i in Array(hotelStarMap[info.hotelStar])"
+            :key="i"
+          >
+            <i class="el-icon-star-on" />
           </div>
         </div>
         <div class="address">
           <div class="position">
-            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-location"></i></div>
+            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;">
+              <i class="el-icon-location" />
+            </div>
             <span class="position_info">
               <span class="position_text">中国，上海，嘉定区，马陆镇宝安公路3138-3148号</span>
-<!--              <span class="position_show_more">显示地图</span>-->
+              <!--              <span class="position_show_more">显示地图</span>-->
             </span>
           </div>
-<!--          <div class="desc">-->
-<!--            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-office-building"></i></div>-->
-<!--            <span class="desc_context">开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。</span>-->
-<!--&lt;!&ndash;            <span class="desc_show_more">查看更多</span>&ndash;&gt;-->
-<!--          </div>-->
+          <!--          <div class="desc">-->
+          <!--            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-office-building"></i></div>-->
+          <!--            <span class="desc_context">开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。</span>-->
+          <!--&lt;!&ndash;            <span class="desc_show_more">查看更多</span>&ndash;&gt;-->
+          <!--          </div>-->
         </div>
       </div>
       <div class="price_container">
@@ -43,47 +48,91 @@
     </div>
     <div class="content">
       <div class="head_album">
-        <div class="album_box" style="position: absolute;top: 0;bottom: 0;right: 0;left: 0">
+        <div
+          class="album_box"
+          style="position: absolute;top: 0;bottom: 0;right: 0;left: 0"
+        >
           <div class="big_pic">
             <div style="position: absolute; inset: 0;padding-bottom: 8px">
-              <img class="bigpic_img" alt="酒店图片" src="//ak-d.tripcdn.com/images/fd/hotel/g3/M07/8F/43/CggYGVX55jyAWTnGAA0-M7m4m2s797_R_600_400_R5_D.jpg" style="height: 100%;width: 100%">
+              <img
+                class="bigpic_img"
+                alt="酒店图片"
+                src="//ak-d.tripcdn.com/images/fd/hotel/g3/M07/8F/43/CggYGVX55jyAWTnGAA0-M7m4m2s797_R_600_400_R5_D.jpg"
+                style="height: 100%;width: 100%"
+              >
             </div>
-<!--            <div class="focus_mask">-->
-<!--              <span class="more_pics">查看全部的377张图片</span>-->
-<!--            </div>-->
-<!--            <div class="collect">-->
-<!--              <i class="el-icon-star-on"></i>-->
-<!--            </div>-->
+            <!--            <div class="focus_mask">-->
+            <!--              <span class="more_pics">查看全部的377张图片</span>-->
+            <!--            </div>-->
+            <!--            <div class="collect">-->
+            <!--              <i class="el-icon-star-on"></i>-->
+            <!--            </div>-->
           </div>
           <div class="child_box">
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic1"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic1"
+                />
               </div>
             </div>
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic2"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic2"
+                />
               </div>
             </div>
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic3"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic3"
+                />
               </div>
             </div>
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic4"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic4"
+                />
               </div>
             </div>
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic5"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic5"
+                />
               </div>
             </div>
             <div class="album_item">
-              <div class="m_pic" style="width: 100%; height: 100%">
-                <div class="m_pic_item" id="pic6"></div>
+              <div
+                class="m_pic"
+                style="width: 100%; height: 100%"
+              >
+                <div
+                  class="m_pic_item"
+                  id="pic6"
+                />
               </div>
             </div>
           </div>
@@ -91,23 +140,46 @@
       </div>
       <div class="head_context">
         <div class="review_container">
-          <div class="review_container_tab" style="width: 98%;">
-            <div class="review_info" style="display: flex;justify-content: flex-start;align-items: center;margin-bottom: 4px">
-              <div class="review_sum" style="width: calc(55% - 4px);display: flex;flex-direction: column">
+          <div
+            class="review_container_tab"
+            style="width: 98%;"
+          >
+            <div
+              class="review_info"
+              style="display: flex;justify-content: flex-start;align-items: center;margin-bottom: 4px"
+            >
+              <div
+                class="review_sum"
+                style="width: calc(55% - 4px);display: flex;flex-direction: column"
+              >
                 <p style="margin-bottom: 8px;margin-top: 0">
                   <span class="score_box">
-                    <b class="score_value" style="color: #fff;font-size: 20px;margin-right: 2px">4.4</b>
+                    <b
+                      class="score_value"
+                      style="color: #fff;font-size: 20px;margin-right: 2px"
+                    >4.4</b>
                     <span style="font-size: 16px;line-height: 22px;color: #fff;font-weight: 500;opacity: .6;">分</span>
                   </span>
                   <span class="score_text">很好</span>
                 </p>
-                <p class="review_all" style="margin-bottom: 10px;margin-top: 10px">显示全部522条评论</p>
-                <p class="review_quality" style="margin-bottom:4px;margin-top: 8px">
+                <p
+                  class="review_all"
+                  style="margin-bottom: 10px;margin-top: 10px"
+                >
+                  显示全部522条评论
+                </p>
+                <p
+                  class="review_quality"
+                  style="margin-bottom:4px;margin-top: 8px"
+                >
                   环境优雅、房间很大
                 </p>
               </div>
-              <div class="review_box" style="position: relative;width: 45%;right:0">
-                <div class="review_bubble"></div>
+              <div
+                class="review_box"
+                style="position: relative;width: 45%;right:0"
+              >
+                <div class="review_bubble" />
                 <div class="review_content">
                   <div class="review_content_context">
                     <span class="review_keyword">
@@ -115,7 +187,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -123,33 +194,33 @@
           <span class="hotel_desc">
             开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。
           </span>
-<!--          <div class="map_icon"></div>-->
-<!--          <div class="map_detail">-->
-<!--            <div>-->
-<!--              <ul class="traffic_list" style="display: flex;justify-content: flex-start;list-style: none;padding-left: 10px">-->
-<!--                <li style="margin-right: 30px;list-style: none;display: list-item">-->
-<!--                  <span style="font-size: 20px;">-->
-<!--                    <i class="el-icon-s-promotion"></i>-->
-<!--                    <span class="item_distance">49.18公里</span>-->
-<!--                  </span>-->
-<!--                </li>-->
-<!--                <li style="margin-right: 30px;list-style: none">-->
-<!--                  <span style="font-size: 20px">-->
-<!--                    <i class="el-icon-truck"></i>-->
-<!--                    <span class="item_distance">31.77公里</span>-->
-<!--                  </span>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--              <div class="traffic_desc" style="overflow: hidden;margin-bottom: 4px;padding-left: 10px">-->
-<!--                <div class="traffic_desc_text">附近1公里内有3个景点，距离市中心45.6千米</div>-->
-<!--              </div>-->
-<!--              <div>-->
-<!--                <span class="map_show_more">-->
-<!--                  查看地图-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="map_icon"></div>-->
+          <!--          <div class="map_detail">-->
+          <!--            <div>-->
+          <!--              <ul class="traffic_list" style="display: flex;justify-content: flex-start;list-style: none;padding-left: 10px">-->
+          <!--                <li style="margin-right: 30px;list-style: none;display: list-item">-->
+          <!--                  <span style="font-size: 20px;">-->
+          <!--                    <i class="el-icon-s-promotion"></i>-->
+          <!--                    <span class="item_distance">49.18公里</span>-->
+          <!--                  </span>-->
+          <!--                </li>-->
+          <!--                <li style="margin-right: 30px;list-style: none">-->
+          <!--                  <span style="font-size: 20px">-->
+          <!--                    <i class="el-icon-truck"></i>-->
+          <!--                    <span class="item_distance">31.77公里</span>-->
+          <!--                  </span>-->
+          <!--                </li>-->
+          <!--              </ul>-->
+          <!--              <div class="traffic_desc" style="overflow: hidden;margin-bottom: 4px;padding-left: 10px">-->
+          <!--                <div class="traffic_desc_text">附近1公里内有3个景点，距离市中心45.6千米</div>-->
+          <!--              </div>-->
+          <!--              <div>-->
+          <!--                <span class="map_show_more">-->
+          <!--                  查看地图-->
+          <!--                </span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
         </div>
         <div class="amenity_container">
           <div class="amenity_list">
@@ -163,7 +234,10 @@
               会议厅
             </span>
           </div>
-          <div class="amenity_show_more" style="text-align: right">
+          <div
+            class="amenity_show_more"
+            style="text-align: right"
+          >
             <span class="amenity-link">
               显示所有设施
             </span>

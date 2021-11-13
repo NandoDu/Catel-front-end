@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import {ref} from 'vue';
+
 const emit = defineEmits(['startSearch', 'changeBreak']);
 let value = ref('');
 let peopleNum = ref(1);
 let roomNum = ref(1);
 let breakfast = ref(2);
 let breakInfo = ref('是否早餐');
-let current = ref(new Date);
-let end = ref(new Date());
-const setDate = () => {
-  end.value.setTime(current.value.getTime() + 3600 * 1000 * 24);
-};
-setDate();
+let current = ref(new Date());
 const disabledDate = (select: Date) => {
   let now = new Date().getTime();
   return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
@@ -44,8 +40,9 @@ const startSearch = () => {
           type="daterange"
           unlink-panels
           range-separator="至"
-          :start-placeholder="current.getFullYear() +'年'+ current.getMonth()+ '月' + current.getDay() + '日'"
-          :end-placeholder="end.getFullYear() +'年'+ end.getMonth()+ '月' + end.getDay() + '日'"
+          :default-value="[current,current]"
+          :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
+          :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
           format="YYYY年MM月DD日"
           :disabled-date="disabledDate"
         />

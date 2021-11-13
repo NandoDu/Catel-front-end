@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PriceContainer from '../component/PriceContainer.vue';
 import DatePicker from '../component/datePicker.vue';
+import HotelInfo from '../component/hotelInfo.vue'; 
 import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
 import {RoomInfoO} from '../api/userApi';
@@ -46,6 +47,9 @@ const changeBreak = (param: number) => {
 </script>
 <template>
   <div style="display:flex;flex-direction:column;align-items: center">
+    <HotelInfo
+      :info="hotelInfo"
+    />
     <DatePicker @changeBreak="changeBreak" />
     <PriceContainer
       v-for="item in displayRoomList"
