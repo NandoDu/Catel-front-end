@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-
+const emit = defineEmits(['startSearch', 'changeBreak']);
 let value = ref('');
 let peopleNum = ref(1);
 let roomNum = ref(1);
@@ -8,13 +8,12 @@ let breakfast = ref(2);
 let breakInfo = ref('是否早餐');
 let current = ref(new Date);
 let end = ref(new Date());
-const setDate=()=>{
-  end.value.setTime(current.value.getTime()+ 3600*1000*24);
+const setDate = () => {
+  end.value.setTime(current.value.getTime() + 3600 * 1000 * 24);
 };
 setDate();
 const disabledDate = (select: Date) => {
   let now = new Date().getTime();
-  console.log(select.getTime());
   return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
 };
 const changeBreak = () => {
@@ -26,6 +25,12 @@ const changeBreak = () => {
   } else {
     breakInfo.value = '不供早餐';
   }
+  emit('changeBreak', breakfast.value);
+  console.log('改变早餐状态emit已送出');
+};
+const startSearch = () => {
+  console.log(value.value);
+  emit('startSearch', value.value);
 };
 </script>
 <template>
@@ -79,7 +84,10 @@ const changeBreak = () => {
         >
           {{ breakInfo }}
         </el-button>
-        <el-button class="confirm-button">
+        <el-button
+          class="confirm-button"
+          @click="startSearch"
+        >
           确认筛选
         </el-button>
       </div>
