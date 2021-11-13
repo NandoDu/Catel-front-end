@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
   {path: '/', component: Home},
   {path: '/login', component: Login},
   {path: '/roomList', component: roomList},
-  {path: '/info', component: Info},
+  {path: '/hotel/:id', component: Info},
 ];
 
 export default routes;
