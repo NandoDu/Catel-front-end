@@ -25,7 +25,10 @@ const changeBreak = () => {
   console.log('改变早餐状态emit已送出');
 };
 const startSearch = () => {
-  console.log(value.value);
+  if(value.value==='') console.log('empty');
+  else{
+    console.log(value.value);
+  }
   emit('startSearch', value.value);
 };
 </script>
@@ -40,7 +43,6 @@ const startSearch = () => {
           type="daterange"
           unlink-panels
           range-separator="至"
-          :default-value="[current,current]"
           :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
           :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
           format="YYYY年MM月DD日"
