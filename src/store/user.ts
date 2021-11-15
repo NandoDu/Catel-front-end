@@ -3,7 +3,7 @@ import {loginAPI, LoginO} from '../api/userApi';
 import actCon from './actCon';
 
 interface UserState {
-  username: string
+  username?: string
 }
 
 const user: Module<UserState, unknown> = {
@@ -12,9 +12,15 @@ const user: Module<UserState, unknown> = {
     afterLogin: (state, userInfo: LoginO) => {
       state.username = userInfo.username;
     },
+    logout: (state) => {
+      state.username = undefined;
+    }, 
   },
   actions: {
     login: actCon(loginAPI, 'afterLogin'),
+  },
+  getters: {
+    username: state => state.username,
   },
 };
 

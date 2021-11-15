@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ElMessage } from 'element-plus';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useTypedStore } from '../store';
+import {ElMessage} from 'element-plus';
+import {ref} from 'vue';
+import {useRouter} from 'vue-router';
+import {useTypedStore} from '../store';
 
 const username = ref('');
-const password = ref(''); 
+const password = ref('');
 const store = useTypedStore();
 const router = useRouter();
 
 const login = async () => {
-  try{
+  try {
     await store.dispatch('user/login', {
       email: username.value,
       password: password.value,
@@ -20,7 +20,7 @@ const login = async () => {
       center: true,
     });
     await router.push('/');
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
 };
@@ -29,7 +29,6 @@ const login = async () => {
 <template>
   <div
     class="flex"
-    style="height: 100%;"
   >
     <ElCard>
       <div class="flex-col login-box">
@@ -56,7 +55,6 @@ const login = async () => {
           <ElButton
             @click="login"
             class="login-button"
-            :circle="true"
           >
             Login
           </ElButton>
