@@ -5,12 +5,16 @@ import FlexSpace from '../Util/FlexSpace.vue';
 import {useRouter} from 'vue-router';
 import {useTypedStore} from '../../store';
 import {computed} from 'vue';
+import {mapState} from 'vuex';
 
 const router = useRouter();
-const state = useTypedStore();
-const username = computed(() => state.getters['user/username']);
+const store = useTypedStore();
+const logged = computed(() => store.getters['user/logged']);
 
-const logout = () => state.commit('user/logout');
+const showLoginModal = () => {
+  router.push('/login');
+};
+const logout = () => store.commit('user/logout');
 </script>
 
 <template>
@@ -37,21 +41,21 @@ const logout = () => state.commit('user/logout');
         to="/roomList"
       />
       <MenuLink
-        v-if="username"
+        v-if="logged"
         text="Order"
         to="/roomList"
       />
       <MenuLink
-        v-if="username"
+        v-if="logged"
         text="Personal"
         to="/roomList"
       />
     </nav>
     <BiggerButton
-      v-if="!username"
+      v-if="!logged"
       id="login-button"
       text="Login"
-      @click="()=>router.push('/login')"
+      @click="showLoginModal"
     />
     <BiggerButton
       v-else
