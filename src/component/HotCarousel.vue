@@ -180,5 +180,4 @@ const cards = reactive([
   flex-direction: column;
   align-self: center;
 }
-
 </style>
