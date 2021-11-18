@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
+import {reactive} from 'vue';
+import OrderItem from '../component/PersonalInfo/OrderItem.vue';
+import Resident from '../component/PersonalInfo/Resident.vue';
+import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
 
-const ifOperationShow = ref(false);
-const operationIndex = ref(0);
 const orderInfoList = reactive([
   {
     'ifOperationShow': false,
@@ -201,35 +202,27 @@ const personInfoList = reactive([
   {
     'ifOperationShow': false,
     'name': '张三',
-    'phone': 13333333333,
-    'idNumber': 232323232323232323,
+    'phone': '13333333333',
+    'idNumber': '232323232323232323',
     'birthday': '1999-05-03',
   },
   {
     'ifOperationShow': false,
     'name': '张四',
-    'phone': 14444444444,
-    'idNumber': 242424242424242424,
+    'phone': '14444444444',
+    'idNumber': '242424242424242424',
     'birthday': '1999-05-04',
   },
   {
     'ifOperationShow': false,
     'name': '张五',
-    'phone': 15555555555,
-    'idNumber': 252525252525252525,
+    'phone': '15555555555',
+    'idNumber': '252525252525252525',
     'birthday': '1999-05-05',
   },
 ]);
-const showOrHideOperation = function (index: any) {
-  for (let i = 0; i < orderInfoList.length; i++) {
-    if (i == index) {
-      continue;
-    }
-    orderInfoList[i].ifOperationShow = false;
-  }
-  orderInfoList[index].ifOperationShow = !orderInfoList[index].ifOperationShow;
-};
-const showOrHidePersonOperation = function (index: any) {
+
+const activeResidentItem = (index: number) => {
   for (let i = 0; i < personInfoList.length; i++) {
     if (i == index) {
       continue;
@@ -238,7 +231,15 @@ const showOrHidePersonOperation = function (index: any) {
   }
   personInfoList[index].ifOperationShow = !personInfoList[index].ifOperationShow;
 };
-
+const activeOrderItem = (index: number) => {
+  for (let i = 0; i < orderInfoList.length; i++) {
+    if (i == index) {
+      continue;
+    }
+    orderInfoList[i].ifOperationShow = false;
+  }
+  orderInfoList[index].ifOperationShow = !orderInfoList[index].ifOperationShow;
+};
 </script>
 
 <template>
@@ -253,87 +254,12 @@ const showOrHidePersonOperation = function (index: any) {
           全部订单
         </div>
         <div class="orderListPart">
-          <div
-            class="orderList"
+          <OrderItem
             v-for="(orderInfo, index) in orderInfoList"
-          >
-            <div
-              class="orderInfoCard"
-              :class="{'orderInfoFirst' : index === 0}"
-              @click="showOrHideOperation(index)"
-            >
-              <div class="orderState">
-                {{ orderInfo['state'] }}
-              </div>
-              <div class="separatingLine" />
-              <div class="orderHotelNameAndAddress">
-                <div class="orderHotelName">
-                  {{ orderInfo['name'] }}
-                </div>
-                <div class="orderHotelAddress">
-                  <img
-                    src="src/asset/dizhi.png"
-                    style="width: 15px; height: 15px; align-self: center"
-                  >
-                  <div class="orderHotelAddressText">
-                    {{ orderInfo['address'] }}
-                  </div>
-                </div>
-              </div>
-              <div class="orderDateInfo">
-                <div class="orderDateInInfo">
-                  <div class="orderDateInIcon">
-                    住
-                  </div>
-                  <div class="orderDateIn">
-                    {{ orderInfo['dateIn'] }}
-                  </div>
-                </div>
-                <div class="orderDateOutInfo">
-                  <div class="orderDateOutIcon">
-                    离
-                  </div>
-                  <div class="orderDateOut">
-                    {{ orderInfo['dateOut'] }}
-                  </div>
-                </div>
-              </div>
-              <div class="orderPrice">
-                ¥ {{ orderInfo['price'] }}
-              </div>
-            </div>
-            <div
-              class="orderOperation"
-              v-show="orderInfo['ifOperationShow']"
-            >
-              <div class="operationOpt">
-                <div class="checkOperation">
-                  <div class="checkIcon">
-                    A
-                  </div>
-                  <div class="checkText">
-                    查看
-                  </div>
-                </div>
-                <div class="cancelOperation">
-                  <div class="cancelIcon">
-                    B
-                  </div>
-                  <div class="cancelText">
-                    撤销
-                  </div>
-                </div>
-                <div class="reviewOperation">
-                  <div class="reviewIcon">
-                    C
-                  </div>
-                  <div class="reviewText">
-                    评价
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            :key="index"
+            :order-info="{index, ...orderInfo}"
+            @toggle="activeOrderItem"
+          />
         </div>
       </div>
     </div>
@@ -406,59 +332,18 @@ const showOrHidePersonOperation = function (index: any) {
             添加
           </div>
           <div class="personListPart">
-            <div
-              class="personList"
+            <Resident
               v-for="(personInfo, index) in personInfoList"
-            >
-              <div
-                class="personInfoCard"
-                :class="{'personInfoFirst' : index === 0}"
-                @click="showOrHidePersonOperation(index)"
-              >
-                <div class="personName">
-                  {{ personInfo['name'] }}
-                </div>
-                <div class="personPhone">
-                  {{ personInfo['phone'] }}
-                </div>
-              </div>
-              <div
-                class="personOperation"
-                v-show="personInfo['ifOperationShow']"
-              >
-                <div class="personOperationOpt">
-                  <div class="personCheckOperation">
-                    <div class="personCheckIcon">
-                      A
-                    </div>
-                    <div class="personCheckText">
-                      查看
-                    </div>
-                  </div>
-                  <div class="personModifyOperation">
-                    <div class="personModifyIcon">
-                      B
-                    </div>
-                    <div class="personModifyText">
-                      修改
-                    </div>
-                  </div>
-                  <div class="personDeleteOperation">
-                    <div class="personDeleteIcon">
-                      C
-                    </div>
-                    <div class="personDeleteText">
-                      删除
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              :key="index"
+              :resident-info="{index, ...personInfo}"
+              @toggle="activeResidentItem"
+            />
             <div class="addPerson">
               <div class="addPersonIcon">
                 <img
                   class="addPersonImg"
-                  src="src/asset/jia.png"
+                  src="src/asset/icons/add.png"
+                  alt="Add Sign"
                 >
               </div>
               <div class="addPersonBottomText">
@@ -478,80 +363,11 @@ const showOrHidePersonOperation = function (index: any) {
             全部记录
           </div>
           <div class="creditRecordListPart">
-            <div
-              class="creditRecordList"
+            <CreditEntry
               v-for="(record, index) in orderInfoList"
-            >
-              <div
-                class="creditRecordCard"
-                :class="{'creditRecordFirst' : index === 0}"
-                v-show="record['state'] !== '已预定'"
-              >
-                <div
-                  class="addCreditIcon"
-                  v-show="record['state'] === '已入住'"
-                >
-                  <img
-                    class="addCreditImg"
-                    src="src/asset/shangzhang.png"
-                  >
-                </div>
-                <div
-                  class="addCreditNum"
-                  v-show="record['state'] === '已入住'"
-                >
-                  +{{ record['price'] }}
-                </div>
-                <div
-                  class="minusCreditIcon"
-                  v-show="record['state'] === '已撤销'"
-                >
-                  <img
-                    class="minusCreditImg"
-                    src="src/asset/xiadie.png"
-                  >
-                </div>
-                <div
-                  class="minusCreditNum"
-                  v-show="record['state'] === '已撤销'"
-                >
-                  -{{ record['price'] }}
-                </div>
-                <div class="recordSeparatingLine" />
-                <div class="recordHotelNameAndAddress">
-                  <div class="recordHotelName">
-                    {{ record['name'] }}
-                  </div>
-                  <div class="recordHotelAddress">
-                    <img
-                      src="src/asset/dizhi.png"
-                      style="width: 13px; height: 13px; align-self: center"
-                    >
-                    <div class="recordHotelAddressText">
-                      {{ record['address'] }}
-                    </div>
-                  </div>
-                </div>
-                <div class="recordDateInfo">
-                  <div class="recordDateInInfo">
-                    <div class="recordDateInIcon">
-                      住
-                    </div>
-                    <div class="recordDateIn">
-                      {{ record['dateIn'] }}
-                    </div>
-                  </div>
-                  <div class="recordDateOutInfo">
-                    <div class="recordDateOutIcon">
-                      离
-                    </div>
-                    <div class="recordDateOut">
-                      {{ record['dateOut'] }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              :key="index"
+              :record="{index, ...record}"
+            />
           </div>
         </div>
       </div>
