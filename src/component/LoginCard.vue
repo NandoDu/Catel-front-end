@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ElMessage} from 'element-plus';
-import {reactive} from 'vue';
+import {inject, reactive} from 'vue';
 import {useRouter} from 'vue-router';
 import {useTypedStore} from '../store';
 
@@ -10,6 +10,7 @@ const loginData = reactive({
 });
 const store = useTypedStore();
 const router = useRouter();
+const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 
 const login = async () => {
   try {
@@ -17,11 +18,13 @@ const login = async () => {
       email: loginData.identity,
       password: loginData.password,
     });
+    if (closeModal) closeModal();
+    else await router.push('/');
+    
     ElMessage.success({
-      message: 'Login Successfully!',
+      message: 'Login successfully!',
       center: true,
     });
-    await router.push('/');
   } catch (e) {
     console.log(e);
   }
@@ -45,7 +48,10 @@ const login = async () => {
         @keyup.enter="login"
         show-password
       />
-      <br>
+      <!--      <LineInput-->
+      <!--        label="Email or Username"-->
+      <!--        v-model="loginData.password"-->
+      <!--      />-->
       <div class="flex-end">
         <span
           class="extern-link"
@@ -79,6 +85,7 @@ $inputLen: 400px;
 }
 
 .flex-end {
+  margin-top: 30px;
   align-self: flex-end;
 }
 

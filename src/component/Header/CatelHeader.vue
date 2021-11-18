@@ -4,17 +4,26 @@ import BiggerButton from './BiggerButton.vue';
 import FlexSpace from '../Util/FlexSpace.vue';
 import {useRouter} from 'vue-router';
 import {useTypedStore} from '../../store';
-import {computed} from 'vue';
-import {mapState} from 'vuex';
+import {computed, ref} from 'vue';
+import VirryModal from '../Util/VirryModal.vue';
+import LoginCard from '../LoginCard.vue';
+import {ElMessage} from 'element-plus';
 
 const router = useRouter();
 const store = useTypedStore();
-const logged = computed(() => store.getters['user/logged']);
 
-const showLoginModal = () => {
-  router.push('/login');
+const logged = computed(() => store.getters['user/logged']);
+const logout = () => {
+  store.commit('user/logout');
+  ElMessage.success({
+    message: 'You\'ve log out.',
+    center: true,
+  });
 };
-const logout = () => store.commit('user/logout');
+
+const loginModal = ref();
+const showLoginModal = () => loginModal.value.open();
+
 </script>
 
 <template>
@@ -63,6 +72,11 @@ const logout = () => store.commit('user/logout');
       text="Logout"
       @click="logout"
     />
+    <VirryModal
+      ref="loginModal"
+    >
+      <LoginCard />
+    </VirryModal>
   </header>
 </template>
 
