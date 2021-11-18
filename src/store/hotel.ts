@@ -1,9 +1,10 @@
 import {Module} from 'vuex';
-import {HotelInfoO, HotelInfoAPI} from '../api/userApi';
+import {HotelInfoO, HotelInfoAPI, GetCommentAPI, GetCommentO} from '../api/userApi';
 import actCon from './actCon';
 
 interface HotelState {
   hotelInfo: HotelInfoO;
+  commentList: GetCommentO
 }
 
 const hotel: Module<HotelState, unknown> = {
@@ -12,12 +13,17 @@ const hotel: Module<HotelState, unknown> = {
     afterGetHotelInfo: (state, hotelInfo: HotelInfoO) => {
       state.hotelInfo = hotelInfo;
     },
+    afterGetComment: (state, commentList: GetCommentO)=>{
+      state.commentList = commentList;
+    },
   },
   actions: {
     getHotelInfo: actCon(HotelInfoAPI, 'afterGetHotelInfo'),
+    getComment: actCon(GetCommentAPI, 'afterGetComment'),
   },
   getters: {
     hotelInfo: state => state.hotelInfo,
+    commentList: state=>state.commentList,
   },
 };
 

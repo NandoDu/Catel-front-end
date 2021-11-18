@@ -46,8 +46,24 @@ interface HotelInfoO {
 }
 
 const HotelInfoAPI = apiCon<HotelInfoI, HotelInfoO>(HttpMethod.Get, 'hotel/detail');
+
+interface GetCommentI{
+  id: number
+}
+interface GetCommentItemO{
+  id: number,
+  user_id: number,
+  hotel_id: number,
+  title: string,
+  content: string,
+  avatar: string,
+  username: string,
+}
+type GetCommentO = GetCommentItemO[];
+const GetCommentAPI=apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
 export {
   LoginI, LoginO, loginAPI,
   RoomInfoI, RoomInfoItemO, RoomInfoO, RoomInfoAPI,
   HotelInfoI, HotelInfoO, HotelInfoAPI,
+  GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
 };

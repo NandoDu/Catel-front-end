@@ -2,15 +2,17 @@
 import PriceContainer from '../component/PriceContainer.vue';
 import DatePicker from '../component/datePicker.vue';
 import HotelInfo from '../component/hotelInfo.vue'; 
+import CommentCard from '../component/CommentCard.vue';
 import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
-import {RoomInfoO} from '../api/userApi';
+import {GetCommentO, RoomInfoO} from '../api/userApi';
 import {useRoute} from 'vue-router';
 
 const store = useTypedStore();
 const route = useRoute();
 const roomTypeMap = {'BigBed': '大床房', 'DoubleBed': '双床房', 'Family': '家庭房'};
 let roomInfoList: Ref<RoomInfoO> = ref([]);
+let commentList: Ref<GetCommentO> = ref([]);
 let hotelInfo = ref();
 let displayRoomList: Ref<RoomInfoO> = ref([]);
 let hotelId = route.params.id;
@@ -21,6 +23,10 @@ store.dispatch('room/roomInfo', {id: hotelId}).then(() => {
 store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
   hotelInfo.value = store.getters['hotel/hotelInfo'];
   console.log(hotelInfo.value);
+});
+store.dispatch('hotel/getComment', {id: hotelId}).then(()=>{
+  commentList.value = store.getters['hotel/commentList'];
+  console.log(commentList.value);
 });
 const changeBreak = (param: number) => {
   console.log('改变早餐状态已接收，值为：' + param);
@@ -61,6 +67,11 @@ const changeBreak = (param: number) => {
       :room-price="item.price"
       :max-people="item.peopleMax"
       style="margin-bottom: 7px"
+    />
+    <CommentCard
+      v-for="item in commentList"
+      :key="item.id"
+      :avatar="item.avatar"
     />
   </div>
 </template>
