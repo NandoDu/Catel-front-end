@@ -15,6 +15,7 @@ const store = useTypedStore();
 const logged = computed(() => store.getters['user/logged']);
 const logout = () => {
   store.commit('user/logout');
+  router.push('/');
   ElMessage.success({
     message: 'You\'ve log out.',
     center: true,
@@ -57,7 +58,7 @@ const showLoginModal = () => loginModal.value.open();
       <MenuLink
         v-if="logged"
         text="Personal"
-        to="/roomList"
+        to="/personalInfo"
       />
     </nav>
     <BiggerButton

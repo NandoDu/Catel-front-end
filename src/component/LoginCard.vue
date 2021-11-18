@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ElMessage} from 'element-plus';
 import {inject, reactive} from 'vue';
-import {useRouter} from 'vue-router';
+import {useRoute, useRouter} from 'vue-router';
 import {useTypedStore} from '../store';
 
 const loginData = reactive({
@@ -10,6 +10,7 @@ const loginData = reactive({
 });
 const store = useTypedStore();
 const router = useRouter();
+const route = useRoute();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 
 const login = async () => {
@@ -19,8 +20,11 @@ const login = async () => {
       password: loginData.password,
     });
     if (closeModal) closeModal();
-    else await router.push('/');
-    
+    else {
+      const target = (route.query.redirect as string) ?? '/';
+      await router.push(target);
+    }
+
     ElMessage.success({
       message: 'Login successfully!',
       center: true,
