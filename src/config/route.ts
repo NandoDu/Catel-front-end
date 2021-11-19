@@ -15,7 +15,7 @@ const allowNotLogged: NavigationGuard = (to, from) => {
 };
 const allowLogged: NavigationGuard = (to, from) => {
   const ok = store.getters['user/logged'];
-  if (!ok) return {path: 'login', query: {redirect: to.path}};
+  if (!ok) return {path: '/login', query: {redirect: to.path}};
 };
 
 const routes: RouteRecordRaw[] = [

@@ -37,7 +37,7 @@ defineProps<{
       >
         <img
           class="minusCreditImg"
-          src="src/asset/xiadie.png"
+          src="src/asset/goDown.png"
         >
       </div>
       <div

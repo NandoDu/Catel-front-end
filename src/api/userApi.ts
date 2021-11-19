@@ -33,7 +33,10 @@ interface UserResidentsI {
 }
 
 interface UserResident {
-  
+  realName: string,
+  phoneNumber: string,
+  idNo: string,
+  birthday: string,
 }
 
 type UserResidentsO = UserResident[];

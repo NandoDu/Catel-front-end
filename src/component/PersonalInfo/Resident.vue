@@ -1,15 +1,10 @@
 <script setup lang="ts">
-interface ResidentInfo {
-  ifOperationShow: boolean,
-  name: string,
-  phone: string,
-  idNumber: string,
-  birthday: string,
-}
-
+import {UserResident} from '../../api/userApi';
 defineProps<{
-  residentInfo: ResidentInfo | { index: number }
+  residentInfo: UserResident | { index: number }
+  ifOperationShow: boolean
 }>();
+
 const emit = defineEmits<{
   (e: 'toggle', index: number): void
 }>();
@@ -25,15 +20,15 @@ const emit = defineEmits<{
       @click="emit('toggle', residentInfo.index)"
     >
       <div class="personName">
-        {{ residentInfo['name'] }}
+        {{ residentInfo.realName }}
       </div>
       <div class="personPhone">
-        {{ residentInfo['phone'] }}
+        {{ residentInfo.phoneNumber }}
       </div>
     </div>
     <div
       class="personOperation"
-      v-show="residentInfo['ifOperationShow']"
+      v-show="ifOperationShow"
     >
       <div class="personOperationOpt">
         <div class="personCheckOperation">
