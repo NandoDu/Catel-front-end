@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {provide, readonly, ref} from 'vue';
+import {provide, ref} from 'vue';
 import {Close as ElClose} from '@element-plus/icons';
 
 const visible = ref(false);
 const open = () => visible.value = true;
 const close = () => visible.value = false;
 
-provide('VirryModal.close', readonly(close));
+provide('VirryModal.close', close);
 defineExpose({open, close});
 </script>
 
