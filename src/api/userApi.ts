@@ -52,6 +52,7 @@ interface GetCommentI{
 }
 interface GetCommentItemO{
   id: number,
+  score: number,
   user_id: number,
   hotel_id: number,
   title: string,

@@ -5,7 +5,7 @@ import HotelInfo from '../component/hotelInfo.vue';
 import CommentCard from '../component/CommentCard.vue';
 import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
-import {GetCommentO, RoomInfoO} from '../api/userApi';
+import {GetCommentO, HotelInfoO, RoomInfoO} from '../api/userApi';
 import {useRoute} from 'vue-router';
 
 const store = useTypedStore();
@@ -13,7 +13,7 @@ const route = useRoute();
 const roomTypeMap = {'BigBed': '大床房', 'DoubleBed': '双床房', 'Family': '家庭房'};
 let roomInfoList: Ref<RoomInfoO> = ref([]);
 let commentList: Ref<GetCommentO> = ref([]);
-let hotelInfo = ref();
+let hotelInfo = ref() as Ref<HotelInfoO>;
 let displayRoomList: Ref<RoomInfoO> = ref([]);
 let hotelId = route.params.id;
 store.dispatch('room/roomInfo', {id: hotelId}).then(() => {
@@ -72,6 +72,11 @@ const changeBreak = (param: number) => {
       v-for="item in commentList"
       :key="item.id"
       :avatar="item.avatar"
+      :username="item.username"
+      :content="item.content"
+      :title="item.title"
+      :score="item.score"
+      :hotel-name="hotelInfo.name"
     />
   </div>
 </template>
