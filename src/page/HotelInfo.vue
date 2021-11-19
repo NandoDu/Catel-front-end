@@ -54,7 +54,9 @@ const changeBreak = (param: number) => {
 <template>
   <div style="display:flex;flex-direction:column;align-items: center">
     <HotelInfo
-      :info="hotelInfo"
+      :hotel-name="hotelInfo.name"
+      :description="hotelInfo.description"
+      :hotel-star="hotelInfo.hotelStar"
     />
     <DatePicker @changeBreak="changeBreak" />
     <PriceContainer

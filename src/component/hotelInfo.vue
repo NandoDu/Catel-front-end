@@ -2,7 +2,7 @@
 import {HotelInfoO} from '../api/userApi';
 
 
-defineProps<{ info: HotelInfoO}>();
+defineProps<{ hotelName: HotelInfoO, description: string, hotelStar: string}>();
 
 const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
 
@@ -13,11 +13,11 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
       <div class="detail">
         <div class="title">
           <h1 class="hotel_name">
-            {{ info.name }}
+            {{ hotelName }}
           </h1>
           <div
             class="star"
-            v-for="i in Array(hotelStarMap[info.hotelStar])"
+            v-for="i in Array(hotelStarMap[hotelStar])"
             :key="i"
           >
             <i class="el-icon-star-on" />
@@ -192,7 +192,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
         </div>
         <div class="traffic_container">
           <span class="hotel_desc">
-            开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。
+            {{ description }}
           </span>
           <!--          <div class="map_icon"></div>-->
           <!--          <div class="map_detail">-->
