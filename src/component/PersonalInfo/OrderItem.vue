@@ -1,25 +1,15 @@
 <script setup lang="ts">
-interface OrderItemInfo {
-  'ifOperationShow': boolean,
-  'state': string,
-  'name': string,
-  'address': string,
-  'dateIn': string,
-  'dateOut': string,
-  'price': string,
-  'roomType': string,
-  'breakfast': boolean,
-  'img': string,
-}
+
+import {OrderItemInfo} from '../../api/orderApi';
 
 defineProps<{
   orderInfo: { index: number } | OrderItemInfo
+  ifOperationShow: boolean,
 }>();
 
 const emit = defineEmits<{
   (e: 'toggle', index: number): void
 }>();
-
 
 </script>
 
@@ -33,12 +23,12 @@ const emit = defineEmits<{
       @click="emit('toggle', orderInfo.index)"
     >
       <div class="orderState">
-        {{ orderInfo['state'] }}
+        {{ orderInfo.orderState }}
       </div>
       <div class="separatingLine" />
       <div class="orderHotelNameAndAddress">
         <div class="orderHotelName">
-          {{ orderInfo['name'] }}
+          {{ orderInfo.hotelName }}
         </div>
         <div class="orderHotelAddress">
           <img
@@ -47,7 +37,7 @@ const emit = defineEmits<{
             alt="Location Icon"
           >
           <div class="orderHotelAddressText">
-            {{ orderInfo['address'] }}
+            {{ orderInfo.hotelAddress }}
           </div>
         </div>
       </div>
@@ -57,7 +47,7 @@ const emit = defineEmits<{
             住
           </div>
           <div class="orderDateIn">
-            {{ orderInfo['dateIn'] }}
+            {{ orderInfo.checkInDate }}
           </div>
         </div>
         <div class="orderDateOutInfo">
@@ -65,17 +55,17 @@ const emit = defineEmits<{
             离
           </div>
           <div class="orderDateOut">
-            {{ orderInfo['dateOut'] }}
+            {{ orderInfo.checkOutDate }}
           </div>
         </div>
       </div>
       <div class="orderPrice">
-        ¥ {{ orderInfo['price'] }}
+        ¥ {{ orderInfo.price }}
       </div>
     </div>
     <div
       class="orderOperation"
-      v-show="orderInfo['ifOperationShow']"
+      v-show="ifOperationShow"
     >
       <div class="operationOpt">
         <div class="checkOperation">
@@ -117,12 +107,14 @@ const emit = defineEmits<{
   flex-direction: row;
   cursor: pointer;
 }
+
 .orderState {
   align-self: center;
   margin-left: 10px;
   font-size: 15px;
   color: grey;
 }
+
 .separatingLine {
   width: 1px;
   height: 50px;
@@ -130,49 +122,58 @@ const emit = defineEmits<{
   align-self: center;
   margin-left: 10px;
 }
+
 .orderHotelNameAndAddress {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
 }
+
 .orderHotelName {
   margin-top: 10px;
   width: 160px;
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
   color: #06aebd;
 }
+
 .orderHotelAddress {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
+
 .orderHotelAddressText {
   width: 160px;
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
   color: #999999;
   font-size: 14px;
 }
+
 .orderDateInfo {
   margin-left: 25px;
   display: flex;
   flex-direction: column;
 }
+
 .orderDateInInfo {
   display: flex;
   flex-direction: row;
 }
+
 .orderDateOutInfo {
   display: flex;
   flex-direction: row;
 }
+
 .orderDateIn {
   margin-top: 10px;
   margin-left: 5px;
 }
+
 .orderDateInIcon {
   margin-top: 10px;
   background-color: orange;
@@ -183,10 +184,12 @@ const emit = defineEmits<{
   color: white;
   font-size: 12px;
 }
+
 .orderDateOut {
   margin-top: 10px;
   margin-left: 5px;
 }
+
 .orderDateOutIcon {
   margin-top: 10px;
   background-color: dodgerblue;
@@ -197,11 +200,13 @@ const emit = defineEmits<{
   color: white;
   font-size: 12px;
 }
+
 .orderPrice {
   margin-left: 45px;
   align-self: center;
   font-size: 20px;
 }
+
 .orderOperation {
   width: 100%;
   height: 30px;
@@ -210,12 +215,14 @@ const emit = defineEmits<{
   display: flex;
   flex-direction: row;
 }
+
 .checkOperation {
   display: flex;
   flex-direction: row;
   margin-left: 100px;
   cursor: pointer;
 }
+
 .checkIcon {
   background-color: green;
   width: 18px;
@@ -228,6 +235,7 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .checkText {
   align-self: center;
   margin-left: 5px;
@@ -236,11 +244,13 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .cancelOperation {
   display: flex;
   flex-direction: row;
   cursor: pointer;
 }
+
 .cancelIcon {
   background-color: red;
   width: 18px;
@@ -253,6 +263,7 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .cancelText {
   align-self: center;
   margin-left: 5px;
@@ -261,12 +272,14 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .reviewOperation {
   display: flex;
   flex-direction: row;
   margin-right: 100px;
   cursor: pointer;
 }
+
 .reviewIcon {
   background-color: dodgerblue;
   width: 18px;
@@ -279,6 +292,7 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .reviewText {
   align-self: center;
   margin-left: 5px;
@@ -287,6 +301,7 @@ const emit = defineEmits<{
   font-weight: bolder;
   font-size: 15px;
 }
+
 .operationOpt {
   display: flex;
   flex-direction: row;

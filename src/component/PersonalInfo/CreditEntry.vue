@@ -1,12 +1,5 @@
 <script setup lang="ts">
-interface CreditRecord {
-  state: string;
-  price: number;
-  name: string;
-  address: string;
-  dataIn: string;
-  dataOut: string;
-}
+import {CreditRecord} from '../../api/orderApi';
 
 defineProps<{
   record: CreditRecord | { index: number }
@@ -21,11 +14,11 @@ defineProps<{
     <div
       class="creditRecordCard"
       :class="{'creditRecordFirst' : record.index === 0}"
-      v-if="record['state'] !== '已预定'"
+      v-if="record.orderState !== 'Available'"
     >
       <div
         class="addCreditIcon"
-        v-if="record['state'] === '已入住'"
+        v-if="record.orderState === 'Finished'"
       >
         <img
           class="addCreditImg"
@@ -34,13 +27,13 @@ defineProps<{
       </div>
       <div
         class="addCreditNum"
-        v-show="record['state'] === '已入住'"
+        v-show="record.orderState === 'Finished'"
       >
-        +{{ record['price'] }}
+        +{{ record.creditDelta }}
       </div>
       <div
         class="minusCreditIcon"
-        v-show="record['state'] === '已撤销'"
+        v-show="record.orderState === 'Canceled'"
       >
         <img
           class="minusCreditImg"
@@ -49,14 +42,14 @@ defineProps<{
       </div>
       <div
         class="minusCreditNum"
-        v-show="record['state'] === '已撤销'"
+        v-show="record.orderState === 'Canceled'"
       >
-        -{{ record['price'] }}
+        {{ record.creditDelta }}
       </div>
       <div class="recordSeparatingLine" />
       <div class="recordHotelNameAndAddress">
         <div class="recordHotelName">
-          {{ record['name'] }}
+          {{ record.hotelName }}
         </div>
         <div class="recordHotelAddress">
           <img
@@ -64,7 +57,7 @@ defineProps<{
             style="width: 13px; height: 13px; align-self: center"
           >
           <div class="recordHotelAddressText">
-            {{ record['address'] }}
+            {{ record.hotelAddress }}
           </div>
         </div>
       </div>
@@ -74,7 +67,7 @@ defineProps<{
             住
           </div>
           <div class="recordDateIn">
-            {{ record['dateIn'] }}
+            {{ record.checkInDate }}
           </div>
         </div>
         <div class="recordDateOutInfo">
@@ -82,7 +75,7 @@ defineProps<{
             离
           </div>
           <div class="recordDateOut">
-            {{ record['dateOut'] }}
+            {{ record.checkOutDate }}
           </div>
         </div>
       </div>

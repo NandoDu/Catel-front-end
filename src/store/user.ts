@@ -5,6 +5,7 @@ import actCon from './actCon';
 interface UserState {
   logged: boolean;
   username?: string;
+  userId?: number;
 }
 
 const user: Module<UserState, unknown> = {
@@ -15,6 +16,7 @@ const user: Module<UserState, unknown> = {
   mutations: {
     afterLogin: (state, userInfo: LoginO) => {
       state.logged = true;
+      state.userId = userInfo.id;
       state.username = userInfo.username;
     },
     logout: (state) => {
@@ -27,6 +29,7 @@ const user: Module<UserState, unknown> = {
   getters: {
     logged: state => state.logged,
     username: state => state.username,
+    userId: state => state.userId,
   },
 };
 

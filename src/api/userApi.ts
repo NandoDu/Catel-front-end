@@ -6,6 +6,7 @@ interface LoginI {
 }
 
 interface LoginO {
+  id: number,
   username: string,
 }
 
@@ -26,6 +27,18 @@ interface RoomInfoItemO {
 
 type RoomInfoO = RoomInfoItemO[];
 const RoomInfoAPI = apiCon<RoomInfoI, RoomInfoO>(HttpMethod.Get, '/room/by-hotel');
+
+interface UserResidentsI {
+  id: number;
+}
+
+interface UserResident {
+  
+}
+
+type UserResidentsO = UserResident[];
+
+const userResidentsAPI = apiCon<UserResidentsI, UserResidentsO>(HttpMethod.Get, '/person/by-user');
 
 interface HotelInfoI {
   id: number;
@@ -49,5 +62,6 @@ const HotelInfoAPI = apiCon<HotelInfoI, HotelInfoO>(HttpMethod.Get, 'hotel/detai
 export {
   LoginI, LoginO, loginAPI,
   RoomInfoI, RoomInfoItemO, RoomInfoO, RoomInfoAPI,
+  UserResidentsI, UserResident, UserResidentsO, userResidentsAPI,
   HotelInfoI, HotelInfoO, HotelInfoAPI,
 };

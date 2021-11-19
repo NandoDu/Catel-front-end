@@ -3,201 +3,15 @@ import {reactive} from 'vue';
 import OrderItem from '../component/PersonalInfo/OrderItem.vue';
 import Resident from '../component/PersonalInfo/Resident.vue';
 import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
+import {useAsyncState} from '@vueuse/core';
+import {ordersOfUserAPI} from '../api/orderApi';
+import {useTypedStore} from '../store';
 
-const orderInfoList = reactive([
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '全季酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-04-16',
-    'dateOut': '2021-04-17',
-    'price': '1401.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/33/24/Cii-Tli89XeIVj6LAASlvtFwJXAAAIHHAJd-gsABKXW202_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已预定',
-    'name': '金陵饭店',
-    'address': '南京鼓楼区汉中路2号',
-    'dateIn': '2021-06-15',
-    'dateOut': '2021-06-16',
-    'price': '769.01',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/33/27/Cii-TFi89vaIINP0AAHNwdCmqR0AAIHIAKjWu4AAc3Z977_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已撤销',
-    'name': '金鹰珠江壹号国际酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-06-16',
-    'dateOut': '2021-06-17',
-    'price': '500.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G1/M00/9A/21/Cii9EFi9Qz2IRVonAApT49DJ5fwAAIb9gHEZe8AClP7382_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '香格里拉大酒店',
-    'address': '西安雁塔区科技路38号乙',
-    'dateIn': '2021-07-13',
-    'dateOut': '2021-07-14',
-    'price': '663.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '全季酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-04-16',
-    'dateOut': '2021-04-17',
-    'price': '401.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/33/79/Cii-T1i9Hf-IUZpYAACB6DJGKykAAIHwQP-89gAAIIA154_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已撤销',
-    'name': '金陵饭店',
-    'address': '南京鼓楼区汉中路2号',
-    'dateIn': '2021-06-15',
-    'dateOut': '2021-06-16',
-    'price': '769.01',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/C7/FD/Cii-TFknV4GIddkeAAFP_vTDaYkAAKaVwM4kNgAAVAW454_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '金鹰珠江壹号国际酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-06-16',
-    'dateOut': '2021-06-17',
-    'price': '500.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/33/24/Cii-Tli89XeIVj6LAASlvtFwJXAAAIHHAJd-gsABKXW202_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已撤销',
-    'name': '香格里拉大酒店',
-    'address': '西安雁塔区科技路38号乙',
-    'dateIn': '2021-07-13',
-    'dateOut': '2021-07-14',
-    'price': '663.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G2/M00/33/27/Cii-TFi89vaIINP0AAHNwdCmqR0AAIHIAKjWu4AAc3Z977_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '全季酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-04-16',
-    'dateOut': '2021-04-17',
-    'price': '401.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G1/M00/9A/21/Cii9EFi9Qz2IRVonAApT49DJ5fwAAIb9gHEZe8AClP7382_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已撤销',
-    'name': '金陵饭店',
-    'address': '南京鼓楼区汉中路2号',
-    'dateIn': '2021-06-15',
-    'dateOut': '2021-06-16',
-    'price': '769.01',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '金鹰珠江壹号国际酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-06-16',
-    'dateOut': '2021-06-17',
-    'price': '500.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '香格里拉大酒店',
-    'address': '西安雁塔区科技路38号乙',
-    'dateIn': '2021-07-13',
-    'dateOut': '2021-07-14',
-    'price': '663.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已撤销',
-    'name': '全季酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-04-16',
-    'dateOut': '2021-04-17',
-    'price': '401.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '金陵饭店',
-    'address': '南京鼓楼区汉中路2号',
-    'dateIn': '2021-06-15',
-    'dateOut': '2021-06-16',
-    'price': '769.01',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '金鹰珠江壹号国际酒店',
-    'address': '北京朝阳区亚运村小营东路3号凯基伦大厦4-5层',
-    'dateIn': '2021-06-16',
-    'dateOut': '2021-06-17',
-    'price': '500.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-  {
-    'ifOperationShow': false,
-    'state': '已入住',
-    'name': '香格里拉大酒店',
-    'address': '西安雁塔区科技路38号乙',
-    'dateIn': '2021-07-13',
-    'dateOut': '2021-07-14',
-    'price': '663.00',
-    'roomType': '大床房',
-    'breakfast': false,
-    'img': 'https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg',
-  },
-]);
+const store = useTypedStore();
+const id = store.getters['user/userId'];
+const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id}), []);
+const activatedOrders = reactive<number[]>([]);
+const activatedResidents = reactive<number[]>([]);
 const personInfoList = reactive([
   {
     'ifOperationShow': false,
@@ -222,6 +36,13 @@ const personInfoList = reactive([
   },
 ]);
 
+const activeOrderItem = (index: number) => {
+  if (activatedOrders.length == 0) activatedOrders.push(index);
+  else {
+    if (activatedOrders[0] == index) activatedOrders.pop();
+    else activatedOrders[0] = index;
+  }
+};
 const activeResidentItem = (index: number) => {
   for (let i = 0; i < personInfoList.length; i++) {
     if (i == index) {
@@ -230,15 +51,6 @@ const activeResidentItem = (index: number) => {
     personInfoList[i].ifOperationShow = false;
   }
   personInfoList[index].ifOperationShow = !personInfoList[index].ifOperationShow;
-};
-const activeOrderItem = (index: number) => {
-  for (let i = 0; i < orderInfoList.length; i++) {
-    if (i == index) {
-      continue;
-    }
-    orderInfoList[i].ifOperationShow = false;
-  }
-  orderInfoList[index].ifOperationShow = !orderInfoList[index].ifOperationShow;
 };
 </script>
 
@@ -258,6 +70,7 @@ const activeOrderItem = (index: number) => {
             v-for="(orderInfo, index) in orderInfoList"
             :key="index"
             :order-info="{index, ...orderInfo}"
+            :if-operation-show="activatedOrders.includes(index)"
             @toggle="activeOrderItem"
           />
         </div>
@@ -342,7 +155,7 @@ const activeOrderItem = (index: number) => {
               <div class="addPersonIcon">
                 <img
                   class="addPersonImg"
-                  src="src/asset/icons/add.png"
+                  src="src/asset/icon/add.png"
                   alt="Add Sign"
                 >
               </div>

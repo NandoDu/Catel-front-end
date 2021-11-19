@@ -35,19 +35,25 @@ const showLoginModal = () => loginModal.value.open();
     >
       <img
         class="logo"
-        src="/src/asset/icon_64x64.png"
+        src="/src/asset/icon_256x256.png"
         alt="Catel Logo"
+        width="64"
+        height="64"
       >
       <span class="logo-name">Catel</span>
     </div>
     <FlexSpace />
     <nav>
       <MenuLink
-        text="Hotel"
-        to="/roomList"
+        text="Home"
+        to="/"
       />
       <MenuLink
         text="About Us"
+        to="/"
+      />
+      <MenuLink
+        text="Hotel"
         to="/roomList"
       />
       <MenuLink
@@ -84,6 +90,7 @@ const showLoginModal = () => loginModal.value.open();
 <style lang="scss" scoped>
 header {
   background-color: white;
+  //background-color: #f5f7fa;
   display: flex;
   align-items: center;
   padding: 0 10vw;
