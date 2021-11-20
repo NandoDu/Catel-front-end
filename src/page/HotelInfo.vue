@@ -56,7 +56,10 @@ const changeBreak = (param: number) => {
     <HotelInfo
       :info="hotelInfo"
     />
-    <DatePicker @changeBreak="changeBreak" />
+    <DatePicker
+      @changeBreak="changeBreak"
+      id="chooseRoom"
+    />
     <PriceContainer
       v-for="item in displayRoomList"
       :key="item.id"

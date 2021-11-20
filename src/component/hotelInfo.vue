@@ -41,7 +41,10 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
         </div>
       </div>
       <div class="price_container">
-        <div class="select_room">
+        <div
+          class="select_room"
+          @click="$router.push('#chooseRoom')"
+        >
           选择房间
         </div>
       </div>
