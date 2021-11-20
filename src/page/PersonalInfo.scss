@@ -1,0 +1,406 @@
+.mainPart {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+.leftPart {
+  width: 50%;
+  height: 680px;
+  background-color: white;
+  border: #cccccc 1px solid;
+  border-radius: 6px;
+  margin-left: 120px;
+  margin-right: 100px;
+  align-self: center;
+}
+.leftPart:hover {
+  background-color: #fafbfb;
+  border: #ff9500 1px solid;
+}
+.leftPart:hover .allOrderText {
+  display: block;
+}
+.orderPart {
+  position: relative;
+}
+.allOrderText {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: none;
+  color: #999;
+  font-size: 15px;
+}
+.allOrderText:hover {
+  color: #ff9500;
+  cursor: pointer;
+}
+.orderPartTitle {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 15px;
+}
+.rightPart {
+  width: 50%;
+  height: 680px;
+  //background-color: #06aebd;
+  margin-right: 120px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  position: relative;
+}
+.rightTopPart {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50%
+}
+.userPart {
+  width: 40%;
+  height: 100%;
+  background-color: white;
+  border: #cccccc 1px solid;
+  border-radius: 6px;
+  position: relative;
+  margin-left: 20px;
+}
+.userPart:hover {
+  background-color: #fafbfb;
+  border: #ff9500 1px solid;
+}
+.userPart:hover .modifyUserText {
+  display: block;
+}
+.modifyUserText {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: none;
+  color: #999;
+  font-size: 15px;
+}
+.modifyUserText:hover {
+  color: #ff9500;
+  cursor: pointer;
+}
+.userPartTitle {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 15px;
+}
+.personPart {
+  width: 40%;
+  height: 100%;
+  background-color: white;
+  border: #cccccc 1px solid;
+  border-radius: 6px;
+  position: relative;
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+}
+.personPart:hover {
+  background-color: #fafbfb;
+  border: #ff9500 1px solid;
+}
+.personPart:hover .addPersonText {
+  display: block;
+}
+.addPersonText {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  color: #999;
+  display: none;
+  font-size: 15px;
+}
+.addPersonText:hover {
+  color: #ff9500;
+  cursor: pointer;
+}
+.personPartTitle {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 15px;
+}
+.titleSquare {
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  left: 12px;
+  background-color: #ff9500;
+}
+.orderListPart {
+  position: relative;
+  top: 60px;
+  left: 12px;
+  height: 600px;
+  width: 95%;
+  overflow-y: auto;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  //background-color: #ff9500;
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
+.orderInfoFirst {
+  margin-top: 0px;
+}
+.orderHotelImg {
+  height: 80px;
+  align-self: center;
+  margin-left: 20px;
+}
+
+.userInfoPart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.userAvatarAndName {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.userAvatar {
+  align-self: center;
+  margin-top: 50px;
+}
+.userAvatarImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.userAvatar:hover {
+  cursor: pointer;
+}
+.userAvatar:hover .modifyAvatar {
+  display: block;
+}
+.modifyAvatar {
+  display: none;
+  z-index: 3;
+  position: absolute;
+  top: 110px;
+  height: 20px;
+  width: 80px;
+  background-color: #383838;
+  text-align: center;
+  line-height: 18px;
+  font-size: 13px;
+  opacity: 0.8;
+  text: opacity(0.8);
+  color: #cccccc;
+  align-self: center;
+}
+.userNamePart {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+}
+.userName {
+  align-self: center;
+  font-weight: bolder;
+  font-size: 20px;
+  width: fit-content;
+  height: 24px;
+  border-bottom: dimgrey 1px dashed;
+  cursor: pointer;
+}
+.userNameIcon {
+  align-self: center;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+.userNameImg {
+  width: 12px;
+  height: 12px;
+  align-self: center;
+}
+.userBasicInfoPart {
+  align-self: center;
+  font-size: 18px;
+  color: dimgrey;
+  display: flex;
+  flex-direction: column;
+}
+.userEmail {
+  align-self: center;
+}
+.userType {
+  margin-top: 10px;
+  align-self: center;
+  font-size: 15px;
+  color: blue;
+}
+.userCredit {
+  align-self: center;
+  font-size: 15px;
+  color: goldenrod;
+}
+.userOperationPart {
+  height: 100px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+.modifyPassword {
+  height: 30px;
+  width: 80px;
+  //border: 1px black solid;
+  border-radius: 10px;
+  background-color: #ff4334;
+  opacity: .9;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+.modifyPassword:hover {
+  cursor: pointer;
+}
+.modifyPasswordText {
+  align-self: center;
+  font-size: 13px;
+  margin-left: 13px;
+  color: white;
+  font-weight: bolder;
+  //text-shadow: black 1px 0 0, black 0 1px 0, black 1px 0 0, black 0 1px 0;
+}
+.modifyPasswordIcon {
+
+}
+.becomeVIP {
+  height: 30px;
+  width: 80px;
+  background-color: #ffc213;
+  //border: 1px black solid;
+  opacity: .9;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+.becomeVIP:hover {
+  cursor: pointer;
+}
+.becomeVIPText {
+  font-size: 13px;
+  align-self: center;
+  margin-left: 13px;
+  color: white;
+  font-weight: bolder;
+  //text-shadow: black 1px 0 0, black 0 1px 0, black 1px 0 0, black 0 1px 0;
+}
+.becomeVIPIcon {
+
+}
+
+.rightBottomPart {
+  width: 95%;
+  height: 40%;
+  position: absolute;
+  bottom: 0;
+  margin-left: 20px;
+  background-color: white;
+  border: #cccccc 1px solid;
+  border-radius: 6px;
+}
+.rightBottomPart:hover {
+  background-color: #fafbfb;
+  border: #ff9500 1px solid;
+}
+.rightBottomPart:hover .allCreditText {
+  display: block;
+}
+.creditPart {
+  width: 100%;
+  height: 100%;
+}
+.creditPartTitle {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 15px;
+}
+.allCreditText {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  display: none;
+  color: #999;
+  font-size: 15px;
+}
+.allCreditText:hover {
+  cursor: pointer;
+  color: #ff9500;
+}
+.personListPart {
+  width: 196px;
+  height: 280px;
+  align-self: center;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+}
+
+.addPerson {
+  height: 30px;
+  width: 150px;
+  margin-top: 10px;
+  align-self: center;
+  font-size: 14px;
+  border: 2px #1296db dashed;
+  line-height: 28px;
+  text-align: center;
+  opacity: .8;
+  display: flex;
+  flex-direction: row;
+  color: #1296db;
+}
+.addPerson:hover {
+  cursor: pointer;
+}
+.addPersonIcon {
+  align-self: center;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+.addPersonImg {
+  width: 10px;
+  height: 10px;
+}
+.addPersonBottomText {
+  margin-left: 3px;
+}
+
+.creditRecordListPart {
+  width: 95%;
+  height: 210px;
+  //background-color: #383838;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 2.5%;
+  margin-top: 50px;
+  overflow-y: auto;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+}

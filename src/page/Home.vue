@@ -1,21 +1,44 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import {reactive} from 'vue';
 import HotCarousel from '../component/HotCarousel.vue';
-import CatelHeader from '../component/CatelHeader.vue';
 
 const hotels_first = reactive([
-  {'name': '网红民宿', 'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg'},
-  {'name': '亲子酒店', 'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg'},
-  {'name': '花样青旅', 'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg'},
-  {'name': '古镇酒店', 'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg'},
+  {
+    'name': '网红民宿',
+    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
+  },
+  {
+    'name': '亲子酒店',
+    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
+  },
+  {
+    'name': '花样青旅',
+    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
+  },
+  {
+    'name': '古镇酒店',
+    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
+  },
   {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
 ]);
 const hotels_second = reactive([
   {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {'name': '古镇酒店', 'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg'},
-  {'name': '花样青旅', 'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg'},
-  {'name': '亲子酒店', 'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg'},
-  {'name': '网红民宿', 'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg'},
+  {
+    'name': '古镇酒店',
+    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
+  },
+  {
+    'name': '花样青旅',
+    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
+  },
+  {
+    'name': '亲子酒店',
+    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
+  },
+  {
+    'name': '网红民宿',
+    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
+  },
 ]);
 const brands = reactive([
   {'img': 'https://m3.tuniucdn.com/fb2/t1/G6/M00/00/CA/Cii-U12gVTiIAggEAAAlmo1PkUgAAAKEQGqxBcAACWy515.png'},
@@ -33,13 +56,12 @@ const brands = reactive([
 
 <template>
   <div class="displayArea">
-    <CatelHeader />
     <div class="recommendArea">
       <h3 class="recommendTxt">
         热门推荐
       </h3>
       <img
-        src="src/asset/budalagong.png"
+        src="/src/asset/budalagong.png"
         class="recommendPng"
       >
     </div>
@@ -120,7 +142,5 @@ const brands = reactive([
     </div>
   </div>
 </template>
-
-
 
 <style src="./Home.scss" lang="scss" scoped />

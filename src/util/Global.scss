@@ -1,0 +1,24 @@
+#app, html, body {
+  height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 160%;
+  margin: 0;
+  //overscroll-behavior: none;
+  //background-color: #f5f7fa;
+  background-color: white;
+}
+
+::-ms-reveal {
+  display: none;
+}

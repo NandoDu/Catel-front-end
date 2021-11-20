@@ -86,7 +86,5 @@ const changeBreak = (param: number) => {
 
 <style src="./HotelInfo.scss" lang="scss" scoped/>
 <style>
-body {
-  background-color: #f5f7fa;
-}
+
 </style>
