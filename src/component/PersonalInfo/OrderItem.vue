@@ -76,7 +76,10 @@ const emit = defineEmits<{
             查看
           </div>
         </div>
-        <div class="cancelOperation">
+        <div
+          class="cancelOperation"
+          v-if="orderInfo.orderState!=='Finished'"
+        >
           <div class="cancelIcon">
             B
           </div>
