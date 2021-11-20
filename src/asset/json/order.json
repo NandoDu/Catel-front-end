@@ -1,0 +1,179 @@
+[
+  {
+    "ifOperationShow": false,
+    "state": "已入住",
+    "hotelName": "全季酒店",
+    "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+    "dateIn": "2021-04-16",
+    "dateOut": "2021-04-17",
+    "price": "1401.00",
+    "roomType": "大床房",
+    "breakfast": false,
+    "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/33/24/Cii-Tli89XeIVj6LAASlvtFwJXAAAIHHAJd-gsABKXW202_w450_h300_c1_t0.jpg"
+  }, {
+  "ifOperationShow": false,
+  "state": "已预定",
+  "hotelName": "金陵饭店",
+  "hotelAddress": "南京鼓楼区汉中路2号",
+  "dateIn": "2021-06-15",
+  "dateOut": "2021-06-16",
+  "price": "769.01",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/33/27/Cii-TFi89vaIINP0AAHNwdCmqR0AAIHIAKjWu4AAc3Z977_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已撤销",
+  "hotelName": "金鹰珠江壹号国际酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-06-16",
+  "dateOut": "2021-06-17",
+  "price": "500.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G1/M00/9A/21/Cii9EFi9Qz2IRVonAApT49DJ5fwAAIb9gHEZe8AClP7382_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "香格里拉大酒店",
+  "hotelAddress": "西安雁塔区科技路38号乙",
+  "dateIn": "2021-07-13",
+  "dateOut": "2021-07-14",
+  "price": "663.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "全季酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-04-16",
+  "dateOut": "2021-04-17",
+  "price": "401.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/33/79/Cii-T1i9Hf-IUZpYAACB6DJGKykAAIHwQP-89gAAIIA154_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已撤销",
+  "hotelName": "金陵饭店",
+  "hotelAddress": "南京鼓楼区汉中路2号",
+  "dateIn": "2021-06-15",
+  "dateOut": "2021-06-16",
+  "price": "769.01",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/C7/FD/Cii-TFknV4GIddkeAAFP_vTDaYkAAKaVwM4kNgAAVAW454_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "金鹰珠江壹号国际酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-06-16",
+  "dateOut": "2021-06-17",
+  "price": "500.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/33/24/Cii-Tli89XeIVj6LAASlvtFwJXAAAIHHAJd-gsABKXW202_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已撤销",
+  "hotelName": "香格里拉大酒店",
+  "hotelAddress": "西安雁塔区科技路38号乙",
+  "dateIn": "2021-07-13",
+  "dateOut": "2021-07-14",
+  "price": "663.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G2/M00/33/27/Cii-TFi89vaIINP0AAHNwdCmqR0AAIHIAKjWu4AAc3Z977_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "全季酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-04-16",
+  "dateOut": "2021-04-17",
+  "price": "401.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G1/M00/9A/21/Cii9EFi9Qz2IRVonAApT49DJ5fwAAIb9gHEZe8AClP7382_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已撤销",
+  "hotelName": "金陵饭店",
+  "hotelAddress": "南京鼓楼区汉中路2号",
+  "dateIn": "2021-06-15",
+  "dateOut": "2021-06-16",
+  "price": "769.01",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "金鹰珠江壹号国际酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-06-16",
+  "dateOut": "2021-06-17",
+  "price": "500.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "香格里拉大酒店",
+  "hotelAddress": "西安雁塔区科技路38号乙",
+  "dateIn": "2021-07-13",
+  "dateOut": "2021-07-14",
+  "price": "663.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已撤销",
+  "hotelName": "全季酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-04-16",
+  "dateOut": "2021-04-17",
+  "price": "401.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "金陵饭店",
+  "hotelAddress": "南京鼓楼区汉中路2号",
+  "dateIn": "2021-06-15",
+  "dateOut": "2021-06-16",
+  "price": "769.01",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "金鹰珠江壹号国际酒店",
+  "hotelAddress": "北京朝阳区亚运村小营东路3号凯基伦大厦4-5层",
+  "dateIn": "2021-06-16",
+  "dateOut": "2021-06-17",
+  "price": "500.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}, {
+  "ifOperationShow": false,
+  "state": "已入住",
+  "hotelName": "香格里拉大酒店",
+  "hotelAddress": "西安雁塔区科技路38号乙",
+  "dateIn": "2021-07-13",
+  "dateOut": "2021-07-14",
+  "price": "663.00",
+  "roomType": "大床房",
+  "breakfast": false,
+  "img": "https://m.tuniucdn.com/fb2/t1/G5/M00/F3/C8/Cii-slrz4mOIZD1AAAJJlkSuRT8AAGpJAKdGcwAAkmu187_w450_h300_c1_t0.jpg"
+}
+]

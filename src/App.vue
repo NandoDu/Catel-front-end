@@ -1,20 +1,13 @@
 <script setup lang="ts">
-// https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import CatelHeader from './component/Header/CatelHeader.vue';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
 </script>
 
 <template>
-  <RouterView />
+  <ElConfigProvider :locale="zhCn">
+    <CatelHeader />
+    <RouterView />
+  </ElConfigProvider>
 </template>
 
-<style>
-#app, html, body {
-  height: 100vh;
-}
-
-::-ms-reveal {
-  display: none;
-}
-body {
-  margin: 0;
-}
-</style>
+<style lang="scss" src="./util/Global.scss" />

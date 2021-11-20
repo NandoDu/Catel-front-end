@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     }
   },
   async err => {
-    console.log('[Error] Axios {err}');
+    console.log(`[Error] Axios ${err}`);
     ElMessage.error({
       message: 'Request error! Check your network connection please.', 
       center: true,

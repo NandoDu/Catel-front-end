@@ -55,22 +55,22 @@ const startSearch = () => {
         >
           <template #reference>
             <el-button class="popover">
-              {{ peopleNum }}位，{{ roomNum }}间
+              {{ roomNum }}间，每间 {{ peopleNum }}人
             </el-button>
           </template>
           <div style="display: flex;flex-direction: row;line-height: 50px;">
-            入住人数：
+            房间数量：
             <el-input-number
-              v-model="peopleNum"
+              v-model="roomNum"
               :min="1"
               size="small"
               style="margin-top: 9px"
             />
           </div>
           <div style="display: flex;flex-direction: row;line-height: 50px;">
-            房间数量：
+            每间人数：
             <el-input-number
-              v-model="roomNum"
+              v-model="peopleNum"
               :min="1"
               size="small"
               style="margin-top: 9px"
