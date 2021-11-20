@@ -6,52 +6,23 @@ import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
 import {useAsyncState} from '@vueuse/core';
 import {ordersOfUserAPI} from '../api/orderApi';
 import {useTypedStore} from '../store';
+import {userResidentsAPI} from '../api/userApi';
 
 const store = useTypedStore();
 const id = store.getters['user/userId'];
-const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id}), []);
 const activatedOrders = reactive<number[]>([]);
 const activatedResidents = reactive<number[]>([]);
-const personInfoList = reactive([
-  {
-    'ifOperationShow': false,
-    'name': '张三',
-    'phone': '13333333333',
-    'idNumber': '232323232323232323',
-    'birthday': '1999-05-03',
-  },
-  {
-    'ifOperationShow': false,
-    'name': '张四',
-    'phone': '14444444444',
-    'idNumber': '242424242424242424',
-    'birthday': '1999-05-04',
-  },
-  {
-    'ifOperationShow': false,
-    'name': '张五',
-    'phone': '15555555555',
-    'idNumber': '252525252525252525',
-    'birthday': '1999-05-05',
-  },
-]);
-
-const activeOrderItem = (index: number) => {
-  if (activatedOrders.length == 0) activatedOrders.push(index);
+const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id}), []);
+const {state: personInfoList} = useAsyncState(userResidentsAPI({id}), []);
+const activeItem = (list: number[], index: number) => {
+  if (list.length == 0) list.push(index);
   else {
-    if (activatedOrders[0] == index) activatedOrders.pop();
-    else activatedOrders[0] = index;
+    if (list[0] == index) list.pop();
+    else list[0] = index;
   }
 };
-const activeResidentItem = (index: number) => {
-  for (let i = 0; i < personInfoList.length; i++) {
-    if (i == index) {
-      continue;
-    }
-    personInfoList[i].ifOperationShow = false;
-  }
-  personInfoList[index].ifOperationShow = !personInfoList[index].ifOperationShow;
-};
+const activeOrderItem = (index: number) => activeItem(activatedOrders, index);
+const activeResidentItem = (index: number) => activeItem(activatedResidents, index);
 </script>
 
 <template>
@@ -92,6 +63,7 @@ const activeResidentItem = (index: number) => {
                 <img
                   src="src/asset/cat.jpeg"
                   class="userAvatarImg"
+                  alt=""
                 >
                 <div class="modifyAvatar">
                   修改头像
@@ -100,8 +72,9 @@ const activeResidentItem = (index: number) => {
               <div class="userNamePart">
                 <div class="userNameIcon">
                   <img
-                    src="src/asset/xiugai.png"
+                    src="src/asset/modify.png"
                     class="userNameImg"
+                    alt="Modify"
                   >
                 </div>
                 <div class="userName">
@@ -149,6 +122,7 @@ const activeResidentItem = (index: number) => {
               v-for="(personInfo, index) in personInfoList"
               :key="index"
               :resident-info="{index, ...personInfo}"
+              :if-operation-show="activatedResidents.includes(index)"
               @toggle="activeResidentItem"
             />
             <div class="addPerson">
