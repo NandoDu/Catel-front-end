@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import PriceContainer from '../component/PriceContainer.vue';
-import DatePicker from '../component/datePicker.vue';
-import HotelInfo from '../component/hotelInfo.vue'; 
-import CommentCard from '../component/CommentCard.vue';
+import PriceContainer from '../component/HotelInfo/PriceContainer.vue';
+import DatePicker from '../component/HotelInfo/datePicker.vue';
+import HotelInfo from '../component/HotelInfo/hotelInfo.vue';
+import CommentCard from '../component/HotelInfo/CommentCard.vue';
+import CommentTotal from '../component/HotelInfo/CommentTotal.vue';
+import PriceAnnouncement from '../component/HotelInfo/PriceAnnouncement.vue';
 import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
 import {GetCommentO, HotelInfoO, RoomInfoO} from '../api/userApi';
@@ -68,8 +70,9 @@ const changeBreak = (param: number) => {
       :room-number="item.total"
       :room-price="item.price"
       :max-people="item.peopleMax"
-      style="margin-bottom: 7px"
+      style="margin-bottom: 5px"
     />
+    <CommentTotal />
     <CommentCard
       v-for="item in commentList"
       :key="item.id"
@@ -79,12 +82,18 @@ const changeBreak = (param: number) => {
       :title="item.title"
       :score="item.score"
       :hotel-name="hotelInfo.name"
+      class="commentCard"
     />
+    <PriceAnnouncement />
   </div>
 </template>
 
 
 <style src="./HotelInfo.scss" lang="scss" scoped/>
 <style>
-
+.commentCard:nth-last-child(2){
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom: 0;
+}
 </style>

@@ -34,9 +34,8 @@ defineProps<{ avatar: string, title: string, content: string, username: string, 
 .main-container {
 	width: 1160px;
 	height: 200px;
-	margin-bottom: 20px;
+  border-bottom: 1px solid #dadfe6 ;
 	background-color: white;
-	border-radius: 8px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
