@@ -54,7 +54,7 @@ const changeBreak = (param: number) => {
 };
 </script>
 <template>
-  <div style="display:flex;flex-direction:column;align-items: center">
+  <div style="display:flex;flex-direction:column;align-items: center;width: 100%;min-width: 1160px">
     <HotelInfo
       :hotel-name="hotelInfo.name"
       :description="hotelInfo.description"
@@ -72,7 +72,10 @@ const changeBreak = (param: number) => {
       :max-people="item.peopleMax"
       style="margin-bottom: 5px"
     />
-    <CommentTotal />
+    <CommentTotal
+      :count="commentList.length"
+      :rate="hotelInfo.rate"
+    />
     <CommentCard
       v-for="item in commentList"
       :key="item.id"
@@ -90,10 +93,4 @@ const changeBreak = (param: number) => {
 
 
 <style src="./HotelInfo.scss" lang="scss" scoped/>
-<style>
-.commentCard:nth-last-child(2){
-  border-bottom-right-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-bottom: 0;
-}
-</style>
+
