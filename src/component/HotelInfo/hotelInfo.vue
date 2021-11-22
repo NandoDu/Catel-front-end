@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {HotelInfoO} from '../api/userApi';
+import {HotelInfoO} from '../../api/userApi';
 
 
 defineProps<{ hotelName: HotelInfoO, description: string, hotelStar: string}>();
@@ -254,6 +254,9 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
 <style scoped>
 section{
   width:1160px;
+  background-color: white;
+  margin-bottom: 16px;
+  border-radius: 8px;
 }
 body{
   font: 12px/1.5 Helvetica Neue,Helvetica,Arial,sans-serif;
@@ -487,7 +490,7 @@ body{
   font-family: PingFangSC-Regular,serif;
 }
 .map_icon{
-  background: url("src/asset/虚假的地图.jpg") 50%/cover;
+  background: url("../../asset/虚假的地图.jpg") 50%/cover;
   max-width: 98px;
   height: 98px;
   width: 24%;

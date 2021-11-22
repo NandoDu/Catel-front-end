@@ -89,8 +89,8 @@ const showLoginModal = () => loginModal.value.open();
 
 <style lang="scss" scoped>
 header {
-  background-color: white;
-  //background-color: #f5f7fa;
+  //background-color: white;
+  background-color: #f5f7fa;
   display: flex;
   align-items: center;
   padding: 0 10vw;
