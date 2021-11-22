@@ -36,44 +36,40 @@ const login = async () => {
 </script>
 
 <template>
-  <ElCard>
-    <div class="flex-col login-box">
-      <h1>Account Login</h1>
-      <ElInput
-        class="input-line"
-        v-model="loginData.identity"
-        placeholder="Email or Username"
-        @keyup.enter="login"
-      />
-      <ElInput
-        class="input-line"
-        v-model="loginData.password"
-        placeholder="Password"
-        @keyup.enter="login"
-        show-password
-      />
-      <!--      <LineInput-->
-      <!--        label="Email or Username"-->
-      <!--        v-model="loginData.password"-->
-      <!--      />-->
-      <div class="flex-end">
-        <span
-          class="extern-link"
-          @click="() => $router.push('/')"
-        >Register</span>
-        <ElButton
-          @click="login"
-          class="login-button"
-        >
-          Login
-        </ElButton>
-      </div>
+  <div id="login-card">
+    <h1>Account Login</h1>
+    <ElInput
+      class="input-line"
+      v-model="loginData.identity"
+      placeholder="Email or Username"
+      @keyup.enter="login"
+    />
+    <ElInput
+      class="input-line"
+      v-model="loginData.password"
+      placeholder="Password"
+      @keyup.enter="login"
+      show-password
+    />
+    <div class="flex-end">
+      <span
+        class="extern-link"
+        @click="() => $router.push('/')"
+      >Register</span>
+      <ElButton
+        @click="login"
+        class="login-button"
+      >
+        Login
+      </ElButton>
     </div>
-  </ElCard>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @use 'src/util/Color';
+@use 'src/util/Shadow';
+@use 'src/util/Other';
 
 $inputLen: 400px;
 
@@ -93,20 +89,10 @@ $inputLen: 400px;
   align-self: flex-end;
 }
 
-.flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-.flex-col {
-  @extend .flex;
-  flex-flow: column nowrap;
-}
-
-.login-box {
+#login-card {
   width: $inputLen;
+  @include Other.center-flex;
+  @include Other.card;
 }
 
 @mixin add-color($color) {

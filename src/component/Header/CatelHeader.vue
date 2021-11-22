@@ -28,7 +28,7 @@ const showLoginModal = () => loginModal.value.open();
 </script>
 
 <template>
-  <header>
+  <header id="catel-header">
     <div
       class="trademark"
       @click="()=>router.push('/')"
@@ -88,7 +88,7 @@ const showLoginModal = () => loginModal.value.open();
 </template>
 
 <style lang="scss" scoped>
-header {
+#catel-header {
   //background-color: white;
   background-color: #f5f7fa;
   display: flex;
@@ -96,6 +96,7 @@ header {
   padding: 0 10vw;
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 10;
 }
 

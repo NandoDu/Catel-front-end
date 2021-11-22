@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {reactive} from 'vue';
+import {reactive, ref} from 'vue';
 import OrderItem from '../component/PersonalInfo/OrderItem.vue';
 import Resident from '../component/PersonalInfo/Resident.vue';
 import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
@@ -7,6 +7,8 @@ import {useAsyncState} from '@vueuse/core';
 import {ordersOfUserAPI} from '../api/orderApi';
 import {useTypedStore} from '../store';
 import {userResidentsAPI} from '../api/userApi';
+import VirryModal from '../component/Util/VirryModal.vue';
+import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
 
 const store = useTypedStore();
 const id = store.getters['user/userId'];
@@ -23,6 +25,9 @@ const activeItem = (list: number[], index: number) => {
 };
 const activeOrderItem = (index: number) => activeItem(activatedOrders, index);
 const activeResidentItem = (index: number) => activeItem(activatedResidents, index);
+
+const residentAddition = ref();
+const showResidentAddition = () => residentAddition.value.open();
 </script>
 
 <template>
@@ -114,7 +119,10 @@ const activeResidentItem = (index: number) => activeItem(activatedResidents, ind
           <div class="personPartTitle">
             入住人信息
           </div>
-          <div class="addPersonText">
+          <div
+            class="addPersonText"
+            @click="showResidentAddition"
+          >
             添加
           </div>
           <div class="personListPart">
@@ -133,7 +141,10 @@ const activeResidentItem = (index: number) => activeItem(activatedResidents, ind
                   alt="Add Sign"
                 >
               </div>
-              <div class="addPersonBottomText">
+              <div
+                class="addPersonBottomText"
+                @click="showResidentAddition"
+              >
                 添加新的入住人信息
               </div>
             </div>
@@ -160,6 +171,10 @@ const activeResidentItem = (index: number) => activeItem(activatedResidents, ind
       </div>
     </div>
   </div>
+
+  <VirryModal ref="residentAddition">
+    <ResidentAddition />
+  </VirryModal>
 </template>
 
 <style src="./PersonalInfo.scss" lang="scss" scoped />

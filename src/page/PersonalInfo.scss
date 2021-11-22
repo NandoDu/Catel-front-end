@@ -1,9 +1,9 @@
+@use "src/util/Other";
 .mainPart {
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
+  @include Other.center-flex;
+  flex-grow: 1;
   flex-direction: row;
+  background-color: white;
 }
 .leftPart {
   width: 50%;

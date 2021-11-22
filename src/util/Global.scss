@@ -1,5 +1,7 @@
 #app, html, body {
-  height: 100vh;
+  min-height: 100vh;
+  width: fit-content;
+  min-width: 100vw;
 }
 
 #app {

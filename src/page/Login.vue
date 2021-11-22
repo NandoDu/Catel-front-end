@@ -1,20 +1,20 @@
 <script setup lang="ts">
 
-import LoginModal from '../component/LoginCard.vue';
+import LoginCard from '../component/LoginCard.vue';
 
 </script>
 
 <template>
-  <div class="flex">
-    <LoginModal />
+  <div id="page-login">
+    <LoginCard />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@use "src/util/Other";
+
+#page-login {
+  @include Other.center-flex;
   flex-grow: 1;
 }
 </style>

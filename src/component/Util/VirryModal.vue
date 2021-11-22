@@ -19,7 +19,7 @@ defineExpose({open, close});
       <button
         @click="close"
       >
-        <ElIcon :size="32">
+        <ElIcon :size="24">
           <ElClose />
         </ElIcon>
       </button>
@@ -29,6 +29,7 @@ defineExpose({open, close});
 </template>
 
 <style lang="scss" scoped>
+@use "src/util/Shadow";
 .backdrop {
   position: fixed;
   top: 0;
@@ -41,11 +42,12 @@ defineExpose({open, close});
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  z-index: 10;
 }
 
 .modal {
-  box-shadow: 2px 2px 40px 1px;
   position: relative;
+  @include Shadow.light;
 }
 
 button {
@@ -56,6 +58,6 @@ button {
   right: 0;
   background: none;
   cursor: pointer;
-  padding: 5px 5px 0 0;
+  padding: 10px 10px 0 0;
 }
 </style>
