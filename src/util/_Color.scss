@@ -1,3 +1,16 @@
 @function tint($color, $percentage) {
-    @return mix(#fff, $color, $percentage);
+  @return mix(#fff, $color, $percentage);
 }
+
+$gray: #f5f7fa;
+$green: #68b668;
+$red: #e31e04;
+$blue: #123456;
+$purple: #8300ee;
+
+$buttonColors: (
+    "green": $green,
+    "red": $red,
+    "blue": $blue,
+    "purple": $purple,
+);

@@ -1,9 +1,16 @@
 <script setup lang="ts">
-defineProps<{ text: string }>();
+defineProps<{
+  text: string
+  color: 'red' | 'green'
+}>();
+
 </script>
 
 <template>
-  <button>
+  <button
+    class="bigger-button"
+    :class="`color-${color}`"
+  >
     {{ text }}
   </button>
 </template>
@@ -11,25 +18,28 @@ defineProps<{ text: string }>();
 <style lang="scss" scoped>
 @use 'src/util/Color';
 
-$mainColor: #68b668;
 $duration: 200ms;
-button {
-  all: unset;
-  cursor: pointer;
-  border: 2px solid $mainColor;
-  border-radius: 40px;
-  padding: 8px 28px;
-  color: $mainColor;
-  transition: color $duration, background-color $duration;
 
-  &:hover {
-    color: white;
-    background-color: $mainColor;
+.bigger-button {
+  @each $name, $color in Color.$buttonColors {
+    &.color-#{$name} {
+      all: unset;
+      cursor: pointer;
+      border: 2px solid $color;
+      border-radius: 40px;
+      padding: 8px 28px;
+      color: $color;
+      transition: color $duration, background-color $duration;
+
+      &:hover {
+        color: white;
+        background-color: $color;
+      }
+
+      &:active {
+        background-color: Color.tint($color, 20);
+      }
+    }
   }
-
-  &:active {
-    background-color: Color.tint($mainColor, 20);
-  }
-
 }
 </style>

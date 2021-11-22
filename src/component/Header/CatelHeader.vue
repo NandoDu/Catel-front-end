@@ -70,12 +70,14 @@ const showLoginModal = () => loginModal.value.open();
     <BiggerButton
       v-if="!logged"
       id="login-button"
+      color="green"
       text="Login"
       @click="showLoginModal"
     />
     <BiggerButton
       v-else
       id="logout-button"
+      color="red"
       text="Logout"
       @click="logout"
     />
