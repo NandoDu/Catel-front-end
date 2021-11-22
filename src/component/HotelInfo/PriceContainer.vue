@@ -1,8 +1,9 @@
 <script setup lang="ts">
-
-defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumber: number, roomPrice: number, maxPeople: number }>();
-
-
+const emit = defineEmits(['book']);
+defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumber: number, roomPrice: number, maxPeople: number, roomId: number}>();
+const book = (roomId: number) => {
+  emit('book', roomId);
+};
 </script>
 
 <template>
@@ -18,7 +19,7 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
             >
           </div>
           <div class="room-panel-name">
-            {{ hotelName+'-'+roomType }}
+            {{ hotelName + '-' + roomType }}
           </div>
         </div>
         <div class="room-sale">
@@ -44,7 +45,7 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
                         {{ roomType }}
                       </div>
                       <div class="bed-info-span-blue">
-                        {{ breakfast?'包含早餐':'不包含早餐' }}
+                        {{ breakfast ? '包含早餐' : '不包含早餐' }}
                       </div>
                     </div>
                   </div>
@@ -79,7 +80,10 @@ defineProps<{ hotelName: string, roomType: string, breakfast: boolean, roomNumbe
                   </div>
                   <div class="sale-button">
                     <div>
-                      <el-button style="background-color: #ff9500;color: white;font-weight: bold">
+                      <el-button
+                        style="background-color: #ff9500;color: white;font-weight: bold"
+                        @click="book(roomId)"
+                      >
                         预订
                       </el-button>
                     </div>

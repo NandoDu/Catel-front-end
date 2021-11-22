@@ -254,6 +254,7 @@ section{
   background-color: white;
   margin-bottom: 16px;
   border-radius: 8px;
+  margin-top: 8px;
 }
 body{
   font: 12px/1.5 Helvetica Neue,Helvetica,Arial,sans-serif;
