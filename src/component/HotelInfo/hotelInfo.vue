@@ -253,7 +253,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
 
 <style scoped>
 section{
-  width:1160px;
+  max-width:1160px;
   background-color: white;
   margin-bottom: 16px;
   border-radius: 8px;
@@ -263,11 +263,12 @@ body{
 }
 .headline{
   display: flex;
+  padding: 8px 24px;
 }
 .content{
   display: flex;
   margin: 0;
-  padding: 4px;
+  padding: 8px 24px;
 }
 .head_album{
   display: flex;
