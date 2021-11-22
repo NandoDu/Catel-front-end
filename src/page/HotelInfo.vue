@@ -131,7 +131,7 @@ const book = (roomId: number) => {
       :hotel-name="hotelInfo.name"
       class="commentCard"
     />
-    <PriceAnnouncement/>
+    <PriceAnnouncement />
   </div>
 </template>
 
