@@ -33,6 +33,7 @@ $duration: 300ms;
 
 #line-input {
   @include Other.center-flex;
+  flex-direction: column;
   margin: 5px;
 
   label {
@@ -42,7 +43,7 @@ $duration: 300ms;
   input {
     all: unset;
     position: relative;
-    border-bottom: 2px solid gray;
+    border-bottom: 1px solid gray;
     transition: border-bottom-color $duration;
     width: 35vh;
     padding: 10px 5px;

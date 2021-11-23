@@ -1,55 +1,88 @@
 <script setup lang="ts">
-import {inject, reactive, unref} from 'vue';
+import {computed, inject, reactive} from 'vue';
 import LineInput from '../Util/LineInput.vue';
 import BiggerButton from '../Header/BiggerButton.vue';
+import {addResidentAPI} from '../../api/user/addResident';
+import {useTypedStore} from '../../store';
+import {ElMessage} from 'element-plus';
+import dateFormat from 'dateformat';
+import useTranslation from '../../config/i18n/useTranslation';
 
-const residentInfo = reactive({
-  name: '',
-  phone: '',
-  idNo: '',
-});
+const store = useTypedStore();
+const userId = computed<number>(() => store.getters['user/userId']);
+const message = useTranslation([
+  'residentAddition', 'residentName', 'realName',
+  'phoneNumber', 'cancel', 'add', 'idNo', 'birthday',
+]);
+
+class ResidentInfo {
+  name = '';
+  phone = '';
+  idNo = '';
+  birthday: Date | null = null;
+}
+
+const residentInfo = reactive(new ResidentInfo());
+
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
-const submitModify = () => {
-  console.log(residentInfo);
+const submitModify = async () => {
+  if (residentInfo.birthday == null) return;
+  const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
+  console.log(dataString);
+  try {
+    await addResidentAPI({
+      realName: residentInfo.name,
+      phoneNumber: residentInfo.phone,
+      idNo: residentInfo.idNo,
+      birthday: dataString,
+      userId: userId.value,
+    });
+    closeModal?.();
+    ElMessage.success({
+      message: ('message.addOk'),
+      center: true,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 </script>
 
 <template>
   <div class="resident-addition">
-    <h3>增加入住人</h3>
-
+    <h3>{{ message.residentAddition }}</h3>
     <LineInput
-      label="Resident Name"
-      placeholder="Real Name"
+      :label="message.residentName"
+      :placeholder="message.realName"
       v-model="residentInfo.name"
     />
 
     <LineInput
-      label="Phone Number"
-      placeholder="Phone Number"
+      :label="message.phoneNumber"
+      :placeholder="message.phoneNumber"
       v-model="residentInfo.phone"
     />
 
     <LineInput
-      label="Id Number"
-      placeholder="Id Number"
+      :label="message.idNo"
+      :placeholder="message.idNo"
       v-model="residentInfo.idNo"
     />
 
     <div class="inline">
-      Birthday
-      <ElDatePicker />
+      {{ message.birthday }}
+      <ElDatePicker v-model="residentInfo.birthday" />
     </div>
 
     <div class="inline">
       <BiggerButton
         color="red"
-        text="Cancel"
+        :text="message.cancel"
         @click="closeModal"
       />
       <BiggerButton
         color="green"
-        text="Modify"
+        :text="message.add"
         @click="submitModify"
       />
     </div>
@@ -63,13 +96,13 @@ const submitModify = () => {
 
 .resident-addition {
   @include Other.center-flex;
+  flex-direction: column;
   @include Other.card;
 }
 
 .inline {
   @include Other.center-flex;
   width: 100%;
-  flex-direction: row;
   margin: 5px;
   justify-content: space-evenly;
 }

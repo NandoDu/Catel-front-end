@@ -3,6 +3,7 @@ import {ElMessage} from 'element-plus';
 import {inject, reactive} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useTypedStore} from '../store';
+import useTranslation from '../config/i18n/useTranslation';
 
 const loginData = reactive({
   identity: '',
@@ -12,6 +13,7 @@ const store = useTypedStore();
 const router = useRouter();
 const route = useRoute();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
+const message = useTranslation(['accountLogin', 'identity', 'password', 'register', 'login', 'loginOk']);
 
 const login = async () => {
   try {
@@ -26,7 +28,7 @@ const login = async () => {
     }
 
     ElMessage.success({
-      message: 'Login successfully!',
+      message: message.value.loginOk,
       center: true,
     });
   } catch (e) {
@@ -37,17 +39,17 @@ const login = async () => {
 
 <template>
   <div id="login-card">
-    <h1>Account Login</h1>
+    <h1>{{ message.accountLogin }}</h1>
     <ElInput
       class="input-line"
       v-model="loginData.identity"
-      placeholder="Email or Username"
+      :placeholder="message.identity"
       @keyup.enter="login"
     />
     <ElInput
       class="input-line"
       v-model="loginData.password"
-      placeholder="Password"
+      :placeholder="message.password"
       @keyup.enter="login"
       show-password
     />
@@ -55,12 +57,14 @@ const login = async () => {
       <span
         class="extern-link"
         @click="() => $router.push('/')"
-      >Register</span>
+      >
+        {{ message.register }}
+      </span>
       <ElButton
         @click="login"
         class="login-button"
       >
-        Login
+        {{ message.login }}
       </ElButton>
     </div>
   </div>
@@ -81,7 +85,11 @@ $inputLen: 400px;
 .extern-link {
   font: 0.75em sans-serif;
   margin: 0 10px;
-  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: #0b3d52;
+  }
 }
 
 .flex-end {
@@ -92,6 +100,7 @@ $inputLen: 400px;
 #login-card {
   width: $inputLen;
   @include Other.center-flex;
+  flex-direction: column;
   @include Other.card;
 }
 

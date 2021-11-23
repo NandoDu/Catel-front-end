@@ -26,7 +26,7 @@ $duration: 200ms;
       all: unset;
       cursor: pointer;
       border: 2px solid $color;
-      border-radius: 40px;
+      border-radius: 20px;
       padding: 8px 28px;
       color: $color;
       transition: color $duration, background-color $duration;

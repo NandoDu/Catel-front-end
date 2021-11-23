@@ -4,13 +4,14 @@ import createPersistedState from 'vuex-persistedstate';
 import user, {UserState} from './user';
 import room, {RoomState} from './room';
 import hotel, {HotelState} from './hotel';
+import config, {ConfigState} from './config';
 
 
-type VuexState = UserState | RoomState | HotelState
+type VuexState = UserState | RoomState | HotelState | ConfigState
 const key: InjectionKey<Store<VuexState>> = Symbol();
 const store = createStore({
   modules: {
-    user, room, hotel,
+    user, room, hotel, config,
   },
   plugins: [createPersistedState()],
 });
