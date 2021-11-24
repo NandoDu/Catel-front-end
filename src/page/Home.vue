@@ -75,7 +75,7 @@ const brands = reactive([
     </div>
   </div>
   <div class="hotelArea">
-    <h3 style="margin-left: 185px; color: #383838">
+    <h3>
       精选酒店
     </h3>
     <div class="hotelListFirst">
@@ -121,7 +121,7 @@ const brands = reactive([
     class="cooperateArea"
     style="margin-top: 100px;"
   >
-    <h3 style="margin-left: 185px; color: #383838">
+    <h3>
       合作品牌
     </h3>
     <div class="brandList">

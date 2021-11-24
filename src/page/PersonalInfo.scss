@@ -3,10 +3,10 @@
   @include Other.center-flex;
   flex-grow: 1;
   flex-direction: row;
-  background-color: white;
 }
 .leftPart {
-  width: 50%;
+  //width: 50%;
+  width: 640px;
   height: 680px;
   background-color: white;
   border: #cccccc 1px solid;
@@ -247,7 +247,7 @@
 .userCredit {
   align-self: center;
   font-size: 15px;
-  color: goldenrod;
+  color: blue;
 }
 .userOperationPart {
   height: 100px;

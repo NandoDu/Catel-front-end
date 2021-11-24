@@ -116,6 +116,7 @@ const emit = defineEmits<{
   margin-left: 10px;
   font-size: 15px;
   color: grey;
+  width: 50px;
 }
 
 .separatingLine {
@@ -138,7 +139,8 @@ const emit = defineEmits<{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: #06aebd;
+  color: black;
+  opacity: .7;
 }
 
 .orderHotelAddress {
@@ -205,9 +207,9 @@ const emit = defineEmits<{
 }
 
 .orderPrice {
-  margin-left: 45px;
+  margin-left: 35px;
   align-self: center;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .orderOperation {

@@ -135,7 +135,8 @@ defineProps<{
   text-overflow: ellipsis;
   white-space:nowrap;
   overflow:hidden;
-  color: #06aebd;
+  color: black;
+  opacity: .7;
   font-size: 14px;
 }
 .recordHotelAddress {
