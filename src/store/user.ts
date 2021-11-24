@@ -1,5 +1,5 @@
 import {Module} from 'vuex';
-import {loginAPI, LoginO} from '../api/userApi';
+import {login, LoginO} from '../api/userApi';
 import actCon from './actCon';
 
 interface UserState {
@@ -24,7 +24,7 @@ const user: Module<UserState, unknown> = {
     },
   },
   actions: {
-    login: actCon(loginAPI, 'afterLogin'),
+    login: actCon(login, 'afterLogin'),
   },
   getters: {
     logged: state => state.logged,

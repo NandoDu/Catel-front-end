@@ -80,6 +80,44 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.1.tgz?cache=0&sync_timestamp=1635879961525&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40humanwhocodes%2Fobject-schema%2Fdownload%2F%40humanwhocodes%2Fobject-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha1-tSBSnsIdjllFoYUd/Rwy6U45/0U=
 
+"@intlify/core-base@9.2.0-beta.20":
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-9.2.0-beta.20.tgz#2c4ea4d244d6835d2bc2aa6a60bf9905d993125c"
+  integrity sha512-2pWte5Qzabs6tU51B6MmNSwzmCo4SoX6M9ZmnesyyDDYJaMpu7/MJ0R5yOZ2G/kbtzn6gYqI2TRPJp7aEhnWeg==
+  dependencies:
+    "@intlify/devtools-if" "9.2.0-beta.20"
+    "@intlify/message-compiler" "9.2.0-beta.20"
+    "@intlify/shared" "9.2.0-beta.20"
+    "@intlify/vue-devtools" "9.2.0-beta.20"
+
+"@intlify/devtools-if@9.2.0-beta.20":
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@intlify/devtools-if/-/devtools-if-9.2.0-beta.20.tgz#3ffef80404a6b170802dcf685fb3771fc8f82554"
+  integrity sha512-Dfx+IzJMB02EW4khgIH9icvxKymRHoSXB1EweE95rs+A6cJtS8LyJMualwoy3T/C6f0eFALg2YjKHLBCXGw1zg==
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.20"
+
+"@intlify/message-compiler@9.2.0-beta.20":
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-9.2.0-beta.20.tgz#ea63c34fc5d0827f86eff9344464b887121f52ac"
+  integrity sha512-nbJFuzwm1XZuKzhXqcURYabZ7JqyhyibIs3i661NXrblutd8ZiuOWUB20zIYjKFRLL38QWIijUclOyp+CSW5YQ==
+  dependencies:
+    "@intlify/shared" "9.2.0-beta.20"
+    source-map "0.6.1"
+
+"@intlify/shared@9.2.0-beta.20":
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.2.0-beta.20.tgz#a434928e5526580312658fdc3da86e5c398a840d"
+  integrity sha512-mwdvobi1gBNWt+dgd68IuRHG3xh6BXs0472ZO8vClr49HOhoVg9M+myQQntBQBHblcXreM8NX/pLkBzXSyUfmQ==
+
+"@intlify/vue-devtools@9.2.0-beta.20":
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@intlify/vue-devtools/-/vue-devtools-9.2.0-beta.20.tgz#811d2fc8ee3dc6df246d5f536572bcc8f541de50"
+  integrity sha512-vqX/JTZt5um78ypTySdW1skJp6TRDgr0TrU4L/j22d5Oth8E3nh9FgtoYvHEFm40dT284sco8dbJiud58d20Ew==
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.20"
+    "@intlify/shared" "9.2.0-beta.20"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.nlark.com/@nodelib/fs.scandir/download/@nodelib/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -113,6 +151,11 @@
   dependencies:
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
+
+"@types/dateformat@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-5.0.0.tgz#17ce64b0318f3f36d1c830c58a7a915445f1f93d"
+  integrity sha512-SZg4JdHIWHQGEokbYGZSDvo5wA4TLYPXaqhigs/wH+REDOejcJzgH+qyY+HtEUtWOZxEUkbhbdYPqQDiEgrXeA==
 
 "@types/json-schema@^7.0.9":
   version "7.0.9"
@@ -295,7 +338,7 @@
     "@vue/compiler-dom" "3.2.22"
     "@vue/shared" "3.2.22"
 
-"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.18":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.13", "@vue/devtools-api@^6.0.0-beta.18":
   version "6.0.0-beta.20.1"
   resolved "https://registry.npmmirror.com/@vue/devtools-api/download/@vue/devtools-api-6.0.0-beta.20.1.tgz#5b499647e929c35baf2a66a399578f9aa4601142"
   integrity sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==
@@ -580,6 +623,11 @@ csstype@^2.6.8:
   version "2.6.19"
   resolved "https://registry.npmmirror.com/csstype/download/csstype-2.6.19.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2Fdownload%2Fcsstype-2.6.19.tgz#feeb5aae89020bb389e1f63669a5ed490e391caa"
   integrity sha512-ZVxXaNy28/k3kJg0Fou5MiYpp88j7H9hLZp8PDC3jV0WFjfH5E9xHb56L0W59cPbKbcHXeP4qyT8PrHp8t6LcQ==
+
+dateformat@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-5.0.2.tgz#0f275609b02e3306ff76d6a2067a6ebb98e6114b"
+  integrity sha512-h9vywpuz+ReixnJTwFx5JLtZpS8eLCbRm8shwwKkCKOZA547N6yoMtD3W91Z6+NFZ8wOaZlcaCcK/w+kELhSVg==
 
 dayjs@^1.10.7:
   version "1.10.7"
@@ -1672,7 +1720,7 @@ source-map-js@^0.6.2:
   resolved "https://registry.npmmirror.com/source-map-js/download/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
   integrity sha1-C7XeYxtBz72mz7qL0FqA79/SOF4=
 
-source-map@^0.6.1:
+source-map@0.6.1, source-map@^0.6.1:
   version "0.6.1"
   resolved "https://registry.nlark.com/source-map/download/source-map-0.6.1.tgz?cache=0&sync_timestamp=1624608014898&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsource-map%2Fdownload%2Fsource-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
@@ -1965,6 +2013,16 @@ vue-eslint-parser@^7.10.0:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^6.3.0"
+
+vue-i18n@^9.2.0-beta.20:
+  version "9.2.0-beta.20"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-9.2.0-beta.20.tgz#145561dbb7035c945ac2b30cd791994553f6809e"
+  integrity sha512-0MLOKveMjMu5Qq8UM+fBWn/ReP3hYxs9eSaqHiKLnYbqLDi/PjHZ+cLcdzBKcyru/xYqlbXoxlwUvVVCe6WeGg==
+  dependencies:
+    "@intlify/core-base" "9.2.0-beta.20"
+    "@intlify/shared" "9.2.0-beta.20"
+    "@intlify/vue-devtools" "9.2.0-beta.20"
+    "@vue/devtools-api" "^6.0.0-beta.13"
 
 vue-router@^4.0.12:
   version "4.0.12"

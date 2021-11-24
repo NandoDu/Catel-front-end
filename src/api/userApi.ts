@@ -1,16 +1,8 @@
 import apiCon, {HttpMethod} from './apiCon';
 
-interface LoginI {
-  username: string,
-  password: string,
-}
-
-interface LoginO {
-  id: number,
-  username: string,
-}
-
-const loginAPI = apiCon<LoginI, LoginO>(HttpMethod.Post, '/user/login');
+export * from './user/login';
+export * from './user/userResidents';
+export * from './user/addResident';
 
 interface RoomInfoI {
   hotelId: number,
@@ -27,21 +19,6 @@ interface RoomInfoItemO {
 
 type RoomInfoO = RoomInfoItemO[];
 const RoomInfoAPI = apiCon<RoomInfoI, RoomInfoO>(HttpMethod.Get, '/room/by-hotel');
-
-interface UserResidentsI {
-  id: number;
-}
-
-interface UserResident {
-  realName: string,
-  phoneNumber: string,
-  idNo: string,
-  birthday: string,
-}
-
-type UserResidentsO = UserResident[];
-
-const userResidentsAPI = apiCon<UserResidentsI, UserResidentsO>(HttpMethod.Get, '/person/by-user');
 
 interface HotelInfoI {
   id: number;
@@ -63,10 +40,11 @@ interface HotelInfoO {
 
 const HotelInfoAPI = apiCon<HotelInfoI, HotelInfoO>(HttpMethod.Get, 'hotel/detail');
 
-interface GetCommentI{
-  id: number
+interface GetCommentI {
+  id: number;
 }
-interface GetCommentItemO{
+
+interface GetCommentItemO {
   id: number,
   score: number,
   user_id: number,
@@ -76,12 +54,11 @@ interface GetCommentItemO{
   avatar: string,
   username: string,
 }
+
 type GetCommentO = GetCommentItemO[];
-const GetCommentAPI=apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
+const GetCommentAPI = apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
 export {
-  LoginI, LoginO, loginAPI,
   RoomInfoI, RoomInfoItemO, RoomInfoO, RoomInfoAPI,
-  UserResidentsI, UserResident, UserResidentsO, userResidentsAPI,
   HotelInfoI, HotelInfoO, HotelInfoAPI,
   GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
 };

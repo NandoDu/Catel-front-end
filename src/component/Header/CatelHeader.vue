@@ -8,16 +8,21 @@ import {computed, ref} from 'vue';
 import VirryModal from '../Util/VirryModal.vue';
 import LoginCard from '../LoginCard.vue';
 import {ElMessage} from 'element-plus';
+import LocaleSelect from '../Util/LocaleSelect.vue';
+import useTranslation from '../../config/i18n/useTranslation';
 
 const router = useRouter();
 const store = useTypedStore();
+const message = useTranslation([
+  'home', 'aboutUs', 'hotel', 'login', 'logout', 'order', 'personal', 'logoutOk',
+]);
 
 const logged = computed(() => store.getters['user/logged']);
 const logout = () => {
   store.commit('user/logout');
   router.push('/');
   ElMessage.success({
-    message: 'You\'ve log out.',
+    message: message.value.logoutOk,
     center: true,
   });
 };
@@ -42,28 +47,29 @@ const showLoginModal = () => loginModal.value.open();
       >
       <span class="logo-name">Catel</span>
     </div>
+    <LocaleSelect />
     <FlexSpace />
     <nav>
       <MenuLink
-        text="Home"
+        :text="message.home"
         to="/"
       />
       <MenuLink
-        text="About Us"
+        :text="message.aboutUs"
         to="/"
       />
       <MenuLink
-        text="Hotel"
+        :text="message.hotel"
         to="/roomList"
       />
       <MenuLink
         v-if="logged"
-        text="Order"
+        :text="message.order"
         to="/roomList"
       />
       <MenuLink
         v-if="logged"
-        text="Personal"
+        :text="message.personal"
         to="/personalInfo"
       />
     </nav>
@@ -71,14 +77,14 @@ const showLoginModal = () => loginModal.value.open();
       v-if="!logged"
       id="login-button"
       color="green"
-      text="Login"
+      :text="message.login"
       @click="showLoginModal"
     />
     <BiggerButton
       v-else
       id="logout-button"
       color="red"
-      text="Logout"
+      :text="message.logout"
       @click="logout"
     />
     <VirryModal
