@@ -9,13 +9,23 @@ import {useTypedStore} from '../store';
 import {userResidentsAPI} from '../api/userApi';
 import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
+import {UserState} from '../store/user';
+import useTranslation from '../config/i18n/useTranslation';
 
 const store = useTypedStore();
-const id = store.getters['user/userId'];
+const userState: UserState = store.getters['user/all'];
+const message = useTranslation(['noPremium', 'basicPremium', 'superPremium']);
+const premium2msg = {
+  Nil: 'noPremium',
+  Small: 'basicPremium',
+  Big: 'superPremium',
+};
+
+const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
+const {state: personInfoList} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
+
 const activatedOrders = reactive<number[]>([]);
 const activatedResidents = reactive<number[]>([]);
-const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id}), []);
-const {state: personInfoList} = useAsyncState(userResidentsAPI({id}), []);
 const activeItem = (list: number[], index: number) => {
   if (list.length == 0) list.push(index);
   else {
@@ -83,19 +93,19 @@ const showResidentAddition = () => residentAddition.value.open();
                   >
                 </div>
                 <div class="userName">
-                  Catel
+                  {{ userState.username }}
                 </div>
               </div>
             </div>
             <div class="userBasicInfoPart">
               <div class="userEmail">
-                nandodu@163.com
+                {{ userState.email }}
               </div>
               <div class="userType">
-                普通用户
+                {{ message[premium2msg[userState.premium]] }}
               </div>
               <div class="userCredit">
-                (信用值：100)
+                (信用值：{{ userState.credit }})
               </div>
             </div>
             <div class="userOperationPart">

@@ -29,6 +29,10 @@ const zh = {
   finished: '已完成',
   canceled: '已撤销',
   orderAvailable: '待使用',
+  noPremium: '普通用户',
+  basicPremium: '高级会员',
+  superPremium: '企业会员',
+  
 };
 
 export default zh;
