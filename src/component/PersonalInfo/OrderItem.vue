@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {OrderItemInfo} from '../../api/orderApi';
+import useTranslation from '../../config/i18n/useTranslation';
 
 defineProps<{
   orderInfo: { index: number } | OrderItemInfo
@@ -11,6 +12,12 @@ const emit = defineEmits<{
   (e: 'toggle', index: number): void
 }>();
 
+const message = useTranslation(['finished', 'canceled', 'orderAvailable']);
+const state2msg = {
+  Finished: 'finished',
+  Canceled: 'canceled',
+  Available: 'orderAvailable',
+};
 </script>
 
 <template>
@@ -23,7 +30,7 @@ const emit = defineEmits<{
       @click="emit('toggle', orderInfo.index)"
     >
       <div class="orderState">
-        {{ orderInfo.orderState }}
+        {{ message[state2msg[orderInfo.orderState]] }}
       </div>
       <div class="separatingLine" />
       <div class="orderHotelNameAndAddress">

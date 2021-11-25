@@ -26,6 +26,9 @@ const zh = {
   logoutOk: '您已登出',
   addOk: '添加成功',
   fieldMissing: '有未填写的必填信息',
+  finished: '已完成',
+  canceled: '已撤销',
+  orderAvailable: '待使用',
 };
 
 export default zh;
