@@ -25,6 +25,7 @@ const zh = {
   loginOk: '登录成功',
   logoutOk: '您已登出',
   addOk: '添加成功',
+  fieldMissing: '有未填写的必填信息',
 };
 
 export default zh;

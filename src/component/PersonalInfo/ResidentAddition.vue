@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, inject, reactive} from 'vue';
+import {computed, inject, reactive, ref} from 'vue';
 import LineInput from '../Util/LineInput.vue';
 import BiggerButton from '../Header/BiggerButton.vue';
 import {addResidentAPI} from '../../api/user/addResident';
@@ -12,7 +12,7 @@ const store = useTypedStore();
 const userId = computed<number>(() => store.getters['user/userId']);
 const message = useTranslation([
   'residentAddition', 'residentName', 'realName',
-  'phoneNumber', 'cancel', 'add', 'idNo', 'birthday',
+  'phoneNumber', 'cancel', 'add', 'idNo', 'birthday', 'fieldMissing',
 ]);
 
 class ResidentInfo {
@@ -24,9 +24,23 @@ class ResidentInfo {
 
 const residentInfo = reactive(new ResidentInfo());
 
+const firstInput = ref();
+
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
+
 const submitModify = async () => {
-  if (residentInfo.birthday == null) return;
+  if (residentInfo.birthday == null ||
+    residentInfo.name == '' ||
+    residentInfo.idNo == '' ||
+    residentInfo.phone == '') {
+    ElMessage.error({
+      message: message.value.fieldMissing,
+      center: true,
+    });
+    console.log(firstInput.value);
+    firstInput.value.focus();
+    return;
+  }
   const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
   console.log(dataString);
   try {
@@ -55,6 +69,7 @@ const submitModify = async () => {
       :label="message.residentName"
       :placeholder="message.realName"
       v-model="residentInfo.name"
+      ref="firstInput"
     />
 
     <LineInput
