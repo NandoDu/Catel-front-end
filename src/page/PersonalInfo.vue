@@ -55,7 +55,8 @@ const showResidentAddition = () => residentAddition.value.open();
           <OrderItem
             v-for="(orderInfo, index) in orderInfoList"
             :key="index"
-            :order-info="{index, ...orderInfo}"
+            :order-info="orderInfo"
+            :index="index"
             :if-operation-show="activatedOrders.includes(index)"
             @toggle="activeOrderItem"
           />

@@ -30,7 +30,7 @@ const en: typeof zh = {
   idNo: 'Id number',
   residentAddition: 'Resident addition',
   add: 'Add',
-  locale: 'Locale'
+  locale: 'Locale',
 };
 
 export default en;

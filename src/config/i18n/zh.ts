@@ -32,7 +32,10 @@ const zh = {
   noPremium: '普通用户',
   basicPremium: '高级会员',
   superPremium: '企业会员',
-  
+  publish: '发表',
+  publishComment: '发表评论',
+  publishOk: '评论成功',
+  title: '标题',
 };
 
 export default zh;

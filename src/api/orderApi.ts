@@ -5,6 +5,7 @@ interface OrdersOfUserI {
 }
 
 interface OrderItemInfo {
+  id: number,
   orderState: string,
   price: string,
   hotelName: string,
