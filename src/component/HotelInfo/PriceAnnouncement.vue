@@ -34,6 +34,7 @@
   margin-top: 16px;
   background-color: white;
   border-radius: 8px;
+  margin-bottom: 20px;
 }
 .announce-container{
   margin-top: 24px;

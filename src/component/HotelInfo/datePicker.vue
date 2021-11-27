@@ -25,11 +25,11 @@ const changeBreak = () => {
   console.log('改变早餐状态emit已送出');
 };
 const startSearch = () => {
-  if(value.value==='') console.log('empty');
-  else{
+  if (value.value === '') console.log('empty');
+  else {
     console.log(value.value);
   }
-  emit('startSearch', value.value);
+  emit('startSearch', value.value, peopleNum.value, roomNum.value, breakfast.value);
 };
 </script>
 <template>
@@ -145,6 +145,7 @@ const startSearch = () => {
   font-weight: bolder;
   font-size: 16px;
   margin-top: -1px;
-  margin-left: 60px;
+  margin-left: 170px;
+  margin-right: 0;
 }
 </style>
