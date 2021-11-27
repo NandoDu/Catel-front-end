@@ -75,13 +75,13 @@ const showResidentAddition = () => residentAddition.value.open();
                 </div>
               </div>
               <div class="userNamePart">
-                <div class="userNameIcon">
-                  <img
-                    src="src/asset/modify.png"
-                    class="userNameImg"
-                    alt="Modify"
-                  >
-                </div>
+<!--                <div class="userNameIcon">-->
+<!--                  <img-->
+<!--                    src="src/asset/modify.png"-->
+<!--                    class="userNameImg"-->
+<!--                    alt="Modify"-->
+<!--                  >-->
+<!--                </div>-->
                 <div class="userName">
                   Catel
                 </div>
