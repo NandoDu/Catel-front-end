@@ -355,10 +355,7 @@ const showMoreLines = () => {
       已经到底啦～
     </div>
   </div>
-  <div
-    class="cooperateArea"
-    style="margin-top: 100px;"
-  >
+  <div class="cooperateArea">
     <h3>
       合作品牌
     </h3>

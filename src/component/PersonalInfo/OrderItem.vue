@@ -37,7 +37,9 @@ const state2msg = {
       @click="emit('toggle', index)"
     >
       <div class="orderState">
-        {{ message[state2msg[orderInfo.orderState]] }}
+        <el-tag v-show="orderInfo.orderState === 'Finished'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
+        <el-tag type="success" v-show="orderInfo.orderState === 'Available'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
+        <el-tag type="danger" v-show="orderInfo.orderState === 'Canceled'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
       </div>
       <div class="separatingLine" />
       <div class="orderHotelNameAndAddress">
@@ -133,12 +135,21 @@ const state2msg = {
 
 .orderState {
   align-self: center;
-  margin-left: 10px;
+  margin-left: 5px;
+  //margin-right: 5px;
   font-size: 15px;
   color: grey;
   width: 50px;
 }
-
+.orderStateTag {
+  width: 50px;
+  height: 20px;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  line-height: 20px;
+}
 .separatingLine {
   width: 1px;
   height: 50px;
