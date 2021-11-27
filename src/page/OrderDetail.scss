@@ -49,7 +49,7 @@
   padding: 24px;
   display: flex;
   //flex-direction: column;
-  line-height: 1;
+  //line-height: 1;
   margin-bottom: 10px;
   align-items: center;
   //justify-content: center;
@@ -59,15 +59,13 @@
   //background: lightgray;
   background-color: white;
   position: sticky;
-  top: 16px;
+  top: 80px;
   max-height: 85vh;
   overflow-y: auto;
-  height: 470px;
-  display: flex;
-  flex-direction: column;
+  //height: 470px;
+  //display: flex;
+  //flex-direction: column;
   line-height: 1;
-  align-items: center;
-  justify-content: center;
 }
 .hotel_name_content{
   display: inline;
@@ -151,6 +149,7 @@
   font-size: 24px;
   color: #287dfa;
   font-weight: 700;
+  vertical-align: center;
 }
 .payment_button{
   padding: 16px 24px;

@@ -1,5 +1,52 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
+import {userResidentsAPI} from '../api/userApi';
+import {useAsyncState} from '@vueuse/core';
+import {useTypedStore} from '../store';
+const store = useTypedStore();
+const id = store.getters['user/userId'];
+let roomId = ref('');
+let startDate = ref('');
+let endDate = ref('');
+let maxRoomNum = ref('');
+const getUrlParams = () =>{
+  const url = location.search;
+  if(url.indexOf('?')!= -1) {
+    let str = url.substr(1).split('&');
+    console.log(str);
+    for (let i = 0; i < str.length; i++) {
+      if(i===0) roomId.value =str[i].split('=')[1];
+      else if(i===1) startDate.value = str[i].split('=')[1];
+      else if(i===2) endDate.value = str[i].split('=')[1];
+      else if(i===3) maxRoomNum.value = str[i].split('=')[1];
+    }
+  }
+};
+const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
+  console.log(r);
+  return r;
+},
+), []);
+let simpleCopy =()=>{
+  for(let i = 0; i < 50; i++) {
+    personInfoList.value.push(personInfoList.value[0]);
+  }
+};
+let dateValue = ref('');
+let nameValue = ref('');
+let phoneValue = ref('');
+const showPersonInfo = ()=>{
+  let personNames = [{value: false, label: ''}];
+  personNames.pop();
+  simpleCopy();
+  for(let i = 0; i < personInfoList.value.length; i++) {
+    const info = personInfoList.value[i];
+    let temp = {value: false, label: info.realName};
+    personNames.push(temp);
+  }
+  return personNames;
+};
+let names = computed(showPersonInfo);
 let current = ref(new Date());
 let options = ref([
   {
@@ -148,7 +195,7 @@ let pickValue=ref('');
               <el-date-picker
                 size="large"
                 style="border-radius: 10px;"
-                v-model="value"
+                v-model="dateValue"
                 type="daterange"
                 unlink-panels
                 range-separator="至"
@@ -196,79 +243,76 @@ let pickValue=ref('');
             </div>
             <div
               class="input_info"
-              style="margin-top: 24px"
+              style="margin-top: 24px;"
             >
               <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">
                 <span>住客姓名</span>
-                <span style="position: relative;width: 100%;display: inline-block">
-                  <input
-                    placeholder="请输入订房人姓名"
-                    type="text"
+                <div
+                  class="select_user"
+                  style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 300px; overflow-y: auto;scrollbar-width: none; /* firefox */-ms-overflow-style: none; /* IE 10+ */overflow-x: hidden;"
+                >
+                  <el-checkbox
+                    v-for="(personInfo, index) in names"
+                    :key="index"
+                    :v-model="personInfo.value"
+                    :label="personInfo.label"
                     class="input_info_content"
-                  >
-                </span>
+                    style="border: none;width: 45%"
+                  />
+                </div>
               </div>
             </div>
-            <div
-              class="input_info"
-              style="margin-top: 24px"
-            >
-              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">
-                <span>电子邮件</span>
-                <span style="position: relative;width: 100%;display: inline-block">
-                  <input
-                    placeholder="请输入电子邮件"
-                    type="text"
-                    class="input_info_content"
-                  >
-                </span>
-              </div>
-            </div>
-            <div
-              class="input_info"
-              style="margin-top: 24px"
-            >
-              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">
-                <span>电话号码</span>
-                <span style="position: relative;width: 100%;display: inline-block">
-                  <input
-                    placeholder="请输入电话号码"
-                    type="text"
-                    class="input_info_content"
-                  >
-                </span>
-              </div>
-            </div>
+<!--            <div-->
+<!--              class="input_info"-->
+<!--              style="margin-top: 24px"-->
+<!--            >-->
+<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
+<!--                <span>电子邮件</span>-->
+<!--                <span style="position: relative;width: 100%;display: inline-block">-->
+<!--                  <input-->
+<!--                    placeholder="请输入电子邮件"-->
+<!--                    type="text"-->
+<!--                    class="input_info_content"-->
+<!--                  >-->
+<!--                </span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="input_info"-->
+<!--              style="margin-top: 24px"-->
+<!--            >-->
+<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
+<!--                <span>电话号码</span>-->
+<!--                <span style="position: relative;width: 100%;display: inline-block">-->
+<!--                  <input-->
+<!--                    placeholder="请输入电话号码"-->
+<!--                    type="text"-->
+<!--                    class="input_info_content"-->
+<!--                    :value="phoneValue"-->
+<!--                  >-->
+<!--                </span>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
           <div class="payment">
             <div
               class="payment_content"
               style="font-size: 14px;flex:1;padding-right: 80px"
             >
-              <div class="pre">
-                <span
-                  class="pre_price"
-                >担保金额 
-                  <span
-                    class="price_content"
-                  >
-                    ￥319.00
-                  </span>
-                </span>
-              </div>
               <div
-                class="real"
-                style="padding-top: 8px"
+                class="pre"
+                style="display: flex;flex-direction: row"
               >
                 <span
-                  class="real_price"
-                >到店付款
-                  <span
-                    class="price_content"
-                    style="font-size: 14px;"
-                  >
-                    ￥319.00
-                  </span>
+                  class="pre_price"
+                  style="display: inline-flex;align-items: center;justify-content: center"
+                >应付金额
+                </span>
+                <span
+                  class="price_content"
+                  style="margin-left:5px; display: inline-flex;align-items: center;justify-content: center"
+                >
+                  ￥319.00
                 </span>
               </div>
             </div>
@@ -289,7 +333,103 @@ let pickValue=ref('');
         </div>
         <div class="price">
           <div class="sticky_side">
-            一些东东
+            <div
+              class="price_sum"
+              style="padding: 24px;background: #fff;"
+            >
+              <div
+                class="price_sum_detail"
+                style="font-size: 14px"
+              >
+                <ul
+                  class="price_list"
+                  style="list-style: none;padding: 0;margin: 0"
+                >
+                  <li
+                    class="total_price"
+                    style="margin-bottom:  16px;display: flex"
+                  >
+                    <span
+                      class="price_label"
+                      style="font-size: 24px;color: #0f294d;line-height: 30px;margin-right: 15px;word-break: break-word;font-weight: 700;display: inline-block"
+                    >
+                      实际应付
+                    </span>
+                    <span
+                      class="price_cell"
+                      style="display: inline-block;flex: 1;text-align: right;line-height: 30px"
+                    >
+                      <div
+                        class="final_p"
+                        style="padding-left: 4px;font-size: 24px"
+                      >
+                        <span style="color: #287dfa;font-weight: 700;">¥ 319</span>
+                      </div>
+                    </span>
+                  </li>
+                  <li
+                    class="sub_price"
+                    style="padding-bottom: 8px; "
+                  >
+                    <div style="display: flex">
+                      <span
+                        class="price_label"
+                        style="color: #0f294d;display: inline-block;margin-right: 15px;word-break: break-word;"
+                      >房间总额</span>
+                      <span
+                        class="price_cell"
+                        style="display: inline-block;flex: 1;text-align: right;"
+                      >
+                        <span style="color: #0f294d;font-weight: 400;font-size: 14px;">¥ 519</span>
+                      </span>
+                    </div>
+                  </li>
+                  <li
+                    class="sub_price"
+                    style="padding-bottom: 8px; "
+                  >
+                    <div style="display: flex">
+                      <span
+                        class="price_label"
+                        style="color: #0f294d;display: inline-block;margin-right: 15px;word-break: break-word;"
+                      >优惠减免</span>
+                      <span
+                        class="price_cell"
+                        style="display: inline-block;flex: 1;text-align: right;"
+                      >
+                        <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">- ¥ 200</span>
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="divide" />
+            </div>
+            <div
+              class="room_sum"
+              style="padding: 0 24px 24px 24px;"
+            >
+              <div
+                class="room_sum_label"
+                style="display: block;font-size: 18px;font-weight: 700;color: #0f294d;margin-bottom: 12px"
+              >
+                房间信息
+              </div>
+              <ul style="margin: 0;padding: 0;list-style: none">
+                <li class="r_tile" style="font-size: 14px;color: #0f294d;margin-bottom: 12px">
+                  <span style="font-weight: 700;padding-right: 15px">房型:</span>
+                  <span>特惠双床房</span>
+                </li>
+                <li class="r_detail" style="font-size: 14px;color: #0f294d">
+                  <span style="font-weight: 700;display: inline-flex;padding-right: 15px">配置:</span>
+                  <div style="display: inline-flex;flex-direction: row">
+                    <span style="padding-right: 15px">2张单人床</span>
+                    <span style="padding-right: 15px">无早餐</span>
+                    <span style="padding-right: 15px">房间最多容纳2人</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
