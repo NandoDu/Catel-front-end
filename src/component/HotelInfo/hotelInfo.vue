@@ -46,7 +46,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
         </div>
       </div>
     </div>
-    <div class="content">
+    <div class="comment-input">
       <div class="head_album">
         <div
           class="album_box"
@@ -261,7 +261,7 @@ body{
 .headline{
   display: flex;
 }
-.content{
+.comment-input{
   display: flex;
   margin: 0;
   padding: 4px;

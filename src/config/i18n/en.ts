@@ -1,8 +1,12 @@
 import zh from './zh';
 
 const en: typeof zh = {
-  addOk: 'Add successfully', 
-  loginOk: 'Login successfully', 
+  orderAvailable: 'Available',
+  canceled: 'Canceled', 
+  fieldMissing: 'Compulsory field(s) missing', 
+  finished: 'Finished',
+  addOk: 'Add successfully',
+  loginOk: 'Login successfully',
   logoutOk: 'You\'ve logged out',
   localeEN: 'English',
   localeZH: 'Chinese',

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 /* eslint-disable vue/no-mutating-props */
 import {useVModel} from '@vueuse/core';
+import {ref} from 'vue';
 
 const props = defineProps<{
   label: string;
@@ -11,6 +12,10 @@ const props = defineProps<{
 const emit = defineEmits<{ (e: 'update:modelValue'): void }>();
 const inputType = props.password ? 'password' : 'text';
 const model = useVModel(props, 'modelValue', emit);
+
+const theInput = ref();
+const focus = () => theInput.value.focus();
+defineExpose({focus});
 </script>
 
 <template>
@@ -21,6 +26,7 @@ const model = useVModel(props, 'modelValue', emit);
       :type="inputType"
       v-model="model"
       autocomplete="off"
+      ref="theInput"
     >
   </div>
 </template>

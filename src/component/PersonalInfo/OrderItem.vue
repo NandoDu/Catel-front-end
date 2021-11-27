@@ -1,16 +1,30 @@
 <script setup lang="ts">
-
 import {OrderItemInfo} from '../../api/orderApi';
+import useTranslation from '../../config/i18n/useTranslation';
+import VirryModal from '../Util/VirryModal.vue';
+import OrderComment from './OrderComment.vue';
+import {ref} from 'vue';
 
 defineProps<{
-  orderInfo: { index: number } | OrderItemInfo
-  ifOperationShow: boolean,
+  orderInfo: OrderItemInfo
+  index: number
+  ifOperationShow: boolean
 }>();
-
 const emit = defineEmits<{
   (e: 'toggle', index: number): void
 }>();
 
+const orderComment = ref();
+const showCommentModal = () => {
+  orderComment.value.open();
+};
+
+const message = useTranslation(['finished', 'canceled', 'orderAvailable']);
+const state2msg = {
+  Finished: 'finished',
+  Canceled: 'canceled',
+  Available: 'orderAvailable',
+};
 </script>
 
 <template>
@@ -19,8 +33,8 @@ const emit = defineEmits<{
   >
     <div
       class="orderInfoCard"
-      :class="{'orderInfoFirst' : orderInfo.index === 0}"
-      @click="emit('toggle', orderInfo.index)"
+      :class="{'orderInfoFirst' : index === 0}"
+      @click="emit('toggle', index)"
     >
       <div class="orderState">
         <el-tag v-show="orderInfo.orderState === 'Finished'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
@@ -89,7 +103,10 @@ const emit = defineEmits<{
             撤销
           </div>
         </div>
-        <div class="reviewOperation">
+        <div
+          class="reviewOperation"
+          @click="showCommentModal"
+        >
           <div class="reviewIcon">
             C
           </div>
@@ -99,6 +116,9 @@ const emit = defineEmits<{
         </div>
       </div>
     </div>
+    <VirryModal ref="orderComment">
+      <OrderComment :order-id="orderInfo.id" />
+    </VirryModal>
   </div>
 </template>
 

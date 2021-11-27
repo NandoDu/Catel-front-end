@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, inject, reactive} from 'vue';
+import {computed, inject, reactive, ref} from 'vue';
 import LineInput from '../Util/LineInput.vue';
 import BiggerButton from '../Header/BiggerButton.vue';
 import {addResidentAPI} from '../../api/user/addResident';
@@ -9,10 +9,12 @@ import dateFormat from 'dateformat';
 import useTranslation from '../../config/i18n/useTranslation';
 
 const store = useTypedStore();
-const userId = computed<number>(() => store.getters['user/userId']);
+const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
+const userId = computed(() => store.getters['user/userId']);
+
 const message = useTranslation([
   'residentAddition', 'residentName', 'realName',
-  'phoneNumber', 'cancel', 'add', 'idNo', 'birthday',
+  'phoneNumber', 'cancel', 'add', 'idNo', 'birthday', 'fieldMissing',
 ]);
 
 class ResidentInfo {
@@ -24,9 +26,22 @@ class ResidentInfo {
 
 const residentInfo = reactive(new ResidentInfo());
 
-const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
+const firstInput = ref();
+
+
 const submitModify = async () => {
-  if (residentInfo.birthday == null) return;
+  if (residentInfo.birthday == null ||
+    residentInfo.name == '' ||
+    residentInfo.idNo == '' ||
+    residentInfo.phone == '') {
+    ElMessage.error({
+      message: message.value.fieldMissing,
+      center: true,
+    });
+    console.log(firstInput.value);
+    firstInput.value.focus();
+    return;
+  }
   const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
   console.log(dataString);
   try {
@@ -49,12 +64,13 @@ const submitModify = async () => {
 </script>
 
 <template>
-  <div class="resident-addition">
+  <section class="resident-addition">
     <h3>{{ message.residentAddition }}</h3>
     <LineInput
       :label="message.residentName"
       :placeholder="message.realName"
       v-model="residentInfo.name"
+      ref="firstInput"
     />
 
     <LineInput
@@ -86,18 +102,16 @@ const submitModify = async () => {
         @click="submitModify"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
-@use "src/util/Shadow";
 @use "src/util/Other";
-
 
 .resident-addition {
   @include Other.center-flex;
-  flex-direction: column;
   @include Other.card;
+  flex-direction: column;
 }
 
 .inline {
