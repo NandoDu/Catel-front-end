@@ -21,8 +21,12 @@ const premium2msg = {
   Big: 'superPremium',
 };
 
-const {state: orderInfoList} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
-const {state: personInfoList} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
+const {state: orders} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
+const {state: residents} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
+
+const refreshResident = async () => {
+  residents.value = await userResidentsAPI({id: userState.userId!});
+};
 
 const activatedOrders = reactive<number[]>([]);
 const activatedResidents = reactive<number[]>([]);
@@ -53,7 +57,7 @@ const showResidentAddition = () => residentAddition.value.open();
         </div>
         <div class="orderListPart">
           <OrderItem
-            v-for="(orderInfo, index) in orderInfoList"
+            v-for="(orderInfo, index) in orders"
             :key="index"
             :order-info="orderInfo"
             :index="index"
@@ -138,11 +142,13 @@ const showResidentAddition = () => residentAddition.value.open();
           </div>
           <div class="personListPart">
             <Resident
-              v-for="(personInfo, index) in personInfoList"
+              v-for="(personInfo, index) in residents"
               :key="index"
-              :resident-info="{index, ...personInfo}"
+              :resident-info="personInfo"
+              :index="index"
               :if-operation-show="activatedResidents.includes(index)"
               @toggle="activeResidentItem"
+              @need-refresh="refreshResident"
             />
             <div class="addPerson">
               <div class="addPersonIcon">
@@ -173,7 +179,7 @@ const showResidentAddition = () => residentAddition.value.open();
           </div>
           <div class="creditRecordListPart">
             <CreditEntry
-              v-for="(record, index) in orderInfoList"
+              v-for="(record, index) in orders"
               :key="index"
               :record="{index, ...record}"
             />
@@ -184,7 +190,7 @@ const showResidentAddition = () => residentAddition.value.open();
   </div>
 
   <VirryModal ref="residentAddition">
-    <ResidentAddition />
+    <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
 </template>
 

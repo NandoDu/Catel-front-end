@@ -1,13 +1,39 @@
 <script setup lang="ts">
-import {UserResident} from '../../api/userApi';
-defineProps<{
-  residentInfo: UserResident | { index: number }
+import {deleteResidentAPI, UserResident} from '../../api/userApi';
+import ConfirmModal from '../Util/ConfirmModal.vue';
+import useTranslation from '../../config/i18n/useTranslation';
+import {ref} from 'vue';
+import {ElMessage} from 'element-plus';
+
+const prop = defineProps<{
+  residentInfo: UserResident
+  index: number
   ifOperationShow: boolean
 }>();
 
 const emit = defineEmits<{
   (e: 'toggle', index: number): void
+  (e: 'needRefresh'): void
 }>();
+const message = useTranslation(['sureToDelete', 'deleteOk']);
+const conformModal = ref();
+const showConfirm = () => {
+  conformModal.value.open();
+};
+const deleteResident = async () => {
+  console.log('delete');
+  try {
+    await deleteResidentAPI({residentId: prop.residentInfo.id});
+    ElMessage.success({
+      message: message.value.deleteOk,
+      center: true,
+    });
+    emit('needRefresh');
+  } catch (e) {
+    console.log(e);
+  }
+  conformModal.value.close();
+};
 </script>
 
 <template>
@@ -16,8 +42,8 @@ const emit = defineEmits<{
   >
     <div
       class="personInfoCard"
-      :class="{'personInfoFirst' : residentInfo.index === 0}"
-      @click="emit('toggle', residentInfo.index)"
+      :class="{'personInfoFirst' : index === 0}"
+      @click="emit('toggle', index)"
     >
       <div class="personName">
         {{ residentInfo.realName }}
@@ -47,7 +73,10 @@ const emit = defineEmits<{
             修改
           </div>
         </div>
-        <div class="personDeleteOperation">
+        <div
+          class="personDeleteOperation"
+          @click="showConfirm"
+        >
           <div class="personDeleteIcon">
             C
           </div>
@@ -57,6 +86,12 @@ const emit = defineEmits<{
         </div>
       </div>
     </div>
+    <ConfirmModal
+      ref="conformModal"
+      @confirmed="deleteResident"
+    >
+      {{ message.sureToDelete }}
+    </ConfirmModal>
   </div>
 </template>
 

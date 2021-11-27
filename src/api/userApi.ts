@@ -3,6 +3,7 @@ import apiCon, {HttpMethod} from './apiCon';
 export * from './user/login';
 export * from './user/userResidents';
 export * from './user/addResident';
+export * from './user/deleteResident';
 
 interface RoomInfoI {
   hotelId: number,

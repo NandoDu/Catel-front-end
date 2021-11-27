@@ -8,6 +8,10 @@ import {ElMessage} from 'element-plus';
 import dateFormat from 'dateformat';
 import useTranslation from '../../config/i18n/useTranslation';
 
+const emit = defineEmits<{
+  (e: 'needRefresh'): void
+}>();
+
 const store = useTypedStore();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 const userId = computed(() => store.getters['user/userId']);
@@ -28,7 +32,6 @@ const residentInfo = reactive(new ResidentInfo());
 
 const firstInput = ref();
 
-
 const submitModify = async () => {
   if (residentInfo.birthday == null ||
     residentInfo.name == '' ||
@@ -42,6 +45,7 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
+
   const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
   console.log(dataString);
   try {
@@ -57,6 +61,7 @@ const submitModify = async () => {
       message: ('message.addOk'),
       center: true,
     });
+    emit('needRefresh');
   } catch (e) {
     console.log(e);
   }

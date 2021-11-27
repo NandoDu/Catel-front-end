@@ -5,6 +5,7 @@ interface UserResidentsI {
 }
 
 interface UserResident {
+  id: number,
   realName: string,
   phoneNumber: string,
   idNo: string,
