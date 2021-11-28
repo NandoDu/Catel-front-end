@@ -26,6 +26,73 @@ defineProps<{ count: number, rate: number }>();
             </div>
           </div>
         </div>
+        <div class="percentage-content">
+          <div class="percentage-list">
+            <div style="float: left">
+              <el-rate
+                model-value="5"
+                disabled
+              />
+            </div>
+            <el-progress
+              style="margin-top: 6px"
+              :show-text="false"
+              :percentage="10"
+            />
+          </div>
+          <div class="percentage-list">
+            <div style="float: left">
+              <el-rate
+                model-value="4"
+                disabled
+              />
+            </div>
+            <el-progress
+              style="margin-top: 6px"
+              :show-text="false"
+              :percentage="30"
+            />
+          </div>
+          <div class="percentage-list">
+            <div style="float: left">
+              <el-rate
+                model-value="3"
+                disabled
+              />
+            </div>
+            <el-progress
+              style="margin-top: 6px"
+              :show-text="false"
+              :percentage="30"
+            />
+          </div>
+          <div class="percentage-list">
+            <div style="float: left">
+              <el-rate
+                model-value="2"
+                disabled
+              />
+            </div>
+            <el-progress
+              style="margin-top: 6px"
+              :show-text="false"
+              :percentage="15"
+            />
+          </div>
+          <div class="percentage-list">
+            <div style="float: left">
+              <el-rate
+                model-value="1"
+                disabled
+              />
+            </div>
+            <el-progress
+              style="margin-top: 6px"
+              :show-text="false"
+              :percentage="5"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,6 +117,7 @@ defineProps<{ count: number, rate: number }>();
 }
 
 .total-title {
+  margin-left: 40px;
   display: flex;
   flex-direction: row;
   height: 26px;
@@ -83,6 +151,8 @@ defineProps<{ count: number, rate: number }>();
   display: flex;
   flex-direction: column;
   align-items: center;
+  float: left;
+  margin-left: 35px;
 }
 .rate-word{
   font-size: 22px;
@@ -108,5 +178,19 @@ defineProps<{ count: number, rate: number }>();
   line-height: 55px;
   text-align: left;
   font-family: BlinkMacSystemFont,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+}
+.percentage-content{
+  width: 500px;
+  height: 150px;
+  margin-top: -16px;
+  float: right;
+  margin-right: 85px;
+  display: flex;
+  flex-direction: column;
+}
+.percentage-list{
+  width: 500px;
+  margin-bottom: 5px;
+  display: block;
 }
 </style>
