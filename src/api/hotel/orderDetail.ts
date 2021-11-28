@@ -8,6 +8,7 @@ interface OrderDetailO {
   id: number;
   hotelId: number;
   creditDelta: number;
+  price: number;
   hotelName: string;
   checkInDate: string;
   checkOutDate: string;

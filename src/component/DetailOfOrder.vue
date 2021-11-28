@@ -26,7 +26,7 @@ const hotelInfo = await hotelDetailAPI({orderId});
     <p class="thanks">
       尊敬的 {{ user.username }}，感谢您在本平台的消费，本订单已被系统接受
     </p>
-    <hr style="width: 60%; border-top: 1px solid gray;">
+    <hr style="width: 100%; border-top: 1px solid gray;">
     <div class="dates">
       <SmallBox
         title="入住日期"
@@ -37,6 +37,20 @@ const hotelInfo = await hotelDetailAPI({orderId});
         :value="hotelInfo.checkOutDate"
       />
     </div>
+    <div class="detail">
+      <div class="hotel">
+        酒店：{{ hotelInfo.hotelName }}
+      </div>
+      <div class="creditDelta">
+        信用值变更：{{ hotelInfo.creditDelta }}
+      </div>
+    </div>
+
+    <hr style="width: 100%; border-top: 1px solid gray;">
+    <div class="price">
+      价格：{{ hotelInfo.price }}
+    </div>
+
   </div>
 </template>
 
@@ -46,7 +60,7 @@ const hotelInfo = await hotelDetailAPI({orderId});
 .detail-of-order {
   @include Other.center-flex;
   flex-direction: column;
-  padding: 0 10vw;
+  padding: 0 20vw;
 
   .thanks {
     color: gray;
@@ -54,8 +68,12 @@ const hotelInfo = await hotelDetailAPI({orderId});
 
   .dates {
     @include Other.even-line;
-    width: 60%;
+    width: 100%;
     margin: 10px;
+  }
+
+  .price {
+    align-self: end;
   }
 }
 
