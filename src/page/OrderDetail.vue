@@ -3,29 +3,41 @@ import {ref, computed} from 'vue';
 import {BookHotelAPI, userResidentsAPI} from '../api/userApi';
 import {useAsyncState} from '@vueuse/core';
 import {useTypedStore} from '../store';
+import dateFormat from 'dateformat';
+import {useRoute, useRouter} from 'vue-router';
+import {ElMessage} from 'element-plus';
+
 
 const store = useTypedStore();
 const id = store.getters['user/userId'];
-let roomId = ref('');
+let router = useRouter();
+let route = useRoute();
+let hotelId = ref(0);
+let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
-let maxRoomNum = ref('');
+let maxRoomNum = ref(0);
 const book = () => {
-  BookHotelAPI({checkInDate: '', checkOutDate: '', hotelId: 0, resident: [], roomId: 0, userId: 0});
+  BookHotelAPI({
+    checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+    hotelId: hotelId.value,
+    resident: [],
+    roomId: roomId.value,
+    userId: id,
+  }).then((result) => {
+    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
+    setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
+  });
 };
 const getUrlParams = () => {
-  const url = location.search;
-  if (url.indexOf('?') != -1) {
-    let str = url.substr(1).split('&');
-    console.log(str);
-    for (let i = 0; i < str.length; i++) {
-      if (i === 0) roomId.value = str[i].split('=')[1];
-      else if (i === 1) startDate.value = str[i].split('=')[1];
-      else if (i === 2) endDate.value = str[i].split('=')[1];
-      else if (i === 3) maxRoomNum.value = str[i].split('=')[1];
-    }
-  }
+  maxRoomNum.value = route.query.num as unknown as number;
+  startDate.value = route.query.start as unknown as string;
+  endDate.value = route.query.end as unknown as string;
+  roomId.value = route.query.roomid as unknown as number;
+  hotelId.value = route.query.hotelId as unknown as number;
 };
+getUrlParams();
 const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   console.log(r);
   return r;
@@ -266,7 +278,7 @@ let pickValue = ref('');
                 </div>
               </div>
             </div>
-            <div class="divide"></div>
+            <div class="divide" />
             <h3 style="font-size: 20px;line-height: 26px;margin-top: 10px">
               优惠券
             </h3>

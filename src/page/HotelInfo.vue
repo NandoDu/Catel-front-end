@@ -81,7 +81,7 @@ const book = (roomId: number) => {
     time = time + 1000 * 60 * 60 * 24;
     router.push({
       path: '/order',
-      query: {roomId: roomId, start: current.value.getTime(), end: time, num: roomNum.value},
+      query: {roomId: roomId, start: current.value.getTime(), end: time, num: roomNum.value, hotelId: hotelId},
     });
   }
 };
