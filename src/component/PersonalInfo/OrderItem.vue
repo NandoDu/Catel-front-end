@@ -37,9 +37,26 @@ const state2msg = {
       @click="emit('toggle', index)"
     >
       <div class="orderState">
-        <el-tag v-show="orderInfo.orderState === 'Finished'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
-        <el-tag type="success" v-show="orderInfo.orderState === 'Available'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
-        <el-tag type="danger" v-show="orderInfo.orderState === 'Canceled'" class="orderStateTag">{{ orderInfo.orderState }}</el-tag>
+        <el-tag
+          v-show="orderInfo.orderState === 'Finished'"
+          class="orderStateTag"
+        >
+          {{ message[state2msg[orderInfo.orderState]] }}
+        </el-tag>
+        <el-tag
+          type="success"
+          v-show="orderInfo.orderState === 'Available'"
+          class="orderStateTag"
+        >
+          {{ message[state2msg[orderInfo.orderState]] }}
+        </el-tag>
+        <el-tag
+          type="danger"
+          v-show="orderInfo.orderState === 'Canceled'"
+          class="orderStateTag"
+        >
+          {{ message[state2msg[orderInfo.orderState]] }}
+        </el-tag>
       </div>
       <div class="separatingLine" />
       <div class="orderHotelNameAndAddress">
@@ -84,7 +101,10 @@ const state2msg = {
       v-show="ifOperationShow"
     >
       <div class="operationOpt">
-        <div class="checkOperation">
+        <div
+          class="checkOperation"
+          @click="$router.push(`/order-detail/${orderInfo.id}`)"
+        >
           <div class="checkIcon">
             A
           </div>
@@ -141,6 +161,7 @@ const state2msg = {
   color: grey;
   width: 50px;
 }
+
 .orderStateTag {
   width: 50px;
   height: 20px;
@@ -150,6 +171,7 @@ const state2msg = {
   justify-content: center;
   line-height: 20px;
 }
+
 .separatingLine {
   width: 1px;
   height: 50px;

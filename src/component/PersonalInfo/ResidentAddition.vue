@@ -8,6 +8,9 @@ import {ElMessage} from 'element-plus';
 import dateFormat from 'dateformat';
 import useTranslation from '../../config/i18n/useTranslation';
 
+defineProps<{
+  isUpdate: boolean
+}>();
 const emit = defineEmits<{
   (e: 'needRefresh'): void
 }>();
@@ -19,6 +22,7 @@ const userId = computed(() => store.getters['user/userId']);
 const message = useTranslation([
   'residentAddition', 'residentName', 'realName',
   'phoneNumber', 'cancel', 'add', 'idNo', 'birthday', 'fieldMissing',
+  'AlterResident',
 ]);
 
 class ResidentInfo {
@@ -120,10 +124,9 @@ const submitModify = async () => {
 }
 
 .inline {
-  @include Other.center-flex;
+  @include Other.even-line;
   width: 100%;
   margin: 5px;
-  justify-content: space-evenly;
 }
 
 

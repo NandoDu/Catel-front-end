@@ -39,6 +39,7 @@ const zh = {
   title: '标题',
   confirm: '确认',
   sureToDelete: '确认要删除该项吗',
+  alterResident: '修改入住人信息'
 };
 
 export default zh;

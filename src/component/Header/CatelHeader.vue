@@ -60,12 +60,12 @@ const showLoginModal = () => loginModal.value.open();
       />
       <MenuLink
         :text="message.hotel"
-        to="/roomList"
+        to="/"
       />
       <MenuLink
         v-if="logged"
         :text="message.order"
-        to="/roomList"
+        to="/"
       />
       <MenuLink
         v-if="logged"

@@ -55,8 +55,7 @@ defineExpose({
   }
 
   .actions {
-    @include Other.center-flex;
-    justify-content: space-evenly;
+    @include Other.even-line;
   }
 }
 
