@@ -262,37 +262,10 @@ let pickValue=ref('');
                 </div>
               </div>
             </div>
-<!--            <div-->
-<!--              class="input_info"-->
-<!--              style="margin-top: 24px"-->
-<!--            >-->
-<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
-<!--                <span>电子邮件</span>-->
-<!--                <span style="position: relative;width: 100%;display: inline-block">-->
-<!--                  <input-->
-<!--                    placeholder="请输入电子邮件"-->
-<!--                    type="text"-->
-<!--                    class="input_info_content"-->
-<!--                  >-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div-->
-<!--              class="input_info"-->
-<!--              style="margin-top: 24px"-->
-<!--            >-->
-<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
-<!--                <span>电话号码</span>-->
-<!--                <span style="position: relative;width: 100%;display: inline-block">-->
-<!--                  <input-->
-<!--                    placeholder="请输入电话号码"-->
-<!--                    type="text"-->
-<!--                    class="input_info_content"-->
-<!--                    :value="phoneValue"-->
-<!--                  >-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
+            <div class="divide"></div>
+            <h3 style="font-size: 20px;line-height: 26px;margin-top: 10px">
+              优惠券
+            </h3>
           </div>
           <div class="payment">
             <div
