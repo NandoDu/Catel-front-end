@@ -12,7 +12,7 @@ const messages = {
   },
 };
 
-type Locales = 'en' | 'zh';
+type Locales = 'zh' | 'en';
 type UpperLocales = Uppercase<Locales>
 
 const i18n = createI18n<typeof zh, Locales>({

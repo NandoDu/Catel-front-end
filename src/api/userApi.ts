@@ -3,6 +3,7 @@ import apiCon, {HttpMethod} from './apiCon';
 export * from './user/login';
 export * from './user/userResidents';
 export * from './user/addResident';
+export * from './user/deleteResident';
 
 interface RoomInfoI {
   hotelId: number,
@@ -56,9 +57,25 @@ interface GetCommentItemO {
 }
 
 type GetCommentO = GetCommentItemO[];
-const GetCommentAPI = apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
+const GetCommentAPI=apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
+
+interface BookHotelI{
+  userId: number,
+  hotelId: number,
+  resident: number[],
+  roomId: number,
+  checkInDate: string,
+  checkOutDate: string
+}
+
+interface BookHotelO{
+  orderId: number,
+}
+const BookHotelAPI = apiCon<BookHotelI, BookHotelO>(HttpMethod.Post, '/order/');
+
 export {
   RoomInfoI, RoomInfoItemO, RoomInfoO, RoomInfoAPI,
   HotelInfoI, HotelInfoO, HotelInfoAPI,
   GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
+  BookHotelI, BookHotelO, BookHotelAPI,
 };

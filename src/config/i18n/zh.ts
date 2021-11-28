@@ -25,6 +25,7 @@ const zh = {
   loginOk: '登录成功',
   logoutOk: '您已登出',
   addOk: '添加成功',
+  deleteOk: '删除成功',
   fieldMissing: '有未填写的必填信息',
   finished: '已完成',
   canceled: '已撤销',
@@ -36,6 +37,9 @@ const zh = {
   publishComment: '发表评论',
   publishOk: '评论成功',
   title: '标题',
+  confirm: '确认',
+  sureToDelete: '确认要删除该项吗',
+  alterResident: '修改入住人信息'
 };
 
 export default zh;

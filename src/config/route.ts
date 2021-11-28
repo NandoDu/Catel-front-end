@@ -4,6 +4,7 @@ import OrderDetail from '../page/OrderDetail.vue';
 import Info from '../page/HotelInfo.vue';
 import hotelInfo from '../component/HotelInfo/hotelInfo.vue';
 import PersonalInfo from '../page/PersonalInfo.vue';
+import OrderDetailPage from '../page/OrderDetailPage.vue';
 import {NavigationGuard, RouteRecordRaw} from 'vue-router';
 import {store} from '../store';
 
@@ -14,6 +15,7 @@ const allowNotLogged: NavigationGuard = (to, from) => {
     return '/';
   }
 };
+
 const allowLogged: NavigationGuard = (to, from) => {
   const ok = store.getters['user/logged'];
   if (!ok) return {path: '/login', query: {redirect: to.path}};
@@ -26,6 +28,7 @@ const routes: RouteRecordRaw[] = [
   {path: '/login', component: Login, beforeEnter: allowNotLogged},
   {path: '/hotel/:id', component: Info},
   {path: '/personalInfo', component: PersonalInfo, beforeEnter: allowLogged},
+  {path: '/order-detail/:orderId', component: OrderDetailPage},
 ];
 
 export default routes;

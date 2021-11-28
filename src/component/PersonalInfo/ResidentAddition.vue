@@ -8,6 +8,13 @@ import {ElMessage} from 'element-plus';
 import dateFormat from 'dateformat';
 import useTranslation from '../../config/i18n/useTranslation';
 
+defineProps<{
+  isUpdate: boolean
+}>();
+const emit = defineEmits<{
+  (e: 'needRefresh'): void
+}>();
+
 const store = useTypedStore();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 const userId = computed(() => store.getters['user/userId']);
@@ -15,6 +22,7 @@ const userId = computed(() => store.getters['user/userId']);
 const message = useTranslation([
   'residentAddition', 'residentName', 'realName',
   'phoneNumber', 'cancel', 'add', 'idNo', 'birthday', 'fieldMissing',
+  'AlterResident',
 ]);
 
 class ResidentInfo {
@@ -27,7 +35,6 @@ class ResidentInfo {
 const residentInfo = reactive(new ResidentInfo());
 
 const firstInput = ref();
-
 
 const submitModify = async () => {
   if (residentInfo.birthday == null ||
@@ -42,6 +49,7 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
+
   const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
   console.log(dataString);
   try {
@@ -57,6 +65,7 @@ const submitModify = async () => {
       message: ('message.addOk'),
       center: true,
     });
+    emit('needRefresh');
   } catch (e) {
     console.log(e);
   }
@@ -115,10 +124,9 @@ const submitModify = async () => {
 }
 
 .inline {
-  @include Other.center-flex;
+  @include Other.even-line;
   width: 100%;
   margin: 5px;
-  justify-content: space-evenly;
 }
 
 

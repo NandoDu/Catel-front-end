@@ -2,6 +2,7 @@
 defineProps<{
   text: string
   color: 'red' | 'green'
+  size?: 'big' | 'small'
 }>();
 
 </script>
@@ -9,7 +10,7 @@ defineProps<{
 <template>
   <button
     class="bigger-button"
-    :class="`color-${color}`"
+    :class="[`color-${color}`, `size-${size ?? 'big'}`]"
   >
     {{ text }}
   </button>
@@ -17,29 +18,46 @@ defineProps<{
 
 <style lang="scss" scoped>
 @use 'src/util/Color';
+@use 'src/util/Size';
 
 $duration: 200ms;
 
 .bigger-button {
   @each $name, $color in Color.$buttonColors {
     &.color-#{$name} {
-      all: unset;
-      cursor: pointer;
-      border: 2px solid $color;
-      border-radius: 20px;
-      padding: 8px 28px;
-      color: $color;
-      transition: color $duration, background-color $duration;
-
-      &:hover {
-        color: white;
-        background-color: $color;
-      }
-
-      &:active {
-        background-color: Color.tint($color, 20);
-      }
+      --base-color: #{$color};
+      --light-color: #{Color.tint($color, 15)};
+      --lighter-color: #{Color.tint($color, 30)};
     }
   }
+  @each $name, $size in Size.$buttonSizes {
+    &.size-#{$name} {
+      --base-size: #{$size};
+    }
+  }
+  $baseColor: var(--base-color);
+  $lightColor: var(--light-color);
+  $lighterColor: var(--lighter-color);
+  $basiSize: var(--base-size);
+
+  all: unset;
+  cursor: pointer;
+  transition: color $duration, background-color $duration;
+  color: $baseColor;
+
+  &:hover {
+    color: white;
+    background-color: $lightColor;
+  }
+
+  &:active {
+    background-color: $lighterColor;
+  }
+
+  border: 2px solid $baseColor;
+  border-radius: 20px;
+  padding: (2 * 4px) 28px;
+
+
 }
 </style>
