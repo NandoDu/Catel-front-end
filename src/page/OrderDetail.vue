@@ -1,24 +1,28 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
-import {userResidentsAPI} from '../api/userApi';
+import {BookHotelAPI, userResidentsAPI} from '../api/userApi';
 import {useAsyncState} from '@vueuse/core';
 import {useTypedStore} from '../store';
+
 const store = useTypedStore();
 const id = store.getters['user/userId'];
 let roomId = ref('');
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref('');
-const getUrlParams = () =>{
+const book = () => {
+  BookHotelAPI({checkInDate: '', checkOutDate: '', hotelId: 0, resident: [], roomId: 0, userId: 0});
+};
+const getUrlParams = () => {
   const url = location.search;
-  if(url.indexOf('?')!= -1) {
+  if (url.indexOf('?') != -1) {
     let str = url.substr(1).split('&');
     console.log(str);
     for (let i = 0; i < str.length; i++) {
-      if(i===0) roomId.value =str[i].split('=')[1];
-      else if(i===1) startDate.value = str[i].split('=')[1];
-      else if(i===2) endDate.value = str[i].split('=')[1];
-      else if(i===3) maxRoomNum.value = str[i].split('=')[1];
+      if (i === 0) roomId.value = str[i].split('=')[1];
+      else if (i === 1) startDate.value = str[i].split('=')[1];
+      else if (i === 2) endDate.value = str[i].split('=')[1];
+      else if (i === 3) maxRoomNum.value = str[i].split('=')[1];
     }
   }
 };
@@ -27,19 +31,19 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   return r;
 },
 ), []);
-let simpleCopy =()=>{
-  for(let i = 0; i < 50; i++) {
+let simpleCopy = () => {
+  for (let i = 0; i < 50; i++) {
     personInfoList.value.push(personInfoList.value[0]);
   }
 };
 let dateValue = ref('');
 let nameValue = ref('');
 let phoneValue = ref('');
-const showPersonInfo = ()=>{
+const showPersonInfo = () => {
   let personNames = [{value: false, label: ''}];
   personNames.pop();
   simpleCopy();
-  for(let i = 0; i < personInfoList.value.length; i++) {
+  for (let i = 0; i < personInfoList.value.length; i++) {
     const info = personInfoList.value[i];
     let temp = {value: false, label: info.realName};
     personNames.push(temp);
@@ -70,7 +74,7 @@ let options = ref([
     label: '5',
   },
 ]);
-let pickValue=ref('');
+let pickValue = ref('');
 </script>
 
 <template>
@@ -262,37 +266,37 @@ let pickValue=ref('');
                 </div>
               </div>
             </div>
-<!--            <div-->
-<!--              class="input_info"-->
-<!--              style="margin-top: 24px"-->
-<!--            >-->
-<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
-<!--                <span>电子邮件</span>-->
-<!--                <span style="position: relative;width: 100%;display: inline-block">-->
-<!--                  <input-->
-<!--                    placeholder="请输入电子邮件"-->
-<!--                    type="text"-->
-<!--                    class="input_info_content"-->
-<!--                  >-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div-->
-<!--              class="input_info"-->
-<!--              style="margin-top: 24px"-->
-<!--            >-->
-<!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
-<!--                <span>电话号码</span>-->
-<!--                <span style="position: relative;width: 100%;display: inline-block">-->
-<!--                  <input-->
-<!--                    placeholder="请输入电话号码"-->
-<!--                    type="text"-->
-<!--                    class="input_info_content"-->
-<!--                    :value="phoneValue"-->
-<!--                  >-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div-->
+            <!--              class="input_info"-->
+            <!--              style="margin-top: 24px"-->
+            <!--            >-->
+            <!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
+            <!--                <span>电子邮件</span>-->
+            <!--                <span style="position: relative;width: 100%;display: inline-block">-->
+            <!--                  <input-->
+            <!--                    placeholder="请输入电子邮件"-->
+            <!--                    type="text"-->
+            <!--                    class="input_info_content"-->
+            <!--                  >-->
+            <!--                </span>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <div-->
+            <!--              class="input_info"-->
+            <!--              style="margin-top: 24px"-->
+            <!--            >-->
+            <!--              <div style="margin-bottom: 16px;position: relative;display: inline-block;flex:1;">-->
+            <!--                <span>电话号码</span>-->
+            <!--                <span style="position: relative;width: 100%;display: inline-block">-->
+            <!--                  <input-->
+            <!--                    placeholder="请输入电话号码"-->
+            <!--                    type="text"-->
+            <!--                    class="input_info_content"-->
+            <!--                    :value="phoneValue"-->
+            <!--                  >-->
+            <!--                </span>-->
+            <!--              </div>-->
+            <!--            </div>-->
           </div>
           <div class="payment">
             <div
@@ -323,6 +327,7 @@ let pickValue=ref('');
               <button
                 type="button"
                 class="payment_button"
+                @click="book"
               >
                 <span>
                   去支付
@@ -416,11 +421,17 @@ let pickValue=ref('');
                 房间信息
               </div>
               <ul style="margin: 0;padding: 0;list-style: none">
-                <li class="r_tile" style="font-size: 14px;color: #0f294d;margin-bottom: 12px">
+                <li
+                  class="r_tile"
+                  style="font-size: 14px;color: #0f294d;margin-bottom: 12px"
+                >
                   <span style="font-weight: 700;padding-right: 15px">房型:</span>
                   <span>特惠双床房</span>
                 </li>
-                <li class="r_detail" style="font-size: 14px;color: #0f294d">
+                <li
+                  class="r_detail"
+                  style="font-size: 14px;color: #0f294d"
+                >
                   <span style="font-weight: 700;display: inline-flex;padding-right: 15px">配置:</span>
                   <div style="display: inline-flex;flex-direction: row">
                     <span style="padding-right: 15px">2张单人床</span>
@@ -437,4 +448,4 @@ let pickValue=ref('');
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped />
+<style src="./OrderDetail.scss" lang="scss" scoped/>
