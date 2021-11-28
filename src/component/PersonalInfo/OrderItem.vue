@@ -114,12 +114,11 @@ const state2msg = {
         </div>
         <div
           class="cancelOperation"
-          v-if="orderInfo.orderState!=='Finished'"
         >
-          <div class="cancelIcon">
+          <div class="cancelIcon" v-show="orderInfo.orderState === 'Available'">
             B
           </div>
-          <div class="cancelText">
+          <div class="cancelText" v-show="orderInfo.orderState === 'Available'">
             撤销
           </div>
         </div>
@@ -127,10 +126,10 @@ const state2msg = {
           class="reviewOperation"
           @click="showCommentModal"
         >
-          <div class="reviewIcon">
-            C
+          <div class="reviewIcon" v-show="orderInfo.orderState === 'Finished' || orderInfo.orderState === 'Canceled'">
+            B
           </div>
-          <div class="reviewText">
+          <div class="reviewText" v-show="orderInfo.orderState === 'Finished' || orderInfo.orderState === 'Canceled'">
             评价
           </div>
         </div>
