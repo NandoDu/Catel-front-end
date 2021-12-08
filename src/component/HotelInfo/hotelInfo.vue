@@ -32,14 +32,6 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
           </div>
         </div>
       </div>
-      <div class="price_container">
-        <div
-          class="select_room"
-          @click="$router.push('#chooseRoom')"
-        >
-          选择房间
-        </div>
-      </div>
     </div>
     <div class="comment-input">
       <div class="head_album">
@@ -56,12 +48,6 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
                 style="height: 100%;width: 100%"
               >
             </div>
-            <!--            <div class="focus_mask">-->
-            <!--              <span class="more_pics">查看全部的377张图片</span>-->
-            <!--            </div>-->
-            <!--            <div class="collect">-->
-            <!--              <i class="el-icon-star-on"></i>-->
-            <!--            </div>-->
           </div>
           <div class="child_box">
             <div class="album_item">
@@ -188,7 +174,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
             </div>
           </div>
         </div>
-        <div class="traffic_container">
+        <div class="traffic_container" style="min-height: 130px">
           <span class="hotel_desc">
             {{ description }}
           </span>
@@ -222,9 +208,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
 <style scoped>
 section {
 	max-width: 1160px;
-	background-color: white;
 	margin-bottom: 16px;
-	border-radius: 8px;
 	margin-top: 8px;
 }
 
@@ -234,13 +218,16 @@ body {
 
 .headline {
 	display: flex;
-	padding: 8px 24px;
+	padding: 8px 0;
+  background: #f5f7fa;
 }
 
 .comment-input {
 	display: flex;
-	margin: 0;
-	padding: 8px 24px;
+	padding: 12px 24px;
+  border-radius: 8px;
+  background: white;
+
 }
 
 .head_album {
