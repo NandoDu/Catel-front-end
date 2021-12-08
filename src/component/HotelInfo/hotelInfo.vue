@@ -6,7 +6,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
 
 </script>
 <template>
-  <section id="hotel_info_card">
+  <section id="hotel_info_card" style="width: 1160px">
     <div class="headline">
       <div class="detail">
         <div class="title">
@@ -28,14 +28,8 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
             </div>
             <span class="position_info">
               <span class="position_text">{{ address }}</span>
-              <!--              <span class="position_show_more">显示地图</span>-->
             </span>
           </div>
-          <!--          <div class="desc">-->
-          <!--            <div style="display: inline-block;vertical-align: baseline;line-height: 22px;"><i class="el-icon-office-building"></i></div>-->
-          <!--            <span class="desc_context">开业：2018 上海悦麓花园酒店位于上海嘉定区马陆镇宝安公路与横沥河交汇处，距上海虹桥国家会展中心约14公里，属上海虹桥商务中心约15分钟快速直达辐射范围内。</span>-->
-          <!--&lt;!&ndash;            <span class="desc_show_more">查看更多</span>&ndash;&gt;-->
-          <!--          </div>-->
         </div>
       </div>
       <div class="price_container">
@@ -198,33 +192,6 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
           <span class="hotel_desc">
             {{ description }}
           </span>
-          <!--          <div class="map_icon"></div>-->
-          <!--          <div class="map_detail">-->
-          <!--            <div>-->
-          <!--              <ul class="traffic_list" style="display: flex;justify-content: flex-start;list-style: none;padding-left: 10px">-->
-          <!--                <li style="margin-right: 30px;list-style: none;display: list-item">-->
-          <!--                  <span style="font-size: 20px;">-->
-          <!--                    <i class="el-icon-s-promotion"></i>-->
-          <!--                    <span class="item_distance">49.18公里</span>-->
-          <!--                  </span>-->
-          <!--                </li>-->
-          <!--                <li style="margin-right: 30px;list-style: none">-->
-          <!--                  <span style="font-size: 20px">-->
-          <!--                    <i class="el-icon-truck"></i>-->
-          <!--                    <span class="item_distance">31.77公里</span>-->
-          <!--                  </span>-->
-          <!--                </li>-->
-          <!--              </ul>-->
-          <!--              <div class="traffic_desc" style="overflow: hidden;margin-bottom: 4px;padding-left: 10px">-->
-          <!--                <div class="traffic_desc_text">附近1公里内有3个景点，距离市中心45.6千米</div>-->
-          <!--              </div>-->
-          <!--              <div>-->
-          <!--                <span class="map_show_more">-->
-          <!--                  查看地图-->
-          <!--                </span>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
         </div>
         <div class="amenity_container">
           <div class="amenity_list">
