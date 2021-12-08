@@ -52,9 +52,9 @@ const showResidentAddition = () => residentAddition.value.open();
         <div class="orderPartTitle">
           我的订单
         </div>
-        <div class="allOrderText">
-          全部订单
-        </div>
+<!--        <div class="allOrderText">-->
+<!--          全部订单-->
+<!--        </div>-->
         <div class="orderListPart">
           <OrderItem
             v-for="(orderInfo, index) in orders"
@@ -174,9 +174,9 @@ const showResidentAddition = () => residentAddition.value.open();
           <div class="creditPartTitle">
             信用值变更
           </div>
-          <div class="allCreditText">
-            全部记录
-          </div>
+<!--          <div class="allCreditText">-->
+<!--            全部记录-->
+<!--          </div>-->
           <div class="creditRecordListPart">
             <CreditEntry
               v-for="(record, index) in orders"

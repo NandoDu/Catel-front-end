@@ -22,6 +22,7 @@ defineProps<{
   padding: 10px 0;
   border: 1px solid gray;
   border-top: 5px solid #06aebd;
+  border-radius: 5px;
   width: 20vw;
 
   strong {
