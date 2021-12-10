@@ -43,21 +43,15 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   return r;
 },
 ), []);
-let simpleCopy = () => {
-  for (let i = 0; i < 50; i++) {
-    personInfoList.value.push(personInfoList.value[0]);
-  }
-};
 let dateValue = ref('');
 let nameValue = ref('');
 let phoneValue = ref('');
 const showPersonInfo = () => {
-  let personNames = [{value: false, label: ''}];
+  let personNames = [{value: false, label: '', id: 0}];
   personNames.pop();
-  simpleCopy();
   for (let i = 0; i < personInfoList.value.length; i++) {
     const info = personInfoList.value[i];
-    let temp = {value: false, label: info.realName};
+    let temp = {value: false, label: info.realName, id: info.id};
     personNames.push(temp);
   }
   return personNames;
@@ -267,14 +261,16 @@ let pickValue = ref('');
                   class="select_user"
                   style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 300px; overflow-y: auto;scrollbar-width: none; /* firefox */-ms-overflow-style: none; /* IE 10+ */overflow-x: hidden;"
                 >
-                  <el-checkbox
-                    v-for="(personInfo, index) in names"
-                    :key="index"
-                    :v-model="personInfo.value"
-                    :label="personInfo.label"
-                    class="input_info_content"
-                    style="border: none;width: 45%"
-                  />
+                  <ElCheckboxGroup v-model="selectedResident">
+                    <el-checkbox
+                      v-for="(personInfo, index) in names"
+                      :key="index"
+                      :label="personInfo.label"
+                      :name="`${personInfo.id}`"
+                      class="input_info_content"
+                      style="border: none;width: 45%"
+                    />
+                  </ElCheckboxGroup>
                 </div>
               </div>
             </div>

@@ -92,6 +92,10 @@ const book = (roomId: number) => {
       :hotel-name="hotelInfo.name"
       :description="hotelInfo.description"
       :hotel-star="hotelInfo.hotelStar"
+      :address="hotelInfo.address"
+      :rate="hotelInfo.rate"
+      :comment-count="commentList.length"
+      :announcement="hotelInfo.announcement"
     />
     <DatePicker
       @changeBreak="changeBreak"
