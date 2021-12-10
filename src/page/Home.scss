@@ -47,27 +47,7 @@
 .hotelListSecond {
   display: flex;
   flex-direction: row;
-  //justify-content: center;
 }
-.hotelItem {
-  margin-top: 20px;
-  height: 350px;
-  width: 199px;
-  border-radius: 10px;
-  margin-left: 20px;
-}
-.hotelItemHead {
-  height: 350px;
-  width: 199px;
-  border-radius: 10px;
-  margin-left: 0px;
-}
-//.firstCardHotel {
-//  height: 350px;
-//  width: 199px;
-//  border-radius: 10px;
-//  margin-left: 0px;
-//}
 .brandList {
   display: flex;
   flex-direction: row;
@@ -104,51 +84,7 @@
   align-self: center;
   flex-direction: column;
 }
-.hotelList {
-  display: flex;
-  flex-direction: row;
-}
-.firstLine {
-  margin-top: -60px;
-}
-.showMore {
-  margin-top: 80px;
-  display: flex;
-  align-self: center;
-  font-size: 15px;
-  color: #515151;
-  cursor: pointer;
-  font-weight: bolder;
-}
-.showMore:hover {
-}
-.showMore:hover .showMoreImg {
-  display: none;
-}
-.showMore:hover .showMoreHoverImg {
-  display: block;
-}
-.showMoreIcon {
-  margin-top: 2px;
-  width: 20px;
-  height: 20px;
-}
-.showMoreImg {
-  width: 15px;
-  height: 15px;
-}
-.showMoreHoverImg {
-  width: 15px;
-  height: 15px;
-  display: none;
-  margin-top: 1px;
-}
-.showMoreText {
-  margin-left: 1px;
-}
-.showMoreText:hover {
-  color: #06aebd;
-}
+
 .showAll {
   margin-top: 80px;
   display: flex;

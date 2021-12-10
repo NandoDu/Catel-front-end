@@ -83,8 +83,6 @@ const cards = reactive([
   width: 99%;
   height: 100px;
   background-color: white;
-  //box-shadow: rgb(56, 56, 56) 1px 1px 0px;
-  //border: 1px #383838 solid;
   box-shadow: black 0px 0px 1px inset;
   border-radius: 10px;
   display: flex;
@@ -96,8 +94,6 @@ const cards = reactive([
   width: 99%;
   height: 100px;
   background-color: white;
-  //box-shadow: rgb(56, 56, 56) 1px 1px 0px;
-  //border: 1px #383838 solid;
   box-shadow: black 0px 0px 1px inset;
   border-radius: 15px;
   display: flex;
