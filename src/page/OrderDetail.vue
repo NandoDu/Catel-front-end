@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
-import {BookHotelAPI, userResidentsAPI} from '../api/userApi';
+import {userResidentsAPI} from '../api/userApi';
+import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
 import {useTypedStore} from '../store';
 import dateFormat from 'dateformat';
@@ -17,6 +18,7 @@ let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
+let price = ref(0);
 
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
@@ -43,6 +45,15 @@ const showPersonInfo = () => {
   }
   return personNames;
 };
+let {state: preview} = useAsyncState(PreviewHotelAPI({
+  userId: id,
+  hotelId: hotelId.value,
+  checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
+  checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+  configId: roomId.value,
+  residents: selectedResident.value,
+}), null);
+
 let names = computed(showPersonInfo);
 let current = ref(new Date());
 let options = ref([
@@ -78,8 +89,12 @@ const book = () => {
     userId: id,
   }).then((result) => {
     ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
-    setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
-  });
+    setTimeout(() => router.push(`/order-detail/${result}`), 3000);
+  })
+    .catch(() => {
+      console.log('后端错误');
+    });
+  
 };
 </script>
 
@@ -366,7 +381,7 @@ const book = () => {
                         class="price_cell"
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
-                        <span style="color: #0f294d;font-weight: 400;font-size: 14px;">¥ 519</span>
+                        <span style="color: #0f294d;font-weight: 400;font-size: 14px;">{{ preview.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
                       </span>
                     </div>
                   </li>
