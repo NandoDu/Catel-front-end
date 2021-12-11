@@ -4,6 +4,7 @@ export * from './user/login';
 export * from './user/userResidents';
 export * from './user/addResident';
 export * from './user/deleteResident';
+export * from './user/register';
 
 interface RoomInfoI {
   hotelId: number,

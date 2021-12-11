@@ -7,6 +7,7 @@ import {useTypedStore} from '../../store';
 import {computed, ref} from 'vue';
 import VirryModal from '../Util/VirryModal.vue';
 import LoginCard from '../LoginCard.vue';
+import RegisterCard from '../RegisterCard.vue';
 import {ElMessage} from 'element-plus';
 import LocaleSelect from '../Util/LocaleSelect.vue';
 import useTranslation from '../../config/i18n/useTranslation';
@@ -29,6 +30,7 @@ const logout = () => {
 
 const loginModal = ref();
 const showLoginModal = () => loginModal.value.open();
+let ifRegister = ref(false);
 
 </script>
 

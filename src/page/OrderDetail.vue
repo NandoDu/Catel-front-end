@@ -18,17 +18,18 @@ let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
 const book = () => {
-  BookHotelAPI({
-    checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
-    checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
-    hotelId: hotelId.value,
-    resident: [],
-    roomId: roomId.value,
-    userId: id,
-  }).then((result) => {
-    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
-    setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
-  });
+  console.log(selectedResident.value);
+  // BookHotelAPI({
+  //   checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
+  //   checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+  //   hotelId: hotelId.value,
+  //   resident: [],
+  //   roomId: roomId.value,
+  //   userId: id,
+  // }).then((result) => {
+  //   ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
+  //   setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
+  // });
 };
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
@@ -43,9 +44,8 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   return r;
 },
 ), []);
+let selectedResident = ref([]);
 let dateValue = ref('');
-let nameValue = ref('');
-let phoneValue = ref('');
 const showPersonInfo = () => {
   let personNames = [{value: false, label: '', id: 0}];
   personNames.pop();
@@ -265,7 +265,7 @@ let pickValue = ref('');
                     <el-checkbox
                       v-for="(personInfo, index) in names"
                       :key="index"
-                      :label="personInfo.label"
+                      :label="`${personInfo.id}`+' '+personInfo.label"
                       :name="`${personInfo.id}`"
                       class="input_info_content"
                       style="border: none;width: 45%"

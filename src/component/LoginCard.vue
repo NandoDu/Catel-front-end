@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ElMessage} from 'element-plus';
-import {inject, reactive} from 'vue';
+import {inject, reactive, ref} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useTypedStore} from '../store';
 import useTranslation from '../config/i18n/useTranslation';
@@ -9,12 +9,21 @@ const loginData = reactive({
   identity: '',
   password: '',
 });
+const registerData = reactive({
+  identity: '',
+  username: '',
+  password: '',
+  verify: '',
+});
 const store = useTypedStore();
 const router = useRouter();
 const route = useRoute();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 const message = useTranslation(['accountLogin', 'identity', 'password', 'register', 'login', 'loginOk']);
-
+let ifLogin = ref(true);
+const switchLoginOrRegister = () => {
+  ifLogin.value = !ifLogin.value;
+};
 const login = async () => {
   try {
     await store.dispatch('user/login', {
@@ -35,10 +44,44 @@ const login = async () => {
     console.log(e);
   }
 };
+const register = async () => {
+  try {
+    if(registerData.password!=registerData.verify){
+      ElMessage.error({
+        message: '两次输入密码不一致',
+        center: true,
+      });
+    }
+    else{
+      console.log(registerData);
+    }
+
+    // await store.dispatch('user/', {
+    //   email: registerData.identity,
+    //   username: registerData.username,
+    //   password: registerData.password,
+    // });
+    // if (closeModal) closeModal();
+    // else {
+    //   const target = (route.query.redirect as string) ?? '/';
+    //   await router.push(target);
+    // }
+
+    // ElMessage.success({
+    //   message: '注册成功',
+    //   center: true,
+    // });
+  } catch (e) {
+    console.log(e);
+  }
+};
 </script>
 
 <template>
-  <div id="login-card">
+  <div
+    id="login-card"
+    v-if="ifLogin"
+  >
     <h1>{{ message.accountLogin }}</h1>
     <ElInput
       class="input-line"
@@ -56,7 +99,7 @@ const login = async () => {
     <div class="flex-end">
       <span
         class="extern-link"
-        @click="() => $router.push('/')"
+        @click="() => ifLogin = false"
       >
         {{ message.register }}
       </span>
@@ -65,6 +108,52 @@ const login = async () => {
         class="login-button"
       >
         {{ message.login }}
+      </ElButton>
+    </div>
+  </div>
+  <div
+    id="register-card"
+    v-if="!ifLogin"
+  >
+    <h1>注册</h1>
+    <ElInput
+      class="input-line"
+      v-model="registerData.identity"
+      placeholder="邮箱"
+      @keyup.enter="register"
+    />
+    <ElInput
+      class="input-line"
+      v-model="registerData.username"
+      placeholder="用户名"
+      @keyup.enter="register"
+    />
+    <ElInput
+      class="input-line"
+      v-model="registerData.password"
+      placeholder="请输入新密码"
+      @keyup.enter="register"
+      show-password
+    />
+    <ElInput
+      class="input-line"
+      v-model="registerData.verify"
+      placeholder="再次确认新密码"
+      @keyup.enter="register"
+      show-password
+    />
+    <div class="flex-end">
+      <span
+        class="extern-link"
+        @click="switchLoginOrRegister"
+      >
+        {{ message.login }}
+      </span>
+      <ElButton
+        @click="register"
+        class="register-button"
+      >
+        注册
       </ElButton>
     </div>
   </div>
@@ -116,5 +205,17 @@ $inputLen: 400px;
 .login-button {
   @include add-color(#0d887e);
 }
+
+#register-card {
+  width: $inputLen;
+  @include Other.center-flex;
+  flex-direction: column;
+  @include Other.card;
+}
+
+.register-button {
+  @include add-color(#0d887e);
+}
+
 
 </style>
