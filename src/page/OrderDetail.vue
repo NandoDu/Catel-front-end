@@ -18,13 +18,12 @@ let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
-let price = ref(0);
 
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
   startDate.value = route.query.start as unknown as string;
   endDate.value = route.query.end as unknown as string;
-  roomId.value = route.query.roomid as unknown as number;
+  roomId.value = route.query.roomId as unknown as number;
   hotelId.value = route.query.hotelId as unknown as number;
 };
 getUrlParams();
@@ -48,12 +47,26 @@ const showPersonInfo = () => {
 let {state: preview} = useAsyncState(PreviewHotelAPI({
   userId: id,
   hotelId: hotelId.value,
-  checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
-  checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+  checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+  checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
   configId: roomId.value,
   residents: selectedResident.value,
 }), null);
-
+const callPrice = () => {
+  PreviewHotelAPI({
+    userId: id,
+    hotelId: hotelId.value,
+    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
+    configId: roomId.value,
+    residents: selectedResident.value,
+  }).then((res) => {
+    preview.value = res;
+  })
+    .catch(() => {
+      console.log('后端报错');
+    });
+};
 let names = computed(showPersonInfo);
 let current = ref(new Date());
 let options = ref([
@@ -81,8 +94,8 @@ let options = ref([
 let pickValue = ref('');
 const book = () => {
   BookHotelAPI({
-    checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
-    checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
     hotelId: hotelId.value,
     residents: selectedResident.value,
     configId: roomId.value,
@@ -276,7 +289,10 @@ const book = () => {
                   class="select_user"
                   style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 300px; overflow-y: auto;scrollbar-width: none; /* firefox */-ms-overflow-style: none; /* IE 10+ */overflow-x: hidden;"
                 >
-                  <ElCheckboxGroup v-model="selectedResident">
+                  <ElCheckboxGroup
+                    v-model="selectedResident"
+                    @change="callPrice"
+                  >
                     <el-checkbox
                       v-for="(personInfo, index) in names"
                       :key="index"
@@ -312,7 +328,7 @@ const book = () => {
                   class="price_content"
                   style="margin-left:5px; display: inline-flex;align-items: center;justify-content: center"
                 >
-                  ￥319.00
+                  {{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}
                 </span>
               </div>
             </div>
@@ -364,7 +380,9 @@ const book = () => {
                         class="final_p"
                         style="padding-left: 4px;font-size: 24px"
                       >
-                        <span style="color: #287dfa;font-weight: 700;">¥ 319</span>
+                        <span
+                          style="color: #287dfa;font-weight: 700;"
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
                       </div>
                     </span>
                   </li>
@@ -381,7 +399,9 @@ const book = () => {
                         class="price_cell"
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
-                        <span style="color: #0f294d;font-weight: 400;font-size: 14px;">{{ preview.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
+                        <span
+                          style="color: #0f294d;font-weight: 400;font-size: 14px;"
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
                       </span>
                     </div>
                   </li>
