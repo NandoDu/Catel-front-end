@@ -9,6 +9,9 @@
 .recommendArea {
   margin-right: 20px;
 }
+.recommendArea:hover{
+  cursor: pointer;
+}
 .displayArea {
   display: flex;
   flex-direction: row;

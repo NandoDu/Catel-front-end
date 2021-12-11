@@ -17,20 +17,7 @@ let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
-const book = () => {
-  console.log(selectedResident.value);
-  // BookHotelAPI({
-  //   checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
-  //   checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
-  //   hotelId: hotelId.value,
-  //   resident: [],
-  //   roomId: roomId.value,
-  //   userId: id,
-  // }).then((result) => {
-  //   ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
-  //   setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
-  // });
-};
+
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
   startDate.value = route.query.start as unknown as string;
@@ -44,7 +31,7 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   return r;
 },
 ), []);
-let selectedResident = ref([]);
+let selectedResident = ref<string[]>([]);
 let dateValue = ref('');
 const showPersonInfo = () => {
   let personNames = [{value: false, label: '', id: 0}];
@@ -81,6 +68,19 @@ let options = ref([
   },
 ]);
 let pickValue = ref('');
+const book = () => {
+  BookHotelAPI({
+    checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
+    hotelId: hotelId.value,
+    residents: selectedResident.value,
+    configId: roomId.value,
+    userId: id,
+  }).then((result) => {
+    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
+    setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
+  });
+};
 </script>
 
 <template>

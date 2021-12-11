@@ -59,7 +59,7 @@ const {state: cards} = useAsyncState(GetCarouselAPI({limit: 9}), []);
             <div class="cardHotelImg">
               <img
                 alt="hotelPic"
-                :src="card['headPic']"
+                :src="card['landscape']"
                 style="width: 100%; height: 100%; border-radius: 10px;"
               >
             </div>

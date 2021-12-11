@@ -63,7 +63,7 @@ const GetCommentAPI = apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/
 interface BookHotelI {
   userId: number,
   hotelId: number,
-  residents: number[],
+  residents: string[],
   configId: number,
   checkInDate: string,
   checkOutDate: string
