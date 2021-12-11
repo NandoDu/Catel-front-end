@@ -27,6 +27,7 @@ const {state: cards} = useAsyncState(GetCarouselAPI({limit: 9}), []);
             class="cardHotel"
             :class="{'firstCardHotel' : index % 3 === 0}"
             v-if="index / (item * 3) < 1 && index >= (item - 1) * 3"
+            @click="$router.push(`/hotel/${card.id}`)"
           >
             <div class="cardHotelOrder">
               {{ index + 1 }}
@@ -80,6 +81,9 @@ const {state: cards} = useAsyncState(GetCarouselAPI({limit: 9}), []);
   display: flex;
   flex-direction: row;
   margin-top: 20px;
+}
+.cardHotel:hover{
+  cursor: pointer;
 }
 
 .firstCardHotel {

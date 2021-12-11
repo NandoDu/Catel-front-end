@@ -35,7 +35,7 @@ const brands = reactive([
       </h3>
       <img
         alt="luckyPic"
-        :src="luckyInfo.landscape"
+        :src="luckyInfo?.landscape"
         class="recommendPng"
       >
     </div>
