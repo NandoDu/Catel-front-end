@@ -5,6 +5,7 @@ import OrderDetail from '../page/OrderDetail.vue';
 import Info from '../page/HotelInfo.vue';
 import hotelInfo from '../component/HotelInfo/hotelInfo.vue';
 import PersonalInfo from '../page/PersonalInfo.vue';
+import Hotels from '../page/Hotels.vue';
 import OrderDetailPage from '../page/OrderDetailPage.vue';
 import {NavigationGuard, RouteRecordRaw} from 'vue-router';
 import {store} from '../store';
@@ -24,8 +25,8 @@ const allowLogged: NavigationGuard = (to, from) => {
 
 const routes: RouteRecordRaw[] = [
   {path: '/', component: Home},
-  {path: '/hotelInfo', component: hotelInfo},
   {path: '/order', component: OrderDetail},
+  {path: '/hotels', component: Hotels},
   {path: '/login', component: Login, beforeEnter: allowNotLogged},
   {path: '/hotel/:id', component: Info},
   {path: '/personalInfo', component: PersonalInfo, beforeEnter: allowLogged},

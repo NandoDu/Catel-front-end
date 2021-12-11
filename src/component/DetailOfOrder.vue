@@ -11,6 +11,7 @@ const store = useTypedStore();
 const user = store.getters['user/all'] as UserState;
 const orderId = route.params.orderId as unknown as number;
 const hotelInfo = await hotelDetailAPI({orderId});
+console.log(hotelInfo);
 </script>
 
 <template>
@@ -37,6 +38,7 @@ const hotelInfo = await hotelDetailAPI({orderId});
         :value="hotelInfo.checkOutDate"
       />
     </div>
+    <hr style="width: 100%; border-top: 1px solid gray;">
     <div class="detail">
       <div class="hotel">
         酒店：{{ hotelInfo.hotelName }}
@@ -46,7 +48,6 @@ const hotelInfo = await hotelDetailAPI({orderId});
       </div>
     </div>
 
-    <hr style="width: 100%; border-top: 1px solid gray;">
     <div class="price">
       价格：{{ hotelInfo.price }}
     </div>
@@ -60,7 +61,7 @@ const hotelInfo = await hotelDetailAPI({orderId});
 .detail-of-order {
   @include Other.center-flex;
   flex-direction: column;
-  padding: 0 20vw;
+  padding: 0 25vw;
 
   .thanks {
     color: gray;
