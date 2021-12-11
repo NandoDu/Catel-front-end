@@ -1,246 +1,9 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
+import {ref} from 'vue';
+import {useAsyncState} from '@vueuse/core';
+import {GetHotelListAPI} from '../../api/hotelApi';
 
-const hotels_list = reactive([
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-  {'name': '出境酒店', 'img': 'https://s.tuniu.net/qn/images/23af3649b4265c97b0c95a2aa859f76e.jpg'},
-  {
-    'name': '古镇酒店',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G4/M00/E2/1F/Cii-VV2MadSIDWB_AAFiV3EjK-4AAK-pgP7oWMAAWJv33.jpeg',
-  },
-  {
-    'name': '花样青旅',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G3/M00/C7/6A/Cii_Ll2MadWIL9TPAADI0Jjt3TMAAI1wwIbv74AAMjo74.jpeg',
-  },
-  {
-    'name': '亲子酒店',
-    'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/02/82/Cii-TF2kGHKID3DvAAONEaR4GZgAAAedwFYbBAAA40p73.jpeg',
-  },
-  {
-    'name': '网红民宿',
-    'img': 'https://m.tuniucdn.com/fb2/t1/G6/M00/05/F7/Cii-TF2phVWIGUYVAAXiIljWMXkAAA9-wFu7b8ABeI699.jpeg',
-  },
-]);
+let {state: hotels_list} = useAsyncState(GetHotelListAPI({}), []);
 const showLines = ref(2);
 const showMoreLines = () => {
   showLines.value = showLines.value + 2;
@@ -250,12 +13,14 @@ const showMoreLines = () => {
 <template>
   <div
     v-for="(hotelLine, lineNum) in hotels_list.length / 5"
+    :key="lineNum"
     class="hotelList"
     :class="{'firstLine': lineNum === 0}"
     v-show="lineNum < showLines"
   >
     <div
       v-for="(hotel, index) in hotels_list"
+      @click="$router.push(`/hotel/${hotel.id}`)"
       :key="index"
     >
       <div
@@ -265,18 +30,21 @@ const showMoreLines = () => {
           class="hotelItem"
           :class="{'hotelItemHead' : index % 5 === 0}"
         >
-          <h4 style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0px #383838">
+          <h4
+            style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0 #383838"
+          >
             {{ hotel['name'] }} >
           </h4>
           <img
-            :src="hotel['img']"
+            alt="hotelPic"
+            :src="hotel['headPic']"
             style="width: 100%; height: 100%; border-radius: 10px;"
           >
         </div>
       </div>
     </div>
   </div>
-
+  
   <div
     class="showMore"
     @click="showMoreLines"
@@ -284,10 +52,12 @@ const showMoreLines = () => {
   >
     <div class="showMoreIcon">
       <img
+        alt="showMore"
         src="src/asset/showMore.png"
         class="showMoreImg"
       >
       <img
+        alt="showMoreHover"
         src="src/asset/showMoreHover.png"
         class="showMoreHoverImg"
       >
@@ -369,11 +139,19 @@ const showMoreLines = () => {
   margin-left: 20px;
 }
 
+.hotelItem:hover {
+  cursor: pointer;
+}
+
+.hotelItemHead:hover {
+  cursor: pointer;
+}
+
 .hotelItemHead {
   height: 350px;
   width: 199px;
   border-radius: 10px;
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 </style>

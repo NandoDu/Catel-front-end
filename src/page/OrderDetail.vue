@@ -22,8 +22,8 @@ const book = () => {
     checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
     checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
     hotelId: hotelId.value,
-    resident: [],
-    roomId: roomId.value,
+    residents: [],
+    configId: roomId.value,
     userId: id,
   }).then((result) => {
     ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});

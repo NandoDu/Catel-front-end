@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
+import {reactive} from 'vue';
 import HotCarousel from '../component/Home/HotCarousel.vue';
 import HotelList from '../component/Home/HotelList.vue';
+import {useAsyncState} from '@vueuse/core';
+import {luckyAPI} from '../api/hotelApi';
+import router from '../router';
+
+const {state: luckyInfo} = useAsyncState(luckyAPI, null);
+const lucky = () => {
+  router.push(`/hotel/${luckyInfo.value?.id}`);
+};
 const brands = reactive([
   {'img': 'https://m3.tuniucdn.com/fb2/t1/G6/M00/00/CA/Cii-U12gVTiIAggEAAAlmo1PkUgAAAKEQGqxBcAACWy515.png'},
   {'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/00/CA/Cii-TF2gVTqICr8MAAAQXjSoO8sAAAKEAP_50cAABB2471.png'},
@@ -18,12 +26,16 @@ const brands = reactive([
 
 <template>
   <div class="displayArea">
-    <div class="recommendArea">
+    <div
+      class="recommendArea"
+      @click="lucky"
+    >
       <h3 class="recommendTxt">
-        热门推荐
+        手气不错
       </h3>
       <img
-        src="/src/asset/budalagong.png"
+        alt="luckyPic"
+        :src="luckyInfo.pic"
         class="recommendPng"
       >
     </div>
@@ -56,6 +68,7 @@ const brands = reactive([
           :class="{'brandItemHead': index === 0}"
         >
           <img
+            alt="img"
             :src="brand['img']"
             style="width: 90%; border-radius: 10px; padding-top: 5px; padding-bottom: 5px;"
           >
@@ -66,4 +79,4 @@ const brands = reactive([
   <el-backtop class="returnToTop" />
 </template>
 
-<style src="./Home.scss" lang="scss" scoped />
+<style src="./Home.scss" lang="scss" scoped/>
