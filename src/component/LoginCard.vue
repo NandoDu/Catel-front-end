@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {ElMessage} from 'element-plus';
-import {inject, reactive, ref} from 'vue';
+import {inject, reactive, ref, registerRuntimeCompiler} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import {useTypedStore} from '../store';
 import useTranslation from '../config/i18n/useTranslation';
+import {RegisterAPI} from '../api/user/register';
 
 const loginData = reactive({
   identity: '',
@@ -26,55 +27,61 @@ const switchLoginOrRegister = () => {
 };
 const login = async () => {
   try {
-    await store.dispatch('user/login', {
-      email: loginData.identity,
-      password: loginData.password,
-    });
-    if (closeModal) closeModal();
-    else {
-      const target = (route.query.redirect as string) ?? '/';
-      await router.push(target);
-    }
-
-    ElMessage.success({
-      message: message.value.loginOk,
-      center: true,
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
-const register = async () => {
-  try {
-    if(registerData.password!=registerData.verify){
+    if (loginData.identity === '' || loginData.password === '') {
       ElMessage.error({
-        message: '两次输入密码不一致',
+        message: '输入信息不能为空',
+        center: true,
+      });
+    } else {
+      await store.dispatch('user/login', {
+        email: loginData.identity,
+        password: loginData.password,
+      });
+      if (closeModal) closeModal();
+      else {
+        const target = (route.query.redirect as string) ?? '/';
+        await router.push(target);
+      }
+      
+      ElMessage.success({
+        message: message.value.loginOk,
         center: true,
       });
     }
-    else{
-      console.log(registerData);
-    }
-
-    // await store.dispatch('user/', {
-    //   email: registerData.identity,
-    //   username: registerData.username,
-    //   password: registerData.password,
-    // });
-    // if (closeModal) closeModal();
-    // else {
-    //   const target = (route.query.redirect as string) ?? '/';
-    //   await router.push(target);
-    // }
-
-    // ElMessage.success({
-    //   message: '注册成功',
-    //   center: true,
-    // });
   } catch (e) {
     console.log(e);
   }
 };
+const register = () => {
+  if (registerData.identity === '' || registerData.username === '' || registerData.password === '' || registerData.verify === '') {
+    ElMessage.error({
+      message: '输入信息不能为空',
+      center: true,
+    });
+  } else if (registerData.password !== registerData.verify) {
+    ElMessage.error({
+      message: '两次输入密码不一致',
+      center: true,
+    });
+  } else {
+    RegisterAPI({
+      email: registerData.identity,
+      username: registerData.username,
+      password: registerData.password,
+    },
+    ).then(() => {
+      ElMessage.success({
+        message: '注册成功',
+        center: true,
+      });
+      ifLogin.value = true;
+    })
+      .catch(() => {
+        console.log('爆炸了');
+      });
+  }
+}
+;
 </script>
 
 <template>
@@ -175,7 +182,7 @@ $inputLen: 400px;
   font: 0.75em sans-serif;
   margin: 0 10px;
   cursor: pointer;
-
+  
   &:hover {
     color: #0b3d52;
   }
@@ -196,7 +203,7 @@ $inputLen: 400px;
 @mixin add-color($color) {
   background-color: $color;
   color: white;
-
+  
   &:hover {
     background-color: Color.tint($color, 20);
   }

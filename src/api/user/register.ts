@@ -2,6 +2,7 @@ import apiCon, {HttpMethod} from '../apiCon';
 
 interface RegisterI {
   username: string,
+  email: string,
   password: string,
 }
 
@@ -14,11 +15,11 @@ interface RegisterO {
   vipType: string;
 }
 
-const register = apiCon<RegisterI, RegisterO>(HttpMethod.Post, '/user/');
+const RegisterAPI = apiCon<RegisterI, RegisterO>(HttpMethod.Post, '/user/');
 
 
 export {
   RegisterI,
   RegisterO,
-  register,
+  RegisterAPI,
 };
