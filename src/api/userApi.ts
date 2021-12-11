@@ -84,7 +84,7 @@ interface CarouselItemO {
   address: string,
   rate: number,
   minPrice: number,
-  headPic: string
+  landscape: string
 }
 
 type CarouselO = CarouselItemO[]

@@ -37,7 +37,7 @@ const showMoreLines = () => {
           </h4>
           <img
             alt="hotelPic"
-            :src="hotel['headPic']"
+            :src="hotel['portrait']"
             style="width: 100%; height: 100%; border-radius: 10px;"
           >
         </div>

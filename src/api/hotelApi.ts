@@ -5,7 +5,7 @@ export * from './hotel/orderDetail';
 
 interface luckyO {
   id: number,
-  pic: string
+  landscape: string
 }
 
 const luckyAPI = apiCon<unknown, luckyO>(HttpMethod.Get, '/hotel/lucky');
@@ -27,7 +27,8 @@ interface hotelListItemO {
   address: string,
   rate: number,
   minPrice: number,
-  headPic: number
+  landscape: string,
+  portrait: string,
 }
 
 type hotelListO = hotelListItemO[]
