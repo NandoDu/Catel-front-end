@@ -4,6 +4,7 @@ export * from './user/login';
 export * from './user/userResidents';
 export * from './user/addResident';
 export * from './user/deleteResident';
+export * from './user/register';
 
 interface RoomInfoI {
   hotelId: number,
@@ -57,25 +58,26 @@ interface GetCommentItemO {
 }
 
 type GetCommentO = GetCommentItemO[];
-const GetCommentAPI=apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
+const GetCommentAPI = apiCon<GetCommentI, GetCommentO>(HttpMethod.Get, 'comment/by-hotel');
 
-interface BookHotelI{
-  userId: number,
-  hotelId: number,
-  resident: number[],
-  roomId: number,
-  checkInDate: string,
-  checkOutDate: string
+interface CarouselI {
+  limit: number,
 }
 
-interface BookHotelO{
-  orderId: number,
+interface CarouselItemO {
+  id: number,
+  name: string,
+  address: string,
+  rate: number,
+  minPrice: number,
+  landscape: string
 }
-const BookHotelAPI = apiCon<BookHotelI, BookHotelO>(HttpMethod.Post, '/order/');
 
+type CarouselO = CarouselItemO[]
+const GetCarouselAPI = apiCon<CarouselI, CarouselO>(HttpMethod.Get, '/hotel/hot');
 export {
   RoomInfoI, RoomInfoItemO, RoomInfoO, RoomInfoAPI,
   HotelInfoI, HotelInfoO, HotelInfoAPI,
   GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
-  BookHotelI, BookHotelO, BookHotelAPI,
+  CarouselI, CarouselItemO, CarouselO, GetCarouselAPI,
 };

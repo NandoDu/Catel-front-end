@@ -1,4 +1,5 @@
 import Login from '../page/Login.vue';
+import Register from '../page/Register.vue';
 import Home from '../page/Home.vue';
 import OrderDetail from '../page/OrderDetail.vue';
 import Info from '../page/HotelInfo.vue';

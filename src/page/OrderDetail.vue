@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
-import {BookHotelAPI, userResidentsAPI} from '../api/userApi';
+import {userResidentsAPI} from '../api/userApi';
+import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
 import {useTypedStore} from '../store';
 import dateFormat from 'dateformat';
@@ -17,24 +18,12 @@ let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
-const book = () => {
-  BookHotelAPI({
-    checkInDate: dateFormat(new Date(startDate.value), 'mm/dd/yyyy'),
-    checkOutDate: dateFormat(new Date(endDate.value), 'mm/dd/yyyy'),
-    hotelId: hotelId.value,
-    resident: [],
-    roomId: roomId.value,
-    userId: id,
-  }).then((result) => {
-    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
-    setTimeout(()=>router.push(`/order-detail/${result}`), 3000);
-  });
-};
+
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
   startDate.value = route.query.start as unknown as string;
   endDate.value = route.query.end as unknown as string;
-  roomId.value = route.query.roomid as unknown as number;
+  roomId.value = route.query.roomId as unknown as number;
   hotelId.value = route.query.hotelId as unknown as number;
 };
 getUrlParams();
@@ -43,9 +32,8 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   return r;
 },
 ), []);
+let selectedResident = ref<string[]>([]);
 let dateValue = ref('');
-let nameValue = ref('');
-let phoneValue = ref('');
 const showPersonInfo = () => {
   let personNames = [{value: false, label: '', id: 0}];
   personNames.pop();
@@ -55,6 +43,29 @@ const showPersonInfo = () => {
     personNames.push(temp);
   }
   return personNames;
+};
+let {state: preview} = useAsyncState(PreviewHotelAPI({
+  userId: id,
+  hotelId: hotelId.value,
+  checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+  checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
+  configId: roomId.value,
+  residents: selectedResident.value,
+}), null);
+const callPrice = () => {
+  PreviewHotelAPI({
+    userId: id,
+    hotelId: hotelId.value,
+    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
+    configId: roomId.value,
+    residents: selectedResident.value,
+  }).then((res) => {
+    preview.value = res;
+  })
+    .catch(() => {
+      console.log('后端报错');
+    });
 };
 let names = computed(showPersonInfo);
 let current = ref(new Date());
@@ -81,6 +92,23 @@ let options = ref([
   },
 ]);
 let pickValue = ref('');
+const book = () => {
+  BookHotelAPI({
+    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
+    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
+    hotelId: hotelId.value,
+    residents: selectedResident.value,
+    configId: roomId.value,
+    userId: id,
+  }).then((result) => {
+    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
+    setTimeout(() => router.push(`/order-detail/${result}`), 3000);
+  })
+    .catch(() => {
+      console.log('后端错误');
+    });
+  
+};
 </script>
 
 <template>
@@ -261,11 +289,14 @@ let pickValue = ref('');
                   class="select_user"
                   style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 300px; overflow-y: auto;scrollbar-width: none; /* firefox */-ms-overflow-style: none; /* IE 10+ */overflow-x: hidden;"
                 >
-                  <ElCheckboxGroup v-model="selectedResident">
+                  <ElCheckboxGroup
+                    v-model="selectedResident"
+                    @change="callPrice"
+                  >
                     <el-checkbox
                       v-for="(personInfo, index) in names"
                       :key="index"
-                      :label="personInfo.label"
+                      :label="`${personInfo.id}`+' '+personInfo.label"
                       :name="`${personInfo.id}`"
                       class="input_info_content"
                       style="border: none;width: 45%"
@@ -297,7 +328,7 @@ let pickValue = ref('');
                   class="price_content"
                   style="margin-left:5px; display: inline-flex;align-items: center;justify-content: center"
                 >
-                  ￥319.00
+                  {{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}
                 </span>
               </div>
             </div>
@@ -349,7 +380,9 @@ let pickValue = ref('');
                         class="final_p"
                         style="padding-left: 4px;font-size: 24px"
                       >
-                        <span style="color: #287dfa;font-weight: 700;">¥ 319</span>
+                        <span
+                          style="color: #287dfa;font-weight: 700;"
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
                       </div>
                     </span>
                   </li>
@@ -366,7 +399,9 @@ let pickValue = ref('');
                         class="price_cell"
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
-                        <span style="color: #0f294d;font-weight: 400;font-size: 14px;">¥ 519</span>
+                        <span
+                          style="color: #0f294d;font-weight: 400;font-size: 14px;"
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
                       </span>
                     </div>
                   </li>

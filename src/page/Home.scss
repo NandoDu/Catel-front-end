@@ -8,6 +8,10 @@
 }
 .recommendArea {
   margin-right: 20px;
+  width: 551px;
+}
+.recommendArea:hover{
+  cursor: pointer;
 }
 .displayArea {
   display: flex;
@@ -85,9 +89,4 @@
   flex-direction: column;
 }
 
-.showAll {
-  margin-top: 80px;
-  display: flex;
-  align-self: center;
-  font-size: 15px;
-}
+

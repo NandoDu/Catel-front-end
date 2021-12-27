@@ -89,13 +89,13 @@ const book = (roomId: number) => {
 <template>
   <div style="display:flex;flex-direction:column;align-items: center;width: 100%;min-width: 1160px">
     <HotelInfo
-      :hotel-name="hotelInfo.name"
-      :description="hotelInfo.description"
-      :hotel-star="hotelInfo.hotelStar"
-      :address="hotelInfo.address"
-      :rate="hotelInfo.rate"
-      :comment-count="commentList.length"
-      :announcement="hotelInfo.announcement"
+      :hotel-name="hotelInfo?.name"
+      :description="hotelInfo?.description"
+      :hotel-star="hotelInfo?.hotelStar"
+      :address="hotelInfo?.address"
+      :rate="hotelInfo?.rate"
+      :comment-count="commentList?.length"
+      :announcement="hotelInfo?.announcement"
     />
     <DatePicker
       @changeBreak="changeBreak"
@@ -122,7 +122,7 @@ const book = (roomId: number) => {
     />
     <CommentTotal
       :count="commentList.length"
-      :rate="hotelInfo.rate"
+      :rate="hotelInfo?.rate"
     />
     <CommentCard
       v-for="item in commentList"
@@ -132,7 +132,7 @@ const book = (roomId: number) => {
       :content="item.content"
       :title="item.title"
       :score="item.score"
-      :hotel-name="hotelInfo.name"
+      :hotel-name="hotelInfo?.name"
       class="commentCard"
     />
     <PriceAnnouncement />
