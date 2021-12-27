@@ -2,6 +2,7 @@
 import {reactive, ref} from 'vue';
 import HotCarousel from '../component/Home/HotCarousel.vue';
 import HotelList from '../component/Home/HotelList.vue';
+import FilterBar from "../component/Util/FilterBar.vue";
 const brands = reactive([
   {'img': 'https://m3.tuniucdn.com/fb2/t1/G6/M00/00/CA/Cii-U12gVTiIAggEAAAlmo1PkUgAAAKEQGqxBcAACWy515.png'},
   {'img': 'https://m2.tuniucdn.com/fb2/t1/G6/M00/00/CA/Cii-TF2gVTqICr8MAAAQXjSoO8sAAAKEAP_50cAABB2471.png'},
@@ -37,6 +38,7 @@ const brands = reactive([
     </div>
   </div>
   <div class="hotelArea">
+    <FilterBar></FilterBar>
     <h3>
       精选酒店
     </h3>

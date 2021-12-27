@@ -375,5 +375,10 @@ const showMoreLines = () => {
   border-radius: 10px;
   margin-left: 0px;
 }
-
+.showAll {
+  margin-top: 80px;
+  display: flex;
+  align-self: center;
+  font-size: 15px;
+}
 </style>
