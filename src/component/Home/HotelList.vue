@@ -20,7 +20,6 @@ const showMoreLines = () => {
   >
     <div
       v-for="(hotel, index) in hotels_list"
-      @click="$router.push(`/hotel/${hotel.id}`)"
       :key="index"
     >
       <div
@@ -38,7 +37,9 @@ const showMoreLines = () => {
           <img
             alt="hotelPic"
             :src="hotel['portrait']"
+            class="hotelItemPic"
             style="width: 100%; height: 100%; border-radius: 10px;"
+            @click="$router.push(`/hotel/${hotel.id}`)"
           >
         </div>
       </div>
@@ -139,13 +140,13 @@ const showMoreLines = () => {
   margin-left: 20px;
 }
 
-.hotelItem:hover {
-  cursor: pointer;
-}
+//.hotelItem:hover {
+//  cursor: pointer;
+//}
 
-.hotelItemHead:hover {
-  cursor: pointer;
-}
+//.hotelItemHead:hover {
+//  cursor: pointer;
+//}
 
 .hotelItemHead {
   height: 350px;
@@ -158,5 +159,8 @@ const showMoreLines = () => {
   display: flex;
   align-self: center;
   font-size: 15px;
+}
+.hotelItemPic:hover {
+  cursor: pointer;
 }
 </style>

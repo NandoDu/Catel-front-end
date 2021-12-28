@@ -18,6 +18,10 @@ let rateRangeList = reactive([
 ])
 let current = ref(new Date());
 let value = ref('');
+let rate = ref(3);
+let rateValue = ref('');
+let starList = ref([]);
+let labelList = ref([['200元以下', 'price'], ['0分以上', 'rate'], ['一星级', 'star']])
 const filterPriceLower = ref(0);
 const filterPriceUpper = ref(200);
 const filterRate = ref(4);
@@ -107,6 +111,7 @@ const setPriceDiyHigh = (event: events) => {
   console.log(parseInt(priceDiyHigh.value))
 }
 const resetPriceDiyHigh = (event: events) => {
+  currentPriceIndex.value = -1;
   if(parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value
     console.log("priceDiyLow > priceDiyHigh")
@@ -119,6 +124,7 @@ const resetPriceDiyHigh = (event: events) => {
   console.log("priceDiyHigh: " + priceDiyHigh.value)
 }
 const resetPriceDiyLow = (event: events) => {
+  currentPriceIndex.value = -1;
   if(parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value
     console.log("priceDiyLow > priceDiyHigh")
@@ -203,12 +209,44 @@ const resetLocation = () => {
       </div>
       <div class="separateLine" style="left: 900px"></div>
       <div class="moreOptionArea">
-        <div class="moreOptionIcon">
-          <img src="src/asset/shaixuan.png" style="width: 15px">
-        </div>
-        <div class="moreOptionTitle">
-          更多筛选
-        </div>
+        <el-popover
+            placement="bottom"
+            trigger="click"
+            :width="200"
+        >
+          <template #reference>
+            <div style="display: flex; flex-direction: row">
+              <div class="moreOptionIcon">
+                <img src="src/asset/shaixuan.png" style="width: 15px">
+              </div>
+              <div class="moreOptionTitle">
+                更多筛选
+              </div>
+            </div>
+          </template>
+          <div class="rateRangeSelectArea">
+            <div class="rateRangeSelectTitle">
+              最低评分:
+            </div>
+            <div class="rateRangeSelectStar">
+              <el-rate v-model="rateValue" allow-half show-score score-template="{value} 分"/>
+            </div>
+          </div>
+          <div class="starRangeSelectArea">
+            <div class="starRangeSelectTitle">
+              酒店星级:
+            </div>
+            <div class="starRangeSelectCheckBox">
+              <el-checkbox-group v-model="starList" class="starCheckBoxList" :style="{'--fill-color': '#ffffff'}">
+                <el-checkbox label="一星级" class="starCheckBox"/>
+                <el-checkbox label="两星级" class="starCheckBox"/>
+                <el-checkbox label="三星级" class="starCheckBox"/>
+                <el-checkbox label="四星级" class="starCheckBox"/>
+                <el-checkbox label="五星级" class="starCheckBox"/>
+              </el-checkbox-group>
+            </div>
+          </div>
+        </el-popover>
       </div>
     </div>
     <div class="FilterSearch">
@@ -217,51 +255,15 @@ const resetLocation = () => {
       </div>
     </div>
   </div>
-  <div class="Bar">
-    <div class="priceSelectArea">
-      <div class="priceSelectAreaTitle">
-        评分区间:
-      </div>
-      <div class="priceRangeSelectArea">
-        <div v-for="(priceRange, index) in priceRangeList" @click="priceRangeClick(index)" :class="{active: index ===  currentPriceIndex}">
-          <div class="priceRange">
-            {{priceRange}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="priceSelectArea">
-      <div class="priceSelectAreaTitle">
-        评分区间:
-      </div>
-      <div class="priceRangeSelectArea">
-        <div v-for="(rateRange, index) in rateRangeList" @click="rateRangeClick(index)" :class="{active: index ===  currentRateIndex}">
-          <div class="priceRange">
-            {{rateRange}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="dateSelectArea">
-      <div class="priceSelectAreaTitle">
-        时间区间:
-      </div>
-      <div class="dateSelectPicker">
-        <el-date-picker
-            size="mini"
-            style="border-radius: 10px;"
-            v-model="value"
-            type="daterange"
-            unlink-panels
-            range-separator="至"
-            :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
-            :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
-            format="YYYY年MM月DD日"
-            :disabled-date="disabledDate"
-        />
-      </div>
-    </div>
-  </div>
+<!--  <div class="filterLabel">-->
+<!--    <div v-for="label in labelList">-->
+<!--      <div class="labelItem">-->
+<!--        <div class="labelTitle">-->
+<!--          {{label[0]}}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <style lang="scss" scoped>
@@ -321,6 +323,9 @@ const resetLocation = () => {
   margin-left: 10px;
   background-color: rgb(81, 179, 109);
   color: white;
+}
+.FilterSearch:hover {
+  cursor: pointer;
 }
 .searchTitle {
   font-size: 17px;
@@ -455,5 +460,65 @@ const resetLocation = () => {
   border-left: 0px;
   border-right: 0px;
   outline: none;
+}
+.checkBox {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border: black 1px solid;
+  margin-right: 10px;
+}
+.checkBoxActive {
+  background-color: #13ce66;
+}
+.rateCheck {
+  display: flex;
+  flex-display: row;
+  align-content: center;
+  align-items: center;
+}
+.rateCheck:hover {
+  cursor: pointer;
+}
+.rateRange {
+
+}
+.rateRangeSelectArea {
+  display: flex;
+  flex-direction: column;
+}
+.rateRangeSelectStar {
+  margin-top: 5px;
+}
+.starRangeSelectArea {
+  margin-top: 10px;
+}
+.starCheckBox {
+  margin-bottom: -15px;
+}
+.starCheckBoxList {
+  display: flex;
+  flex-direction: column;
+}
+.filterLabel {
+  width: 1000px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-left: -10px;
+  margin-top: 10px;
+}
+.labelItem {
+  width: fit-content;
+  height: 25px;
+  background-color: #cccccc;
+  margin-left: 10px;
+  line-height: 25px;
+}
+.labelTitle {
+  color: #69717c;
+  font-size: 12px;
+  margin-left: 3px;
+  margin-right: 8px;
 }
 </style>
