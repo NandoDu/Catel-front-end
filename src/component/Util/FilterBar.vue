@@ -232,6 +232,7 @@ const resetLocation = () => {
               <el-rate v-model="rateValue" allow-half show-score score-template="{value} 分"/>
             </div>
           </div>
+          <div class="horizontalLine"></div>
           <div class="starRangeSelectArea">
             <div class="starRangeSelectTitle">
               酒店星级:
@@ -520,5 +521,12 @@ const resetLocation = () => {
   font-size: 12px;
   margin-left: 3px;
   margin-right: 8px;
+}
+.horizontalLine {
+  width: 200px;
+  height: 1px;
+  margin-top: 10px;
+  opacity: .3;
+  background-color: #cccccc;
 }
 </style>
