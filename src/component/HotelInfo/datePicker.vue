@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-
+defineProps<{ userMaxRoomNum: number, userMaxPeoplePerRoom: number }>();
 const emit = defineEmits(['startSearch', 'changeBreak']);
 let value = ref('');
 let peopleNum = ref(1);
@@ -63,6 +63,7 @@ const startSearch = () => {
             <el-input-number
               v-model="roomNum"
               :min="1"
+              :max="userMaxRoomNum"
               size="small"
               style="margin-top: 9px"
             />
@@ -72,6 +73,7 @@ const startSearch = () => {
             <el-input-number
               v-model="peopleNum"
               :min="1"
+              :max="userMaxPeoplePerRoom"
               size="small"
               style="margin-top: 9px"
             />

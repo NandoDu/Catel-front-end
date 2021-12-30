@@ -18,62 +18,78 @@ let roomInfoList: Ref<RoomInfoO> = ref([]);
 let commentList: Ref<GetCommentO> = ref([]);
 let hotelInfo = ref() as Ref<HotelInfoO>;
 let displayRoomList: Ref<RoomInfoO> = ref([]);
+let selectedRoomList: Ref<RoomInfoO> = ref([]);
 let selectedTime = ref<Date[]>([]);
 let roomNum = ref(1);
 let hotelId = route.params.id;
+let userMaxRoomNum = ref(0);
+let userMaxPeoplePerRoom = ref(0);
+const checkMaxNum = () => {
+  let roomMax = 0;
+  let peopleMax = 0;
+  for (let room of roomInfoList.value) {
+    if (room.total > roomMax)
+      roomMax = room.total;
+    if (room.peopleMax > peopleMax)
+      peopleMax = room.peopleMax;
+  }
+  userMaxPeoplePerRoom.value = peopleMax;
+  userMaxRoomNum.value = roomMax;
+};
 const current = ref(new Date());
 store.dispatch('room/roomInfo', {id: hotelId}).then(() => {
   roomInfoList.value = store.getters['room/roomInfo'];
   displayRoomList.value = roomInfoList.value;
+  selectedRoomList.value = roomInfoList.value;
+  checkMaxNum();
 });
 store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
   hotelInfo.value = store.getters['hotel/hotelInfo'];
-  console.log(hotelInfo.value);
 });
 store.dispatch('hotel/getComment', {id: hotelId}).then(() => {
   commentList.value = store.getters['hotel/commentList'];
-  console.log(commentList.value);
 });
-const changeBreak = (param: number) => {
-  console.log('改变早餐状态已接收，值为：' + param);
+const changeBreakfast = (param: number) => {
   if (param === 0) {
-    console.log(roomInfoList.value);
-    console.log('开始筛选没有早餐的房间');
     displayRoomList.value = [];
-    for (let room of roomInfoList.value) {
+    for (let room of selectedRoomList.value) {
       if (!room.breakfast)
         displayRoomList.value.push(room);
     }
-    console.log(displayRoomList.value);
   } else if (param === 1) {
     displayRoomList.value = [];
-    for (let room of roomInfoList.value) {
+    for (let room of selectedRoomList.value) {
       if (room.breakfast)
         displayRoomList.value.push(room);
     }
   } else {
-    displayRoomList.value = roomInfoList.value;
+    displayRoomList.value = selectedRoomList.value;
   }
 };
 const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast: number) => {
-  changeBreak(breakfast);
-  const temp = displayRoomList.value;
+  const temp = roomInfoList.value;
   if (time !== '') {
     selectedTime.value = time;
   }
   roomNum.value = roomNumber;
-  displayRoomList.value = [];
+  selectedRoomList.value = [];
   for (let room of temp) {
     if (room.peopleMax >= peopleNum && room.total >= roomNumber)
-      displayRoomList.value.push(room);
+      selectedRoomList.value.push(room);
   }
+  changeBreakfast(breakfast);
 };
 const book = (roomId: number) => {
   console.log(roomId);
   if (selectedTime.value.length !== 0)
     router.push({
       path: '/order',
-      query: {roomId: roomId, start: selectedTime.value[0].getTime(), end: selectedTime.value[1].getTime(), num: roomNum.value},
+      query: {
+        roomId: roomId,
+        start: selectedTime.value[0].getTime(),
+        end: selectedTime.value[1].getTime(),
+        num: roomNum.value,
+      },
     });
   else {
     let time = current.value.getTime();
@@ -97,8 +113,10 @@ const book = (roomId: number) => {
       :announcement="hotelInfo?.announcement"
     />
     <DatePicker
-      @changeBreak="changeBreak"
+      @changeBreak="changeBreakfast"
       @startSearch="startSearch"
+      :user-max-people-per-room="userMaxPeoplePerRoom"
+      :user-max-room-num="userMaxRoomNum"
     />
     <el-empty
       description="没有符合您要求的房型哦！"
