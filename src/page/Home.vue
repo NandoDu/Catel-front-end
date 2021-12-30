@@ -2,6 +2,7 @@
 import {reactive} from 'vue';
 import HotCarousel from '../component/Home/HotCarousel.vue';
 import HotelList from '../component/Home/HotelList.vue';
+import FilterBar from "../component/Util/FilterBar.vue";
 import {useAsyncState} from '@vueuse/core';
 import {luckyAPI} from '../api/hotelApi';
 import router from '../router';
@@ -49,6 +50,7 @@ const brands = reactive([
     </div>
   </div>
   <div class="hotelArea">
+    <FilterBar></FilterBar>
     <h3>
       精选酒店
     </h3>
