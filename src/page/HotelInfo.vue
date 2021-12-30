@@ -36,38 +36,37 @@ store.dispatch('hotel/getComment', {id: hotelId}).then(() => {
 });
 const changeBreak = (param: number) => {
   console.log('改变早餐状态已接收，值为：' + param);
-  let temp = displayRoomList.value;
   if (param === 0) {
     console.log(roomInfoList.value);
     console.log('开始筛选没有早餐的房间');
     displayRoomList.value = [];
-    for (let room of temp) {
+    for (let room of roomInfoList.value) {
       if (!room.breakfast)
         displayRoomList.value.push(room);
     }
     console.log(displayRoomList.value);
   } else if (param === 1) {
     displayRoomList.value = [];
-    for (let room of temp) {
+    for (let room of roomInfoList.value) {
       if (room.breakfast)
         displayRoomList.value.push(room);
     }
-    // displayRoomList.value.filter(x => x.breakfast);
   } else {
-    displayRoomList.value = temp;
+    displayRoomList.value = roomInfoList.value;
   }
 };
 const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast: number) => {
+  changeBreak(breakfast);
+  const temp = displayRoomList.value;
   if (time !== '') {
     selectedTime.value = time;
   }
   roomNum.value = roomNumber;
   displayRoomList.value = [];
-  for (let room of roomInfoList.value) {
+  for (let room of temp) {
     if (room.peopleMax >= peopleNum && room.total >= roomNumber)
       displayRoomList.value.push(room);
   }
-  changeBreak(breakfast);
 };
 const book = (roomId: number) => {
   console.log(roomId);

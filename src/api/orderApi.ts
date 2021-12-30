@@ -30,8 +30,35 @@ interface CreditRecord {
 type OrdersOfUserO = OrderItemInfo[];
 const ordersOfUserAPI = apiCon<OrdersOfUserI, OrdersOfUserO>(HttpMethod.Get, '/order/by-user');
 
+interface BookHotelI {
+  userId: number,
+  hotelId: number,
+  checkInDate: string,
+  checkOutDate: string,
+  couponChosen?: number[],
+  configId: number,
+  residents: string[]
+}
+
+interface CouponListItemO {
+  id: number,
+  name: string,
+}
+
+interface BookInfoO {
+  totalPrice: number,
+  availableCoupon: CouponListItemO[]
+}
+
+interface BookHotelO {
+  orderId: number,
+}
+
+const PreviewHotelAPI = apiCon<BookHotelI, BookInfoO>(HttpMethod.Post, '/order/preview');
+const BookHotelAPI = apiCon<BookHotelI, BookHotelO>(HttpMethod.Post, '/order/');
 export {
   OrdersOfUserI, OrderItemInfo, CreditRecord, OrdersOfUserO, ordersOfUserAPI,
+  BookHotelI, BookInfoO, CouponListItemO, BookHotelO, PreviewHotelAPI, BookHotelAPI,
 };
 
   
