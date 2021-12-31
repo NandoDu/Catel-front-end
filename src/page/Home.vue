@@ -2,7 +2,7 @@
 import {reactive} from 'vue';
 import HotCarousel from '../component/Home/HotCarousel.vue';
 import HotelList from '../component/Home/HotelList.vue';
-import FilterBar from "../component/Util/FilterBar.vue";
+import FilterBar from '../component/Util/FilterBar.vue';
 import {useAsyncState} from '@vueuse/core';
 import {luckyAPI} from '../api/hotelApi';
 import router from '../router';
@@ -29,7 +29,6 @@ const brands = reactive([
   <div class="displayArea">
     <div
       class="recommendArea"
-      @click="lucky"
     >
       <h3 class="recommendTxt">
         手气不错
@@ -38,6 +37,7 @@ const brands = reactive([
         alt="luckyPic"
         :src="luckyInfo?.landscape"
         class="recommendPng"
+        @click="lucky"
       >
     </div>
     <div>

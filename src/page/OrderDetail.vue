@@ -14,8 +14,6 @@ let router = useRouter();
 let route = useRoute();
 let hotelId = ref(0);
 let roomId = ref(0);
-let startDate = ref<Date>();
-let endDate = ref<Date>();
 let maxRoomNum = ref(0);
 
 const formatDate = (date: Date) => dateFormat(date, 'mm/dd/yyyy');
