@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, computed} from 'vue';
+import {ref, computed, reactive, watch} from 'vue';
 import {userResidentsAPI} from '../api/userApi';
 import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
@@ -8,32 +8,44 @@ import dateFormat from 'dateformat';
 import {useRoute, useRouter} from 'vue-router';
 import {ElMessage} from 'element-plus';
 
-
 const store = useTypedStore();
 const id = store.getters['user/userId'];
 let router = useRouter();
 let route = useRoute();
 let hotelId = ref(0);
 let roomId = ref(0);
-let startDate = ref('');
-let endDate = ref('');
+let startDate = ref<Date>();
+let endDate = ref<Date>();
 let maxRoomNum = ref(0);
+
+const formatDate = (date: Date) => dateFormat(date, 'mm/dd/yyyy');
+
+let orderArgs = reactive({
+  residents: [],
+  startDate: new Date(+(route.query.start as string)),
+  endDate: new Date(+(route.query.end as string)),
+});
 
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
-  startDate.value = route.query.start as unknown as string;
-  endDate.value = route.query.end as unknown as string;
   roomId.value = route.query.roomId as unknown as number;
   hotelId.value = route.query.hotelId as unknown as number;
 };
+
 getUrlParams();
 const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   console.log(r);
   return r;
-},
-), []);
+}), []);
 let selectedResident = ref<string[]>([]);
-let dateValue = ref('');
+
+let dataRange = ref<Date[]>([]);
+
+watch(dataRange, () => {
+  orderArgs.startDate = dataRange.value[0];
+  orderArgs.endDate = dataRange.value[1];
+});
+
 const showPersonInfo = () => {
   let personNames = [{value: false, label: '', id: 0}];
   personNames.pop();
@@ -44,71 +56,43 @@ const showPersonInfo = () => {
   }
   return personNames;
 };
-let {state: preview} = useAsyncState(PreviewHotelAPI({
-  userId: id,
-  hotelId: hotelId.value,
-  checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
-  checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
-  configId: roomId.value,
-  residents: selectedResident.value,
-}), null);
-const callPrice = () => {
-  PreviewHotelAPI({
-    userId: id,
-    hotelId: hotelId.value,
-    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
-    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
-    configId: roomId.value,
-    residents: selectedResident.value,
-  }).then((res) => {
-    preview.value = res;
-  })
-    .catch(() => {
-      console.log('后端报错');
-    });
-};
 let names = computed(showPersonInfo);
-let current = ref(new Date());
-let options = ref([
-  {
-    value: '1',
-    label: '1',
-  },
-  {
-    value: '2',
-    label: '2',
-  },
-  {
-    value: '3',
-    label: '3',
-  },
-  {
-    value: '4',
-    label: '4',
-  },
-  {
-    value: '5',
-    label: '5',
-  },
-]);
-let pickValue = ref('');
-const book = () => {
-  BookHotelAPI({
-    checkInDate: dateFormat(new Date(parseInt(startDate.value)), 'mm/dd/yyyy'),
-    checkOutDate: dateFormat(new Date(parseInt(endDate.value)), 'mm/dd/yyyy'),
-    hotelId: hotelId.value,
-    residents: selectedResident.value,
-    configId: roomId.value,
+const getArgs = () => {
+  return {
     userId: id,
-  }).then((result) => {
+    hotelId: hotelId.value,
+    checkInDate: formatDate(orderArgs.startDate),
+    checkOutDate: formatDate(orderArgs.endDate),
+    configId: roomId.value,
+    residents: selectedResident.value,
+  };
+};
+
+let {state: preview} = useAsyncState(PreviewHotelAPI(getArgs()), null);
+
+const callPrice = async () => {
+  try {
+    const r = await PreviewHotelAPI(getArgs());
+    console.log(r);
+    preview.value = r;
+  } catch (e) {
+    console.log('后端报错');
+  }
+};
+
+let options = new Array(5).fill(0).map((_, i) => ({value: i + 1, label: i + 1}));
+let roomNumber = ref('');
+
+const book = async () => {
+  try {
+    const result = await BookHotelAPI(getArgs());
     ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
     setTimeout(() => router.push(`/order-detail/${result}`), 3000);
-  })
-    .catch(() => {
-      console.log('后端错误');
-    });
-  
+  } catch (_) {
+    console.log('后端错误');
+  }
 };
+
 </script>
 
 <template>
@@ -233,12 +217,12 @@ const book = () => {
               <el-date-picker
                 size="large"
                 style="border-radius: 10px;"
-                v-model="dateValue"
+                v-model="dataRange"
                 type="daterange"
                 unlink-panels
                 range-separator="至"
-                :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
-                :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
+                :start-placeholder="dateFormat(orderArgs.startDate, 'yyyy年mm月dd日')"
+                :end-placeholder="dateFormat(orderArgs.endDate, 'yyyy年mm月dd日')"
                 format="YYYY年MM月DD日"
               />
               <div
@@ -256,7 +240,7 @@ const book = () => {
                   style="display: inline-block;"
                 >
                   <el-select
-                    v-model="pickValue"
+                    v-model="roomNumber"
                     placeholder="请选择房间数"
                     size="medium"
                   >
@@ -296,11 +280,12 @@ const book = () => {
                     <el-checkbox
                       v-for="(personInfo, index) in names"
                       :key="index"
-                      :label="`${personInfo.id}`+' '+personInfo.label"
-                      :name="`${personInfo.id}`"
+                      :label="personInfo.id"
                       class="input_info_content"
-                      style="border: none;width: 45%"
-                    />
+                      style="border: none;"
+                    >
+                      {{ personInfo.label }}
+                    </el-checkbox>
                   </ElCheckboxGroup>
                 </div>
               </div>
@@ -328,7 +313,7 @@ const book = () => {
                   class="price_content"
                   style="margin-left:5px; display: inline-flex;align-items: center;justify-content: center"
                 >
-                  {{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}
+                  {{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}
                 </span>
               </div>
             </div>
@@ -382,7 +367,7 @@ const book = () => {
                       >
                         <span
                           style="color: #287dfa;font-weight: 700;"
-                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}</span>
                       </div>
                     </span>
                   </li>
@@ -401,7 +386,7 @@ const book = () => {
                       >
                         <span
                           style="color: #0f294d;font-weight: 400;font-size: 14px;"
-                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview.totalPrice }}</span>
+                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}</span>
                       </span>
                     </div>
                   </li>
@@ -464,4 +449,4 @@ const book = () => {
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped/>
+<style src="./OrderDetail.scss" lang="scss" scoped />
