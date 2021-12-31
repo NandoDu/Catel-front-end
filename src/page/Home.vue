@@ -29,7 +29,6 @@ const brands = reactive([
   <div class="displayArea">
     <div
       class="recommendArea"
-      @click="lucky"
     >
       <h3 class="recommendTxt">
         手气不错
@@ -38,6 +37,7 @@ const brands = reactive([
         alt="luckyPic"
         :src="luckyInfo?.landscape"
         class="recommendPng"
+        @click="lucky"
       >
     </div>
     <div>

@@ -48,8 +48,26 @@ interface roomInfoO {
 }
 
 const GetRoomInfoAPI = apiCon<roomInfoI, roomInfoO>(HttpMethod.Get, '/room/');
+
+interface briefRoomInfoI {
+  id: number;
+}
+
+interface briefRoomInfoO {
+  id: number;
+  name: string;
+  address: string;
+  rate: number;
+  minPrice: number;
+  landscape: string;
+  portrait: string;
+  hotelStar: 5;
+}
+
+const BriefHotelInfoAPI = apiCon<briefRoomInfoI, briefRoomInfoO>(HttpMethod.Get, '/hotel/brief');
 export {
   luckyO, luckyAPI,
   hotelListI, hotelListO, hotelListItemO, GetHotelListAPI,
   roomInfoI, roomInfoO, GetRoomInfoAPI,
+  briefRoomInfoI, briefRoomInfoO, BriefHotelInfoAPI,
 };

@@ -89,6 +89,7 @@ const book = (roomId: number) => {
         start: selectedTime.value[0].getTime(),
         end: selectedTime.value[1].getTime(),
         num: roomNum.value,
+        hotelId: hotelId,
       },
     });
   else {

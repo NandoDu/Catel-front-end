@@ -7,7 +7,6 @@ import {useTypedStore} from '../../store';
 import {computed, ref} from 'vue';
 import VirryModal from '../Util/VirryModal.vue';
 import LoginCard from '../LoginCard.vue';
-import RegisterCard from '../RegisterCard.vue';
 import {ElMessage} from 'element-plus';
 import LocaleSelect from '../Util/LocaleSelect.vue';
 import useTranslation from '../../config/i18n/useTranslation';
@@ -49,7 +48,7 @@ let ifRegister = ref(false);
       >
       <span class="logo-name">Catel</span>
     </div>
-    <LocaleSelect />
+    <LocaleSelect v-if="false" />
     <FlexSpace />
     <nav>
       <MenuLink
