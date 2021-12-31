@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ count: number, rate: number }>();
+defineProps<{ count: number, rate: number, rateDist: number[] }>();
 </script>
 <template>
   <div class="main-container">
@@ -37,7 +37,7 @@ defineProps<{ count: number, rate: number }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="10"
+              :percentage="rateDist[0] *100"
             />
           </div>
           <div class="percentage-list">
@@ -50,7 +50,7 @@ defineProps<{ count: number, rate: number }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="30"
+              :percentage="rateDist[1] *100"
             />
           </div>
           <div class="percentage-list">
@@ -63,7 +63,7 @@ defineProps<{ count: number, rate: number }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="30"
+              :percentage="rateDist[2] *100"
             />
           </div>
           <div class="percentage-list">
@@ -76,7 +76,7 @@ defineProps<{ count: number, rate: number }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="15"
+              :percentage="rateDist[3] *100"
             />
           </div>
           <div class="percentage-list">
@@ -89,7 +89,7 @@ defineProps<{ count: number, rate: number }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="5"
+              :percentage="rateDist[4] *100"
             />
           </div>
         </div>
@@ -154,32 +154,37 @@ defineProps<{ count: number, rate: number }>();
   float: left;
   margin-left: 35px;
 }
-.rate-word{
+
+.rate-word {
   font-size: 22px;
   color: #366ab3;
   font-weight: 700;
   line-height: 33px;
 }
-.rate-score{
+
+.rate-score {
   display: flex;
   flex-direction: row;
-
+  
 }
-.current-score{
+
+.current-score {
   font-size: 48px;
   color: #366ab3;
   line-height: 55px;
   padding-right: 7px;
-  font-family: BlinkMacSystemFont,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 }
-.full-score{
+
+.full-score {
   font-size: 32px;
   color: #acb4bf;
   line-height: 55px;
   text-align: left;
-  font-family: BlinkMacSystemFont,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif;
 }
-.percentage-content{
+
+.percentage-content {
   width: 500px;
   height: 150px;
   margin-top: -16px;
@@ -188,7 +193,8 @@ defineProps<{ count: number, rate: number }>();
   display: flex;
   flex-direction: column;
 }
-.percentage-list{
+
+.percentage-list {
   width: 500px;
   margin-bottom: 5px;
   display: block;

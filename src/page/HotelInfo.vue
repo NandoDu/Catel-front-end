@@ -37,14 +37,12 @@ const checkMaxNum = () => {
   userMaxRoomNum.value = roomMax;
 };
 const current = ref(new Date());
-store.dispatch('room/roomInfo', {id: hotelId}).then(() => {
-  roomInfoList.value = store.getters['room/roomInfo'];
+store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
+  hotelInfo.value = store.getters['hotel/hotelInfo'];
+  roomInfoList.value = hotelInfo.value.rooms;
   displayRoomList.value = roomInfoList.value;
   selectedRoomList.value = roomInfoList.value;
   checkMaxNum();
-});
-store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
-  hotelInfo.value = store.getters['hotel/hotelInfo'];
 });
 store.dispatch('hotel/getComment', {id: hotelId}).then(() => {
   commentList.value = store.getters['hotel/commentList'];
@@ -141,6 +139,7 @@ const book = (roomId: number) => {
     <CommentTotal
       :count="commentList.length"
       :rate="hotelInfo?.rate"
+      :rate-dist="hotelInfo?.rateDist"
     />
     <CommentCard
       v-for="item in commentList"

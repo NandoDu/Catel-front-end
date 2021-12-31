@@ -1,7 +1,6 @@
 import { Module } from 'vuex';
-import { RoomInfoAPI, RoomInfoO} from '../api/userApi';
-import actCon from './actCon';
-import {GetRoomInfoAPI} from '../api/hotelApi';
+import {RoomInfoO} from '../api/userApi';
+
 
 interface RoomState {
   roomInfoList: RoomInfoO
@@ -10,15 +9,13 @@ interface RoomState {
 const room: Module<RoomState, unknown> = {
   namespaced: true,
   mutations: {
-    afterRoomInfo: (state, roomInfoList: RoomInfoO) =>{
-      state.roomInfoList = roomInfoList;
-    },
+
   },
   actions: {
-    roomInfo: actCon(RoomInfoAPI, 'afterRoomInfo'),
+
   },
   getters: {
-    roomInfo: state => state.roomInfoList,
+
   },
 };
 
