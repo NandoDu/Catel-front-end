@@ -33,7 +33,23 @@ interface hotelListItemO {
 
 type hotelListO = hotelListItemO[]
 const GetHotelListAPI = apiCon<hotelListI, hotelListO>(HttpMethod.Get, '/hotel/');
+
+interface roomInfoI {
+  id: number;
+}
+
+interface roomInfoO {
+  id: number;
+  roomType: string;
+  price: number;
+  total: number;
+  breakfast: boolean;
+  peopleMax: number;
+}
+
+const GetRoomInfoAPI = apiCon<roomInfoI, roomInfoO>(HttpMethod.Get, '/room/');
 export {
   luckyO, luckyAPI,
   hotelListI, hotelListO, hotelListItemO, GetHotelListAPI,
+  roomInfoI, roomInfoO, GetRoomInfoAPI,
 };

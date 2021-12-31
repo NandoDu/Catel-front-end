@@ -1,6 +1,7 @@
 import { Module } from 'vuex';
 import { RoomInfoAPI, RoomInfoO} from '../api/userApi';
 import actCon from './actCon';
+import {GetRoomInfoAPI} from '../api/hotelApi';
 
 interface RoomState {
   roomInfoList: RoomInfoO

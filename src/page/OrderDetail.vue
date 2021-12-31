@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import {ref, computed} from 'vue';
-import {userResidentsAPI} from '../api/userApi';
+import {ref, computed, Ref} from 'vue';
+import {HotelInfoO, userResidentsAPI} from '../api/userApi';
 import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
 import {useTypedStore} from '../store';
 import dateFormat from 'dateformat';
 import {useRoute, useRouter} from 'vue-router';
 import {ElMessage} from 'element-plus';
+import {GetRoomInfoAPI} from '../api/hotelApi';
 
 
 const store = useTypedStore();
@@ -18,7 +19,9 @@ let roomId = ref(0);
 let startDate = ref('');
 let endDate = ref('');
 let maxRoomNum = ref(0);
-
+let hotelInfo = ref() as Ref<HotelInfoO>;
+const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
+const roomTypeMap = {'BigBed': '大床房', 'DoubleBed': '双床房', 'Family': '家庭房'};
 const getUrlParams = () => {
   maxRoomNum.value = route.query.num as unknown as number;
   startDate.value = route.query.start as unknown as string;
@@ -27,6 +30,13 @@ const getUrlParams = () => {
   hotelId.value = route.query.hotelId as unknown as number;
 };
 getUrlParams();
+store.dispatch('hotel/getHotelInfo', {id: hotelId.value}).then(() => {
+  hotelInfo.value = store.getters['hotel/hotelInfo'];
+});
+const {state: singleRoomInfo} = useAsyncState(GetRoomInfoAPI({id: roomId.value}).then(r => {
+  console.log(r);
+},
+), null);
 const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
   console.log(r);
   return r;
@@ -119,11 +129,11 @@ const book = () => {
           <div class="room_info">
             <div class="hotel_name">
               <div class="hotel_name_content">
-                上海陆家嘴丽呈酒店
+                {{ hotelInfo?.name }}
               </div>
               <div
                 class="star"
-                v-for="i in 4"
+                v-for="i in Array(hotelStarMap[hotelInfo.hotelStar])"
                 :key="i"
               >
                 <i class="el-icon-star-on" />
@@ -134,11 +144,11 @@ const book = () => {
                 <i class="el-icon-location" />
               </div>
               <div style="color:#0f294d;font-size: 14px;font-weight: 400;letter-spacing: 0">
-                中国，上海，浦东新区，南洋泾路568号
+                {{ hotelInfo?.address }}
               </div>
             </div>
             <div class="room_name">
-              特惠双床房
+              {{ roomTypeMap[singleRoomInfo.roomType] }}
             </div>
             <div
               class="facility"
@@ -150,7 +160,7 @@ const book = () => {
                     <i class="el-icon-s-home" />
                   </div>
                   <div class="text">
-                    <span>2人</span>
+                    <span>{{ singleRoomInfo.peopleMax }}</span>
                   </div>
                 </div>
                 <div class="facility_item">
@@ -158,7 +168,7 @@ const book = () => {
                     <i class="el-icon-s-order" />
                   </div>
                   <div class="text">
-                    <span>2张单人床</span>
+                    <span>目前剩余{{ singleRoomInfo.total }}间</span>
                   </div>
                 </div>
                 <div class="facility_item">
@@ -166,7 +176,7 @@ const book = () => {
                     <i class="el-icon-dish-1" />
                   </div>
                   <div class="text">
-                    <span>无早餐</span>
+                    <span>{{ singleRoomInfo.breakfast ? '有': '无' }}早餐</span>
                   </div>
                 </div>
               </div>
