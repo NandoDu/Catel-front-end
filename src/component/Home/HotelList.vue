@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import {useAsyncState} from '@vueuse/core';
-import {GetHotelListAPI} from '../../api/hotelApi';
+import {hotelListItemO} from '../../api/hotelApi';
 
-let {state: hotels_list} = useAsyncState(GetHotelListAPI({}), []);
+defineProps<{hotelsList: hotelListItemO[]}>();
 const showLines = ref(2);
 const showMoreLines = () => {
   showLines.value = showLines.value + 2;
@@ -12,14 +11,14 @@ const showMoreLines = () => {
 
 <template>
   <div
-    v-for="(hotelLine, lineNum) in hotels_list.length / 5"
+    v-for="(hotelLine, lineNum) in hotelsList.length / 5"
     :key="lineNum"
     class="hotelList"
     :class="{'firstLine': lineNum === 0}"
     v-show="lineNum < showLines"
   >
     <div
-      v-for="(hotel, index) in hotels_list"
+      v-for="(hotel, index) in hotelsList"
       :key="index"
     >
       <div
@@ -49,7 +48,7 @@ const showMoreLines = () => {
   <div
     class="showMore"
     @click="showMoreLines"
-    v-show="showLines < hotels_list.length / 5"
+    v-show="showLines < hotelsList.length / 5"
   >
     <div class="showMoreIcon">
       <img
@@ -69,7 +68,7 @@ const showMoreLines = () => {
   </div>
   <div
     class="showAll"
-    v-show="showLines >= hotels_list.length / 5"
+    v-show="showLines >= hotelsList.length / 5"
   >
     已经到底啦～
   </div>

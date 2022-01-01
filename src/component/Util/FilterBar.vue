@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {reactive, ref} from 'vue';
 import * as events from 'events';
+import dateFormat from 'dateformat';
 
 let priceRangeList = reactive([
   '200元以下',
@@ -10,24 +11,17 @@ let priceRangeList = reactive([
   '1000-2000元',
   '2000元以上',
 ]);
-let rateRangeList = reactive([
-  '0分以上',
-  '1分以上',
-  '2分以上',
-  '3分以上',
-  '4分以上',
-]);
 let current = ref(new Date());
 let value = ref('');
 let rateValue = ref('');
 let starList = ref([]);
 const filterPriceLower = ref(0);
-const filterPriceUpper = ref(200);
-const filterRate = ref(4);
+const filterPriceUpper = ref(999999);
+const filterRate = ref(6);
 const currentPriceIndex = ref(-1);
-const currentRateIndex = ref(4);
 const filterLocation = ref('酒店地址');
 const showFilterPrice = ref('预期价格');
+const emit = defineEmits(['screen']);
 const disabledDate = (select: Date) => {
   let now = new Date().getTime();
   return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
@@ -71,29 +65,29 @@ const priceRangeClick = (index: number) => {
   console.log('filterPriceLower: ' + filterPriceLower.value);
   console.log('filterPriceUpper: ' + filterPriceUpper.value);
 };
-const rateRangeClick = (index: number) => {
-  currentRateIndex.value = index;
-  switch (rateRangeList[index]) {
-    case '0分以上':
-      filterRate.value = 0;
-      break;
-    case '1分以上':
-      filterRate.value = 1;
-      break;
-    case '2分以上':
-      filterRate.value = 2;
-      break;
-    case '3分以上':
-      filterRate.value = 3;
-      break;
-    case '4分以上':
-      filterRate.value = 4;
-      break;
-    default:
-      break;
-  }
-  console.log('filterRate: ' + filterRate.value);
-};
+// const rateRangeClick = (index: number) => {
+//   currentRateIndex.value = index;
+//   switch (rateRangeList[index]) {
+//     case '0分以上':
+//       filterRate.value = 0;
+//       break;
+//     case '1分以上':
+//       filterRate.value = 1;
+//       break;
+//     case '2分以上':
+//       filterRate.value = 2;
+//       break;
+//     case '3分以上':
+//       filterRate.value = 3;
+//       break;
+//     case '4分以上':
+//       filterRate.value = 4;
+//       break;
+//     default:
+//       break;
+//   }
+//   console.log('filterRate: ' + filterRate.value);
+// };
 const priceDiyLow = ref('0');
 const priceDiyHigh = ref('0');
 const setPriceDiyLow = (event: events) => {
@@ -143,6 +137,31 @@ const resetLocation = () => {
     filterLocation.value = '酒店地址';
   }
 };
+const screen = () => {
+  let star = '';
+  for (let item of starList.value) {
+    switch (item) {
+      case '一星级':
+        star += '1';
+        break;
+      case '两星级':
+        star += '2';
+        break;
+      case '三星级':
+        star += '3';
+        break;
+      case '四星级':
+        star += '4';
+        break;
+      case '五星级':
+        star += '5';
+        break;
+      default:
+        break;
+    }
+  }
+  emit('screen', filterLocation.value, value.value.length ===0 ? 0: value.value[0], value.value.length ===0 ? 0:value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+};
 </script>
 <template>
   <div class="FilterArea">
@@ -150,7 +169,7 @@ const resetLocation = () => {
       <div class="locationArea">
         <div class="locationIcon">
           <img
-            src="src/asset/weizhi.png"
+            src="src/asset/location.png"
             style="width: 15px"
             alt="location"
           >
@@ -177,8 +196,8 @@ const resetLocation = () => {
             type="daterange"
             unlink-panels
             range-separator="至"
-            :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
-            :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
+            :start-placeholder="dateFormat(current.getTime(),'yyyy年mm月dd日')"
+            :end-placeholder="dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日')"
             format="YYYY年MM月DD日"
             :disabled-date="disabledDate"
           />
@@ -198,8 +217,9 @@ const resetLocation = () => {
             <div style="display: flex; flex-direction: row">
               <div class="priceIcon">
                 <img
-                  src="src/asset/jiage.png"
+                  src="../../asset/price.png"
                   style="width: 15px"
+                  alt="icon"
                 >
               </div>
               <div class="priceTitle">
@@ -323,7 +343,10 @@ const resetLocation = () => {
         </el-popover>
       </div>
     </div>
-    <div class="FilterSearch">
+    <div
+      class="FilterSearch"
+      @click="screen"
+    >
       <div class="searchTitle">
         搜索酒店
       </div>
@@ -387,13 +410,13 @@ const resetLocation = () => {
 
 .FilterArea {
   display: flex;
-  flex-display: row;
+  flex-direction: row;
 }
 
 .FilterBar {
   height: 60px;
   width: 900px;
-  box-shadow: black 0px 0px 1px;
+  box-shadow: black 0 0 1px;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
@@ -503,7 +526,7 @@ const resetLocation = () => {
 }
 
 .priceRange:hover {
-  box-shadow: white 0px 0px 1px inset;
+  box-shadow: white 0 0 1px inset;
   border: rgb(253, 170, 134) 1px solid;
   color: rgb(252, 81, 30);
   background-color: rgb(255, 240, 235);
@@ -511,7 +534,7 @@ const resetLocation = () => {
 }
 
 .active div {
-  box-shadow: white 0px 0px 1px inset;
+  box-shadow: white 0 0 1px inset;
   border: rgb(253, 170, 134) 1px solid;
   color: rgb(252, 81, 30);
   background-color: rgb(255, 240, 235);
@@ -552,9 +575,9 @@ const resetLocation = () => {
   width: 45px;
   text-align: center;
   border-bottom: 1px solid dimgrey;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   outline: none;
 }
 
@@ -564,9 +587,9 @@ const resetLocation = () => {
   margin-left: 2px;
   text-align: center;
   border-bottom: 1px solid dimgrey;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   outline: none;
 }
 
@@ -584,7 +607,7 @@ const resetLocation = () => {
 
 .rateCheck {
   display: flex;
-  flex-display: row;
+  flex-direction: row;
   align-content: center;
   align-items: center;
 }

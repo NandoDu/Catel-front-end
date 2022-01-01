@@ -30,7 +30,8 @@ interface HotelInfoO {
   rate: number,
   description: string,
   phoneNumber: string,
-  pic: string,
+  landscape: string,
+  portrait: string,
   creditBound: number,
   announcement: string,
   rooms: RoomInfoItemO[]
