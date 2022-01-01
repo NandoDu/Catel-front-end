@@ -81,8 +81,6 @@ const {state: cards} = useAsyncState(GetCarouselAPI({limit: 9}), []);
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-}
-.cardHotel:hover{
   cursor: pointer;
 }
 

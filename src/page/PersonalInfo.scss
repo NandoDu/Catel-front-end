@@ -176,14 +176,12 @@
 .userAvatar {
   align-self: center;
   margin-top: 50px;
+  cursor: pointer;
 }
 .userAvatarImg {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-}
-.userAvatar:hover {
-  cursor: pointer;
 }
 .userAvatar:hover .modifyAvatar {
   display: block;
@@ -292,8 +290,6 @@
   display: flex;
   flex-direction: row;
   align-self: center;
-}
-.becomeVIP:hover {
   cursor: pointer;
 }
 .becomeVIPText {
@@ -373,8 +369,6 @@
   display: flex;
   flex-direction: row;
   color: #1296db;
-}
-.addPerson:hover {
   cursor: pointer;
 }
 .addPersonIcon {
