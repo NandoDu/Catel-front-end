@@ -437,9 +437,6 @@ const screen = () => {
   margin-left: 10px;
   background-color: rgb(81, 179, 109);
   color: white;
-}
-
-.FilterSearch:hover {
   cursor: pointer;
 }
 
