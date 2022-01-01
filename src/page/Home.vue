@@ -4,10 +4,40 @@ import HotCarousel from '../component/Home/HotCarousel.vue';
 import HotelList from '../component/Home/HotelList.vue';
 import FilterBar from '../component/Util/FilterBar.vue';
 import {useAsyncState} from '@vueuse/core';
-import {luckyAPI} from '../api/hotelApi';
+import {GetHotelListAPI, luckyAPI} from '../api/hotelApi';
 import router from '../router';
+import dateFormat from 'dateformat';
 
 const {state: luckyInfo} = useAsyncState(luckyAPI, null);
+let {state: hotelsList} = useAsyncState(GetHotelListAPI({}), []);
+const screenHotel = (location: string, start: number, end: number, priceLow: number, priceHigh: number, rate: number, star: string) => {
+  console.log('000000');
+  console.log(location);
+  console.log(start);
+  console.log(end);
+  console.log(priceLow);
+  console.log(priceHigh);
+  console.log(rate);
+  console.log(star);
+  GetHotelListAPI({
+    filterLocation: location === '酒店商圈' ? undefined : location,
+    filterRate: rate === 6 ? undefined : rate,
+    filterInDate: start === 0 ? undefined : dateFormat(start, 'mm/dd/yyyy'),
+    filterOutDate: end === 0 ? undefined : dateFormat(end, 'mm/dd/yyyy'),
+    filterStar: star === '' ? undefined : star,
+    filterPriceLower: priceLow === 0 ? undefined : priceLow,
+    filterPriceUpper: priceHigh === 999999 ? undefined : priceHigh,
+  }).then((res) => {
+    console.log('收到结果');
+    console.log(res);
+    hotelsList.value = res;
+    console.log('赋值结果');
+    console.log(hotelsList.value);
+  }).catch(() => {
+    console.log('后端报错');
+  },
+  );
+};
 const lucky = () => {
   router.push(`/hotel/${luckyInfo.value?.id}`);
 };
@@ -50,11 +80,15 @@ const brands = reactive([
     </div>
   </div>
   <div class="hotelArea">
-    <FilterBar />
+    <FilterBar
+      @screen="screenHotel"
+    />
     <h3>
       精选酒店
     </h3>
-    <HotelList />
+    <HotelList
+      :hotels-list="hotelsList"
+    />
   </div>
   <div class="cooperateArea">
     <h3>

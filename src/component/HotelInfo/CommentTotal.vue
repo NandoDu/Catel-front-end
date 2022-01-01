@@ -37,7 +37,7 @@ defineProps<{ count: number, rate: number, rateDist: number[] }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="rateDist[0] *100"
+              :percentage="rateDist[4] *100"
             />
           </div>
           <div class="percentage-list">
@@ -50,7 +50,7 @@ defineProps<{ count: number, rate: number, rateDist: number[] }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="rateDist[1] *100"
+              :percentage="rateDist[3] *100"
             />
           </div>
           <div class="percentage-list">
@@ -76,7 +76,7 @@ defineProps<{ count: number, rate: number, rateDist: number[] }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="rateDist[3] *100"
+              :percentage="rateDist[1] *100"
             />
           </div>
           <div class="percentage-list">
@@ -89,7 +89,7 @@ defineProps<{ count: number, rate: number, rateDist: number[] }>();
             <el-progress
               style="margin-top: 6px"
               :show-text="false"
-              :percentage="rateDist[4] *100"
+              :percentage="rateDist[0] *100"
             />
           </div>
         </div>

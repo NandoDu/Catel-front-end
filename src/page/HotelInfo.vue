@@ -37,12 +37,33 @@ const checkMaxNum = () => {
   userMaxRoomNum.value = roomMax;
 };
 const current = ref(new Date());
-store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
-  hotelInfo.value = store.getters['hotel/hotelInfo'];
+const getDone = () => {
   roomInfoList.value = hotelInfo.value.rooms;
   displayRoomList.value = roomInfoList.value;
   selectedRoomList.value = roomInfoList.value;
   checkMaxNum();
+};
+// const {state: hotelInfo} = useAsyncState(HotelInfoAPI({id: +(hotelId)}), {
+//   id: 0,
+//   name: '加载中',
+//   address: '加载中',
+//   bizRegion: '加载中',
+//   hotelStar: 'Five',
+//   rate: 5,
+//   description: '加载中',
+//   phoneNumber: '加载中',
+//   landscape: '',
+//   portrait: '',
+//   creditBound: 100,
+//   announcement: '加载中',
+//   rooms: [],
+//   rateDist: [],
+// }, getDone);
+
+
+store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
+  hotelInfo.value = store.getters['hotel/hotelInfo'];
+  getDone();
 });
 store.dispatch('hotel/getComment', {id: hotelId}).then(() => {
   commentList.value = store.getters['hotel/commentList'];
@@ -152,7 +173,7 @@ const book = (roomId: number) => {
       :hotel-name="hotelInfo?.name"
       class="commentCard"
     />
-    <PriceAnnouncement />
+    <PriceAnnouncement/>
   </div>
 </template>
 

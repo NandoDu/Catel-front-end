@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
+import dateFormat from 'dateformat';
+
 defineProps<{ userMaxRoomNum: number, userMaxPeoplePerRoom: number }>();
 const emit = defineEmits(['startSearch', 'changeBreak']);
 let value = ref('');
@@ -43,8 +45,8 @@ const startSearch = () => {
           type="daterange"
           unlink-panels
           range-separator="至"
-          :start-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + current.getDate() + '日'"
-          :end-placeholder="current.getFullYear() +'年'+ String(current.getMonth()+1)+ '月' + String(current.getDate()+1) + '日'"
+          :start-placeholder="dateFormat(current.getTime(),'yyyy年mm月dd日')"
+          :end-placeholder="dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日' )"
           format="YYYY年MM月DD日"
           :disabled-date="disabledDate"
         />
