@@ -9,6 +9,8 @@ import {useTypedStore} from '../store';
 import {userResidentsAPI} from '../api/userApi';
 import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
+import ModifyPassword from '../component/PersonalInfo/ModifyPassword.vue';
+import ChargeVIP from '../component/PersonalInfo/ChargeVIP.vue';
 import {UserState} from '../store/user';
 import useTranslation from '../config/i18n/useTranslation';
 
@@ -42,6 +44,10 @@ const activeResidentItem = (index: number) => activeItem(activatedResidents, ind
 
 const residentAddition = ref();
 const showResidentAddition = () => residentAddition.value.open();
+const modifyPassword = ref();
+const showModifyPassword = () => modifyPassword.value.open();
+const chargeVip = ref();
+const showChargeVip = () => chargeVip.value.open();
 </script>
 
 <template>
@@ -52,9 +58,9 @@ const showResidentAddition = () => residentAddition.value.open();
         <div class="orderPartTitle">
           我的订单
         </div>
-<!--        <div class="allOrderText">-->
-<!--          全部订单-->
-<!--        </div>-->
+        <!--        <div class="allOrderText">-->
+        <!--          全部订单-->
+        <!--        </div>-->
         <div class="orderListPart">
           <OrderItem
             v-for="(orderInfo, index) in orders"
@@ -90,13 +96,13 @@ const showResidentAddition = () => residentAddition.value.open();
                 </div>
               </div>
               <div class="userNamePart">
-<!--                <div class="userNameIcon">-->
-<!--                  <img-->
-<!--                    src="src/asset/modify.png"-->
-<!--                    class="userNameImg"-->
-<!--                    alt="Modify"-->
-<!--                  >-->
-<!--                </div>-->
+                <!--                <div class="userNameIcon">-->
+                <!--                  <img-->
+                <!--                    src="src/asset/modify.png"-->
+                <!--                    class="userNameImg"-->
+                <!--                    alt="Modify"-->
+                <!--                  >-->
+                <!--                </div>-->
                 <div class="userName">
                   {{ userState.username }}
                 </div>
@@ -114,14 +120,20 @@ const showResidentAddition = () => residentAddition.value.open();
               </div>
             </div>
             <div class="userOperationPart">
-              <div class="modifyPassword">
+              <div
+                class="modifyPassword"
+                @click="showModifyPassword"
+              >
                 <div class="modifyPasswordText">
                   修改密码
                 </div>
                 <div class="modifyPasswordIcon" />
               </div>
               <div class="becomeVIP">
-                <div class="becomeVIPText">
+                <div
+                  class="becomeVIPText"
+                  @click="showChargeVip"
+                >
                   充值会员
                 </div>
                 <div class="becomeVIPIcon" />
@@ -174,9 +186,9 @@ const showResidentAddition = () => residentAddition.value.open();
           <div class="creditPartTitle">
             信用值变更
           </div>
-<!--          <div class="allCreditText">-->
-<!--            全部记录-->
-<!--          </div>-->
+          <!--          <div class="allCreditText">-->
+          <!--            全部记录-->
+          <!--          </div>-->
           <div class="creditRecordListPart">
             <CreditEntry
               v-for="(record, index) in orders"
@@ -191,6 +203,12 @@ const showResidentAddition = () => residentAddition.value.open();
 
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
+  </VirryModal>
+  <VirryModal ref="modifyPassword">
+    <ModifyPassword is-update />
+  </VirryModal>
+  <VirryModal ref="chargeVip">
+    <ChargeVIP is-update />
   </VirryModal>
 </template>
 
