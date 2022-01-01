@@ -281,7 +281,7 @@ const book = async () => {
                 <span>住客姓名</span>
                 <div
                   class="select_user"
-                  style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 300px; overflow-y: auto;scrollbar-width: none; /* firefox */-ms-overflow-style: none; /* IE 10+ */overflow-x: hidden;"
+                  style="margin-top: 5px;position: relative;width: 100%;display: inline-block;height: 150px; overflow-y: auto;overflow-x: hidden"
                 >
                   <ElCheckboxGroup
                     v-model="selectedResident"
