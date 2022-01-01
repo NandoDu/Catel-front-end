@@ -11,7 +11,7 @@ const showMoreLines = () => {
 
 <template>
   <div
-    v-for="(hotelLine, lineNum) in hotelsList.length / 5"
+    v-for="(hotelLine, lineNum) in Math.ceil(hotelsList.length / 5)"
     :key="lineNum"
     class="hotelList"
     :class="{'firstLine': lineNum === 0}"

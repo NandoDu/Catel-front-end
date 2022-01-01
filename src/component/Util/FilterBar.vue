@@ -19,7 +19,7 @@ const filterPriceLower = ref(0);
 const filterPriceUpper = ref(999999);
 const filterRate = ref(6);
 const currentPriceIndex = ref(-1);
-const filterLocation = ref('酒店地址');
+const filterLocation = ref('酒店商圈');
 const showFilterPrice = ref('预期价格');
 const emit = defineEmits(['screen']);
 const disabledDate = (select: Date) => {
@@ -65,6 +65,9 @@ const priceRangeClick = (index: number) => {
   console.log('filterPriceLower: ' + filterPriceLower.value);
   console.log('filterPriceUpper: ' + filterPriceUpper.value);
 };
+const rateChange = () => {
+  filterRate.value = +(rateValue.value);
+};
 // const rateRangeClick = (index: number) => {
 //   currentRateIndex.value = index;
 //   switch (rateRangeList[index]) {
@@ -97,11 +100,13 @@ const setPriceDiyLow = (event: events) => {
     priceDiyHigh.value = priceDiyLow.value;
   }
   console.log(parseInt(priceDiyLow.value));
+  filterPriceLower.value = +(priceDiyLow.value);
 };
 const setPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
   priceDiyHigh.value = event.currentTarget.value;
   console.log(parseInt(priceDiyHigh.value));
+  filterPriceUpper.value = +(priceDiyHigh.value);
 };
 const resetPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
@@ -160,7 +165,7 @@ const screen = () => {
         break;
     }
   }
-  emit('screen', filterLocation.value, value.value.length ===0 ? 0: value.value[0], value.value.length ===0 ? 0:value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+  emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0 ? 0 : value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
 };
 </script>
 <template>
@@ -283,7 +288,7 @@ const screen = () => {
             <div style="display: flex; flex-direction: row">
               <div class="moreOptionIcon">
                 <img
-                  src="src/asset/shaixuan.png"
+                  src="../../asset/screen.png"
                   style="width: 15px"
                   alt="icon"
                 >
@@ -303,6 +308,7 @@ const screen = () => {
                 allow-half
                 show-score
                 score-template="{value} 分"
+                @change="rateChange"
               />
             </div>
           </div>

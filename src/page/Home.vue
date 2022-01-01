@@ -20,7 +20,7 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
   console.log(rate);
   console.log(star);
   GetHotelListAPI({
-    filterLocation: location === '酒店地址' ? undefined : location,
+    filterLocation: location === '酒店商圈' ? undefined : location,
     filterRate: rate === 6 ? undefined : rate,
     filterInDate: start === 0 ? undefined : dateFormat(start, 'mm/dd/yyyy'),
     filterOutDate: end === 0 ? undefined : dateFormat(end, 'mm/dd/yyyy'),
@@ -28,7 +28,11 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
     filterPriceLower: priceLow === 0 ? undefined : priceLow,
     filterPriceUpper: priceHigh === 999999 ? undefined : priceHigh,
   }).then((res) => {
+    console.log('收到结果');
+    console.log(res);
     hotelsList.value = res;
+    console.log('赋值结果');
+    console.log(hotelsList.value);
   }).catch(() => {
     console.log('后端报错');
   },
