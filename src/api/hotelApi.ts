@@ -1,4 +1,5 @@
 import apiCon, {HttpMethod} from './apiCon';
+import {RoomInfoO} from './userApi';
 
 export * from './hotel/orderDetail';
 
@@ -66,9 +67,19 @@ interface briefHotelInfoO {
 }
 
 const BriefHotelInfoAPI = apiCon<briefHotelInfoI, briefHotelInfoO>(HttpMethod.Get, '/hotel/brief');
+
+interface screenRoomI {
+  id: number,
+  inDate: string,
+  outDate: string,
+  roomNumber: number,
+}
+
+const ScreenRoomAPI = apiCon<screenRoomI, RoomInfoO>(HttpMethod.Get, '/room/screen');
 export {
   luckyO, luckyAPI,
   hotelListI, hotelListO, hotelListItemO, GetHotelListAPI,
   roomInfoI, roomInfoO, GetRoomInfoAPI,
   briefHotelInfoI, briefHotelInfoO, BriefHotelInfoAPI,
+  screenRoomI, ScreenRoomAPI,
 };

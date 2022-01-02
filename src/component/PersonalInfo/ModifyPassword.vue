@@ -6,12 +6,10 @@ import BiggerButton from '../Header/BiggerButton.vue';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import useTranslation from '../../config/i18n/useTranslation';
+import {ChangePassAPI} from '../../api/userApi';
 
 defineProps<{
   isUpdate: boolean
-}>();
-const emit = defineEmits<{
-  (e: 'needRefresh'): void
 }>();
 
 const store = useTypedStore();
@@ -37,7 +35,7 @@ const firstInput = ref();
 
 const submitModify = async () => {
   if (pwdInfo.oldPwd == '' ||
-      pwdInfo.newPwd == '') {
+    pwdInfo.newPwd == '') {
     ElMessage.error({
       message: message.value.fieldMissing,
       center: true,
@@ -46,28 +44,31 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
-  if(pwdInfo.oldPwd!=pwdInfo.newPwd){
+  if (pwdInfo.oldPwd != pwdInfo.newPwd) {
     ElMessage.error({
       message: '两次新密码输入不一致',
       center: true,
     });
   }
-  try {
-    // await xxAPI({
-    //   id: pwdInfo.id,
-    //   oldPwd: pwdInfo.oldPwd,
-    //   newPwd: pwdInfo.newPwd
-    // });
-    console.log('修改密码');
-    closeModal?.();
+  ChangePassAPI({
+    id: userId.value,
+    oldPass: pwdInfo.oldPwd,
+    newPass: pwdInfo.newPwd,
+  }).then(() => {
     ElMessage.success({
       message: ('修改成功'),
       center: true,
     });
-    emit('needRefresh');
-  } catch (e) {
+  }).catch((e) => {
     console.log(e);
-  }
+  });
+  // await xxAPI({
+  //   id: pwdInfo.id,
+  //   oldPwd: pwdInfo.oldPwd,
+  //   newPwd: pwdInfo.newPwd
+  // });
+  console.log('修改密码');
+  closeModal?.();
 };
 </script>
 
@@ -80,7 +81,7 @@ const submitModify = async () => {
       v-model="pwdInfo.oldPwd"
       ref="firstInput"
     />
-
+    
     <LineInput
       label="新密码"
       placeholder="请输入新密码"

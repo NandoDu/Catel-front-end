@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {computed, inject, reactive, ref} from 'vue';
-// import LineInput from '../Util/LineInput.vue';
+import {computed, inject, ref} from 'vue';
 import BiggerButton from '../Header/BiggerButton.vue';
-// import {addResidentAPI} from '../../api/user/addResident';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
-import useTranslation from '../../config/i18n/useTranslation';
+import {ChargeVipAPI} from '../../api/userApi';
+import user from '../../store/user';
 
 defineProps<{
   isUpdate: boolean
@@ -20,39 +19,34 @@ const userId = computed(() => store.getters['user/userId']);
 let vipRange = ref('');
 let zfb = ref(null);
 
-// const message = useTranslation([
-//   'residentAddition', 'residentName', 'realName',
-//   'phoneNumber', 'cancel', 'add', 'idNo', 'birthday', 'fieldMissing',
-//   'AlterResident',
-// ]);
 const submitCharge = async () => {
-  if(vipRange.value==='') {
+  if (vipRange.value === '') {
     ElMessage.error({
       message: '请选择会员等级',
       center: true,
     });
   }
-  if(zfb.value===null) {
+  if (zfb.value === null) {
     ElMessage.error({
       message: '请选择支付方式',
       center: true,
     });
   }
-  try {
-    // await xxAPI({
-    //   userId: userId.value,
-    //   vipRange: vipRange.value
-    // });
-    console.log('充值会员');
-    closeModal?.();
+  
+  ChargeVipAPI({
+    id: userId.value,
+    vipType: vipRange.value,
+  }).then(() => {
     ElMessage.success({
       message: ('充值成功'),
       center: true,
     });
-    emit('needRefresh');
-  } catch (e) {
+  }).catch((e) => {
     console.log(e);
-  }
+  });
+  console.log('充值会员');
+  closeModal?.();
+  emit('needRefresh');
 };
 </script>
 
@@ -68,17 +62,17 @@ const submitCharge = async () => {
     >
       <el-radio
         v-model="vipRange"
-        label="1"
+        label="small"
         size="large"
       >
-        升级红名会员
+        升级超级会员
       </el-radio>
       <el-radio
         v-model="vipRange"
-        label="2"
+        label="big"
         size="large"
       >
-        升级黄名会员
+        升级企业级会员
       </el-radio>
     </div>
     <h4>选择支付方式</h4>
