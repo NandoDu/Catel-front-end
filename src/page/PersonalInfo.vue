@@ -11,6 +11,7 @@ import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
 import ModifyPassword from '../component/PersonalInfo/ModifyPassword.vue';
 import ChargeVIP from '../component/PersonalInfo/ChargeVIP.vue';
+import ModifyInfo from '../component/PersonalInfo/ModifyInfo.vue';
 import {UserState} from '../store/user';
 import useTranslation from '../config/i18n/useTranslation';
 
@@ -54,6 +55,8 @@ const modifyPassword = ref();
 const showModifyPassword = () => modifyPassword.value.open();
 const chargeVip = ref();
 const showChargeVip = () => chargeVip.value.open();
+const modifyInfo = ref();
+const showModifyInfo = () => modifyInfo.value.open();
 </script>
 
 <template>
@@ -87,7 +90,10 @@ const showChargeVip = () => chargeVip.value.open();
           <div class="userPartTitle">
             账号信息
           </div>
-          <div class="modifyUserText">
+          <div
+            class="modifyUserText"
+            @click="showModifyInfo"
+          >
             修改
           </div>
           <div class="userInfoPart">
@@ -228,6 +234,9 @@ const showChargeVip = () => chargeVip.value.open();
     <ChargeVIP
       @need-refresh="changeVipType"
     />
+  </VirryModal>
+  <VirryModal ref="modifyInfo">
+    <ModifyInfo is-update />
   </VirryModal>
 </template>
 
