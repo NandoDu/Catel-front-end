@@ -2,8 +2,11 @@
 import {OrderItemInfo} from '../../api/orderApi';
 import useTranslation from '../../config/i18n/useTranslation';
 import VirryModal from '../Util/VirryModal.vue';
+import ConfirmModal from '../Util/ConfirmModal.vue';
 import OrderComment from './OrderComment.vue';
 import {ref} from 'vue';
+import {deleteResidentAPI} from "../../api/user/deleteResident";
+import {ElMessage} from "element-plus";
 
 defineProps<{
   orderInfo: OrderItemInfo
@@ -18,12 +21,18 @@ const orderComment = ref();
 const showCommentModal = () => {
   orderComment.value.open();
 };
+const conformModal = ref();
+const showConfirm = () => conformModal.value.open();
 
-const message = useTranslation(['finished', 'canceled', 'orderAvailable']);
+const message = useTranslation(['finished', 'canceled', 'orderAvailable', 'sureToDelete', 'deleteOk', 'sureToWithdrawOrder']);
 const state2msg = {
   Finished: 'finished',
   Canceled: 'canceled',
   Available: 'orderAvailable',
+};
+const deleteResident = async () => {
+  console.log('delete');
+  conformModal.value.close();
 };
 </script>
 
@@ -114,6 +123,7 @@ const state2msg = {
         </div>
         <div
           class="cancelOperation"
+          @click="showConfirm"
         >
           <div class="cancelIcon" v-show="orderInfo.orderState === 'Available'">
             B
@@ -135,6 +145,12 @@ const state2msg = {
         </div>
       </div>
     </div>
+    <ConfirmModal
+        ref="conformModal"
+        @confirmed="deleteResident"
+    >
+      {{ message.sureToWithdrawOrder }}
+    </ConfirmModal>
     <VirryModal ref="orderComment">
       <OrderComment :order-id="orderInfo.id" />
     </VirryModal>

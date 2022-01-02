@@ -24,6 +24,32 @@ console.log(hotelInfo);
       <ELChecked />
     </ElIcon>
     <h2>订单详情 # {{ hotelInfo.id }}</h2>
+    <div class="detail">
+      <div class="hotelArea">
+        <div class="hotelIcon">
+          <img src="/src/asset/jiudian.png" class="hotelIconPic">
+        </div>
+        <div class="hotel">
+          酒店：{{ hotelInfo.hotelName }}
+        </div>
+      </div>
+      <div class="creditDeltaArea">
+        <div class="creditDeltaIcon">
+          <img src="/src/asset/xinyongka.png" class="creditDeltaIconPic">
+        </div>
+        <div class="creditDelta">
+          信用值变更：{{ hotelInfo.creditDelta }}
+        </div>
+      </div>
+      <div class="priceArea">
+        <div class="priceIcon">
+          <img src="/src/asset/jiageqian.png" class="priceIconPic">
+        </div>
+        <div class="price">
+          价格：{{ hotelInfo.price }}
+        </div>
+      </div>
+    </div>
     <p class="thanks">
       尊敬的 {{ user.username }}，感谢您在本平台的消费，本订单已被系统接受
     </p>
@@ -39,19 +65,32 @@ console.log(hotelInfo);
       />
     </div>
     <hr style="width: 100%; border-top: 1px solid gray;">
-    <div class="detail">
-      <div class="hotel">
-        酒店：{{ hotelInfo.hotelName }}
-      </div>
-      <div class="creditDelta">
-        信用值变更：{{ hotelInfo.creditDelta }}
-      </div>
-    </div>
-
-    <div class="price">
-      价格：{{ hotelInfo.price }}
-    </div>
-
+<!--    <div class="detail">-->
+<!--      <div class="hotelArea">-->
+<!--        <div class="hotelIcon">-->
+<!--          <img src="/src/asset/jiudian.png" class="hotelIconPic">-->
+<!--        </div>-->
+<!--        <div class="hotel">-->
+<!--          酒店：{{ hotelInfo.hotelName }}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="creditDeltaArea">-->
+<!--        <div class="creditDeltaArea">-->
+<!--          <img src="/src/asset/xinyongka.png" class="creditDeltaIconPic">-->
+<!--        </div>-->
+<!--        <div class="creditDelta">-->
+<!--          信用值变更：{{ hotelInfo.creditDelta }}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="priceArea">-->
+<!--        <div class="priceIcon">-->
+<!--          <img src="/src/asset/jiageqian.png" class="priceIconPic">-->
+<!--        </div>-->
+<!--        <div class="price">-->
+<!--          价格：{{ hotelInfo.price }}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -62,6 +101,7 @@ console.log(hotelInfo);
   @include Other.center-flex;
   flex-direction: column;
   padding: 0 25vw;
+  margin-top: 100px;
 
   .thanks {
     color: gray;
@@ -72,10 +112,45 @@ console.log(hotelInfo);
     width: 100%;
     margin: 10px;
   }
-
-  .price {
-    align-self: end;
-  }
 }
-
+.hotelArea {
+  display: flex;
+  flex-direction: row;
+  margin-left: -20px;
+}
+.creditDeltaArea {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+  margin-left: -20px;
+}
+.priceArea {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+  margin-left: -20px;
+}
+.hotelIconPic {
+  width: 23px;
+  height: 23px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+.creditDeltaIconPic {
+  width: 23px;
+  height: 23px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+.priceIconPic {
+  width: 23px;
+  height: 23px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
 </style>

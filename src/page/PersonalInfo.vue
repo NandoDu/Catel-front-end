@@ -195,6 +195,9 @@ const showChargeVip = () => chargeVip.value.open();
               :key="index"
               :record="{index, ...record}"
             />
+            <div class="noCreditEntry" v-show="orders.length === 0">
+              <img src="src/asset/empty.png" class="noCreditEntryIcon">
+            </div>
           </div>
         </div>
       </div>
