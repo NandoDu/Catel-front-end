@@ -1,92 +1,74 @@
 <script setup lang="ts">
 import {CreditEntry} from '../../api/userApi';
+import {computed} from 'vue';
+import BiggerButton from '../Header/BiggerButton.vue';
 
 const prop = defineProps<{
   record: CreditEntry
   index: number
 }>();
 
+const up = computed(() => prop.record.creditDelta > 0);
+const color = computed(() => up.value ? 'green' : 'red');
+const classes = computed(() => ['credit-entry', up.value ? 'up' : 'down']);
+
 console.log(prop.record);
 
 </script>
 
 <template>
-  <div
-    class="creditRecordList"
-  >
-    <div
-      class="creditRecordCard"
-      :class="{'creditRecordFirst' : index === 0}"
-      v-if="record.orderState !== 'Available'"
-    >
-      <div
-        class="addCreditIcon"
-        v-if="record.orderState === 'Finished'"
-      >
-        <img
-          class="addCreditImg"
-          src="src/asset/shangzhang.png"
-        >
-      </div>
-      <div
-        class="addCreditNum"
-        v-show="record.orderState === 'Finished'"
-      >
-        +{{ record.creditDelta }}
-      </div>
-      <div
-        class="minusCreditIcon"
-        v-show="record.orderState === 'Canceled'"
-      >
-        <img
-          class="minusCreditImg"
-          src="src/asset/goDown.png"
-        >
-      </div>
-      <div
-        class="minusCreditNum"
-        v-show="record.orderState === 'Canceled'"
-      >
-        {{ record.creditDelta }}
-      </div>
-      <div class="recordSeparatingLine" />
-      <div class="recordHotelNameAndAddress">
-        <div class="recordHotelName">
-          {{ record.hotelName }}
-        </div>
-        <div class="recordHotelAddress">
-          <img
-            src="src/asset/locationIcon.png"
-            style="width: 13px; height: 13px; align-self: center"
-          >
-          <div class="recordHotelAddressText">
-            {{ record.hotelAddress }}
-          </div>
-        </div>
-      </div>
-      <div class="recordDateInfo">
-        <div class="recordDateInInfo">
-          <div class="recordDateInIcon">
-            住
-          </div>
-          <div class="recordDateIn">
-            {{ record.checkInDate }}
-          </div>
-        </div>
-        <div class="recordDateOutInfo">
-          <div class="recordDateOutIcon">
-            离
-          </div>
-          <div class="recordDateOut">
-            {{ record.checkOutDate }}
-          </div>
-        </div>
-      </div>
+  <section :class="classes">
+    <div class="title">
+      订单 #{{ record.orderId }}
     </div>
-  </div>
+
+    <span class="content">
+      信用值{{ up ? '增加' : '降低' }}
+      {{ Math.abs(record.creditDelta) }}
+      点
+    </span>
+
+    <div class="more">
+      <BiggerButton
+        text="详细信息"
+        :color="color"
+        size="small"
+        @click="$router.push(`/order-detail/${record.orderId}`)"
+      />
+    </div>
+
+  </section>
 </template>
 
 <style lang="scss" scoped>
+@use "./src/util/Other";
+
+.credit-entry {
+  @include Other.center-flex;
+  border-radius: 15px;
+  padding: 10px 20px;
+
+  &.up {
+    background-color: #0d84ff;
+  }
+
+  &.down {
+    background-color: #f8dcd4;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    width: 25%;
+    min-width: 120px;
+  }
+
+  .content {
+    width: 40%;
+    flex-grow: 1;
+  }
+
+}
+
 .creditRecordCard {
   width: 100%;
   height: 56px;

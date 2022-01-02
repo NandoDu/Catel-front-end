@@ -38,13 +38,18 @@ $duration: 200ms;
   $baseColor: var(--base-color);
   $lightColor: var(--light-color);
   $lighterColor: var(--lighter-color);
-  $basiSize: var(--base-size);
+  $baseSize: var(--base-size);
 
   all: unset;
   cursor: pointer;
   transition: color $duration, background-color $duration;
   color: $baseColor;
-
+  background-color: white;
+  text-align: center;
+  border: 1px solid $baseColor;
+  border-radius: 20px;
+  padding: (2 * 4px) $baseSize;
+  
   &:hover {
     color: white;
     background-color: $lightColor;
@@ -53,10 +58,6 @@ $duration: 200ms;
   &:active {
     background-color: $lighterColor;
   }
-
-  border: 2px solid $baseColor;
-  border-radius: 20px;
-  padding: (2 * 4px) 28px;
 
 
 }

@@ -5,13 +5,9 @@ interface CreditHistoryI {
 }
 
 interface CreditEntry {
-  orderState: string;
-  price: number;
-  hotelName: string;
-  hotelAddress: string;
-  checkInDate: string;
-  checkOutDate: string;
   creditDelta: number;
+  createdWhen: string;
+  orderId: number;
 }
 
 type CreditHistoryO = CreditEntry[];

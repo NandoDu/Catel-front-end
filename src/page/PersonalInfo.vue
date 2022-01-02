@@ -23,17 +23,18 @@ const premium2msg = {
   Big: 'superPremium',
 };
 
-const {state: orders} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
-const {state: residents} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
-
-const {state: creditHistory} = useAsyncState(userCreditHistoryAPI({userId: userState.userId!}), []);
-
-
+const fetchOrders = () => ordersOfUserAPI({id: userState.userId!});
+const fetchResidents = () => userResidentsAPI({id: userState.userId!});
+const fetchCreditHistory = () => userCreditHistoryAPI({userId: userState.userId!});
+const {state: orders} = useAsyncState(fetchOrders, []);
+const {state: residents} = useAsyncState(fetchResidents, []);
+const {state: creditHistory} = useAsyncState(fetchCreditHistory, []);
 const refreshResident = async () => {
-  residents.value = await userResidentsAPI({id: userState.userId!});
+  residents.value = await fetchResidents();
 };
 const refreshOrder = async () => {
-  orders.value = await ordersOfUserAPI({id: userState.userId!});
+  orders.value = await fetchOrders();
+  creditHistory.value = await fetchCreditHistory();
 };
 
 const activatedOrders = reactive<number[]>([]);
@@ -193,19 +194,16 @@ const showChargeVip = () => chargeVip.value.open();
           <div class="creditPartTitle">
             信用值变更
           </div>
-          <!--          <div class="allCreditText">-->
-          <!--            全部记录-->
-          <!--          </div>-->
           <div class="creditRecordListPart">
             <CreditEntry
-              v-for="(record, index) in orders"
+              v-for="(entry, index) in creditHistory"
               :key="index"
-              :record="record"
+              :record="entry"
               :index="index"
             />
             <div
               class="noCreditEntry"
-              v-show="orders.length === 0"
+              v-if="creditHistory.length === 0"
             >
               <img
                 src="src/asset/empty.png"
@@ -217,7 +215,7 @@ const showChargeVip = () => chargeVip.value.open();
       </div>
     </div>
   </div>
-  
+
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
@@ -231,4 +229,4 @@ const showChargeVip = () => chargeVip.value.open();
   </VirryModal>
 </template>
 
-<style src="./PersonalInfo.scss" lang="scss" scoped/>
+<style src="./PersonalInfo.scss" lang="scss" scoped />
