@@ -11,6 +11,8 @@ import {GetCommentO, HotelInfoO, RoomInfoO} from '../api/userApi';
 import {useRoute, useRouter} from 'vue-router';
 import {roomTypeMap} from '../util/globalMap';
 import {ElMessage} from 'element-plus';
+import {ScreenRoomAPI} from '../api/hotelApi';
+import dateFormat from 'dateformat';
 
 const store = useTypedStore();
 const route = useRoute();
@@ -85,20 +87,66 @@ const changeBreakfast = (param: number) => {
   } else {
     displayRoomList.value = selectedRoomList.value;
   }
+  ElMessage.success('早餐筛选成功');
+};
+const changeBreakfastWithoutMessage = (param: number) => {
+  if (param === 0) {
+    displayRoomList.value = [];
+    for (let room of selectedRoomList.value) {
+      if (!room.breakfast)
+        displayRoomList.value.push(room);
+    }
+  } else if (param === 1) {
+    displayRoomList.value = [];
+    for (let room of selectedRoomList.value) {
+      if (room.breakfast)
+        displayRoomList.value.push(room);
+    }
+  } else {
+    displayRoomList.value = selectedRoomList.value;
+  }
 };
 const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast: number) => {
-  const temp = roomInfoList.value;
+  let temp = roomInfoList.value;
   if (time !== '' && !time) {
     selectedTime.value = time;
   }
   roomNum.value = roomNumber;
+  if (selectedTime.value.length !== 0) {
+    ScreenRoomAPI({
+      id: hotelInfo.value.id,
+      inDate: dateFormat(selectedTime.value[0], 'mm/dd/yyyy'),
+      outDate: dateFormat(selectedTime.value[1], 'mm/dd/yyyy'),
+      roomNumber: roomNumber,
+    }).then((res) => {
+      temp = res;
+    }).catch(() => {
+      console.log('后端报错');
+    });
+  } else {
+    let start = current.value.getTime();
+    let end = start + 1000 * 60 * 60 * 24;
+    if (current.value.getHours() >= 14) {
+      start += 1000 * 60 * 60 * 24;
+      end = start + 1000 * 60 * 60 * 24;
+    }
+    ScreenRoomAPI({
+      id: hotelInfo.value.id,
+      inDate: dateFormat(start, 'mm/dd/yyyy'),
+      outDate: dateFormat(end, 'mm/dd/yyyy'),
+      roomNumber: roomNumber,
+    }).then((res) => {
+      temp = res;
+    }).catch(() => {
+      console.log('后端报错');
+    });
+  }
   selectedRoomList.value = [];
   for (let room of temp) {
-    if (room.peopleMax >= peopleNum && room.total >= roomNumber)
+    if (room.peopleMax >= peopleNum)
       selectedRoomList.value.push(room);
   }
-  //TODO  按照时间筛选房间型号
-  changeBreakfast(breakfast);
+  changeBreakfastWithoutMessage(breakfast);
   ElMessage.success('房型筛选成功！');
 };
 const book = (roomId: number) => {

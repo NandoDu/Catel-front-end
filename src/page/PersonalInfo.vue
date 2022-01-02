@@ -203,24 +203,32 @@ const showChargeVip = () => chargeVip.value.open();
               :record="record"
               :index="index"
             />
-            <div class="noCreditEntry" v-show="orders.length === 0">
-              <img src="src/asset/empty.png" class="noCreditEntryIcon">
+            <div
+              class="noCreditEntry"
+              v-show="orders.length === 0"
+            >
+              <img
+                src="src/asset/empty.png"
+                class="noCreditEntryIcon"
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
   <VirryModal ref="modifyPassword">
-    <ModifyPassword is-update />
+    <ModifyPassword />
   </VirryModal>
   <VirryModal ref="chargeVip">
-    <ChargeVIP is-update />
+    <ChargeVIP
+      @need-refresh="changeVipType"
+    />
   </VirryModal>
 </template>
 
-<style src="./PersonalInfo.scss" lang="scss" scoped />
+<style src="./PersonalInfo.scss" lang="scss" scoped/>
