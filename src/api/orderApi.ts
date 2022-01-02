@@ -42,7 +42,10 @@ interface BookHotelI {
 
 interface CouponListItemO {
   id: number,
+  type: string,
   name: string,
+  condition: string,
+  amount: number,
 }
 
 interface BookInfoO {

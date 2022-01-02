@@ -25,11 +25,12 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
     filterRate: rate === 6 ? undefined : rate,
     filterInDate: start === 0 ? undefined : dateFormat(start, 'mm/dd/yyyy'),
     filterOutDate: end === 0 ? undefined : dateFormat(end, 'mm/dd/yyyy'),
-    filterStar: star === '' ? undefined : star,
+    filterStars: star === '' ? undefined : star,
     filterPriceLower: priceLow === 0 ? undefined : priceLow,
     filterPriceUpper: priceHigh === 999999 ? undefined : priceHigh,
   }).then((res) => {
-    ElMessage.success('已成功筛选出符合条件的酒店');
+    const num = res.length;
+    ElMessage.success('已成功筛选出' + num + '所符合条件的酒店');
     hotelsList.value = res;
   }).catch(() => {
     ElMessage.error('backend failure');
@@ -87,6 +88,11 @@ const brands = reactive([
     </h3>
     <HotelList
       :hotels-list="hotelsList"
+      v-if="hotelsList.length !== 0"
+    />
+    <el-empty
+      description="没有符合您要求的酒店哦！"
+      v-else
     />
   </div>
   <div class="cooperateArea">

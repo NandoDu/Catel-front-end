@@ -9,11 +9,11 @@ import {useTypedStore} from '../store';
 import {Ref, ref} from 'vue';
 import {GetCommentO, HotelInfoO, RoomInfoO} from '../api/userApi';
 import {useRoute, useRouter} from 'vue-router';
+import {roomTypeMap} from '../util/globalMap';
 
 const store = useTypedStore();
 const route = useRoute();
 const router = useRouter();
-const roomTypeMap = {'BigBed': '大床房', 'DoubleBed': '双床房', 'Family': '家庭房'};
 let roomInfoList: Ref<RoomInfoO> = ref([]);
 let commentList: Ref<GetCommentO> = ref([]);
 let hotelInfo = ref() as Ref<HotelInfoO>;
@@ -131,6 +131,7 @@ const book = (roomId: number) => {
       :rate="hotelInfo?.rate"
       :comment-count="commentList?.length"
       :announcement="hotelInfo?.announcement"
+      :biz-region="hotelInfo?.bizRegion"
     />
     <DatePicker
       @changeBreak="changeBreakfast"
@@ -173,7 +174,7 @@ const book = (roomId: number) => {
       :hotel-name="hotelInfo?.name"
       class="commentCard"
     />
-    <PriceAnnouncement/>
+    <PriceAnnouncement />
   </div>
 </template>
 

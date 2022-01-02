@@ -1,9 +1,7 @@
 <script setup lang="ts">
+import {hotelStarMap, bizRegionMap} from '../../util/globalMap';
 
-defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string }>();
-
-const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
-
+defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string }>();
 </script>
 <template>
   <section
@@ -30,7 +28,7 @@ const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
               <i class="el-icon-location" />
             </div>
             <span class="position_info">
-              <span class="position_text">{{ address }}</span>
+              <span class="position_text">位于{{ address }},在{{ bizRegionMap[bizRegion] }}中</span>
             </span>
           </div>
         </div>

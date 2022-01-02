@@ -8,6 +8,8 @@ import dateFormat from 'dateformat';
 import {useRoute, useRouter} from 'vue-router';
 import {ElMessage} from 'element-plus';
 import {BriefHotelInfoAPI, GetRoomInfoAPI} from '../api/hotelApi';
+import {hotelStarMap, roomTypeMap} from '../util/globalMap';
+import CouponList from '../component/couponList.vue';
 
 const store = useTypedStore();
 const id = store.getters['user/userId'];
@@ -16,8 +18,7 @@ let route = useRoute();
 let hotelId = ref(0);
 let roomId = ref(0);
 let maxRoomNum = ref(0);
-const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
-const roomTypeMap = {'BigBed': '大床房', 'DoubleBed': '双床房', 'Family': '家庭房', 'loading': '加载中'};
+const couponList = ref([]);
 
 const formatDate = (date: Date) => dateFormat(date, 'mm/dd/yyyy');
 
@@ -304,6 +305,7 @@ const book = async () => {
             <h3 style="font-size: 20px;line-height: 26px;margin-top: 10px">
               优惠券
             </h3>
+            <CouponList :coupon-list="couponList" />
           </div>
           <div class="payment">
             <div

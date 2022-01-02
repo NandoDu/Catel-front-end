@@ -19,7 +19,7 @@ interface hotelListI {
   filterLocation?: string,
   filterInDate?: string,
   filterOutDate?: string,
-  filterStar?: string,
+  filterStars?: string,
 }
 
 interface hotelListItemO {
