@@ -59,7 +59,7 @@ const selectCoupon = (currentIndex: number, activeIndex: number, couponId: numbe
 .coupon-card-container {
   width: 600px;
   height: 100px;
-  background-color: #f5f7fa;
+  background-color: white;
   margin-top: 20px;
   border-radius: 8px;
   box-sizing: border-box;

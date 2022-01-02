@@ -193,9 +193,10 @@ input::-webkit-input-placeholder {
   color: #8592a6;
 }
 .coupon-list{
+  background-color: #f5f7fa;
   width: 720px;
   height: 480px;
-  margin-left: 90px;
+  padding-left: 90px;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none; /* IE 10+ */
