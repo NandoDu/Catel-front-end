@@ -117,7 +117,7 @@ const book = async () => {
               </div>
               <div
                 class="star"
-                v-for="i in Array(hotelStarMap[hotelInfo?.hotelStar])"
+                v-for="i in Array(hotelStarMap[hotelInfo?.star])"
                 :key="i"
               >
                 <i class="el-icon-star-on" />

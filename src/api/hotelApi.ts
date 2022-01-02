@@ -62,7 +62,7 @@ interface briefHotelInfoO {
   minPrice: number;
   landscape: string;
   portrait: string;
-  hotelStar: 5;
+  star: string;
 }
 
 const BriefHotelInfoAPI = apiCon<briefHotelInfoI, briefHotelInfoO>(HttpMethod.Get, '/hotel/brief');
