@@ -73,34 +73,14 @@ const priceRangeClick = (index: number) => {
 const rateChange = () => {
   filterRate.value = +(rateValue.value);
 };
-// const rateRangeClick = (index: number) => {
-//   currentRateIndex.value = index;
-//   switch (rateRangeList[index]) {
-//     case '0分以上':
-//       filterRate.value = 0;
-//       break;
-//     case '1分以上':
-//       filterRate.value = 1;
-//       break;
-//     case '2分以上':
-//       filterRate.value = 2;
-//       break;
-//     case '3分以上':
-//       filterRate.value = 3;
-//       break;
-//     case '4分以上':
-//       filterRate.value = 4;
-//       break;
-//     default:
-//       break;
-//   }
-//   console.log('filterRate: ' + filterRate.value);
-// };
 const priceDiyLow = ref('0');
 const priceDiyHigh = ref('0');
 const setPriceDiyLow = (event: events) => {
   currentPriceIndex.value = -1;
-  priceDiyLow.value = event.currentTar-get.value;
+  priceDiyLow.value = (parseInt(event.currentTarget.value)).toString();
+  if(priceDiyLow.value === 'NaN') {
+    priceDiyLow.value = '';
+  }
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value;
   }
@@ -110,7 +90,10 @@ const setPriceDiyLow = (event: events) => {
 };
 const setPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
-  priceDiyHigh.value = event.currentTarget.value;
+  priceDiyHigh.value = parseInt(event.currentTarget.value).toString();
+  if(priceDiyHigh.value === 'NaN') {
+    priceDiyHigh.value = '';
+  }
   console.log(parseInt(priceDiyHigh.value));
   filterPriceLower.value = +(priceDiyLow.value);
   filterPriceUpper.value = +(priceDiyHigh.value);
@@ -149,6 +132,19 @@ const resetLocation = () => {
     filterLocation.value = '酒店商圈';
   }
 };
+const clearFilterPrice = () => {
+  currentPriceIndex.value = -1;
+  filterPriceLower.value = 0;
+  filterPriceUpper.value = 999999;
+  showFilterPrice.value = '预期价格';
+  priceDiyLow.value = '0';
+  priceDiyHigh.value = '0';
+}
+const clearFilterRateAndStar = () => {
+  rateValue.value = '0';
+  filterRate.value = 6;
+  starList.value = [];
+}
 const screen = () => {
   let star = '';
   for (let item of starList.value) {
@@ -283,6 +279,9 @@ const screen = () => {
               >
             </div>
           </div>
+          <div class="resetDiyPrice" @click="clearFilterPrice">
+            重置价格设定
+          </div>
         </el-popover>
       </div>
       <div
@@ -356,6 +355,9 @@ const screen = () => {
                 />
               </el-checkbox-group>
             </div>
+          </div>
+          <div class="resetMoreOptions" @click="clearFilterRateAndStar">
+            重置设定
           </div>
         </el-popover>
       </div>
@@ -671,5 +673,35 @@ const screen = () => {
   margin-top: 10px;
   opacity: .3;
   background-color: #cccccc;
+}
+.resetDiyPrice {
+  width: 85px;
+  height: 25px;
+  margin-left: 60px;
+  margin-top: 8px;
+  background-color: rgb(252, 81, 30);
+  border-radius: 20px;
+  text-align: center;
+  line-height: 23px;
+  color: white;
+  font-size: 12px;
+}
+.resetDiyPrice:hover {
+  cursor: pointer;
+}
+.resetMoreOptions {
+  width: 85px;
+  height: 25px;
+  margin-left: 60px;
+  margin-top: 15px;
+  background-color: rgb(252, 81, 30);
+  border-radius: 20px;
+  text-align: center;
+  line-height: 23px;
+  color: white;
+  font-size: 12px;
+}
+.resetMoreOptions:hover {
+  cursor: pointer;
 }
 </style>
