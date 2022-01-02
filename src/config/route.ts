@@ -7,6 +7,7 @@ import hotelInfo from '../component/HotelInfo/hotelInfo.vue';
 import PersonalInfo from '../page/PersonalInfo.vue';
 import Hotels from '../page/Hotels.vue';
 import OrderDetailPage from '../page/OrderDetailPage.vue';
+import AboutUs from '../page/AboutUs.vue';
 import {NavigationGuard, RouteRecordRaw} from 'vue-router';
 import {store} from '../store';
 
@@ -31,6 +32,7 @@ const routes: RouteRecordRaw[] = [
   {path: '/hotel/:id', component: Info},
   {path: '/personalInfo', component: PersonalInfo, beforeEnter: allowLogged},
   {path: '/order-detail/:orderId', component: OrderDetailPage},
+  {path: '/about-us', component: AboutUs},
 ];
 
 export default routes;

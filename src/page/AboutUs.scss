@@ -1,0 +1,15 @@
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+p{
+  line-height: 2em;
+  width: 56%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 4px;
+}

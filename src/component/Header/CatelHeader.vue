@@ -57,7 +57,7 @@ let ifRegister = ref(false);
       />
       <MenuLink
         :text="message.aboutUs"
-        to="/"
+        to="/about-us"
       />
       <MenuLink
         :text="message.hotel"
