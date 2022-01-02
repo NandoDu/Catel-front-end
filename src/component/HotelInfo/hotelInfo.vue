@@ -43,7 +43,7 @@ console.log(props.hotelPortrait);
           style="position: absolute;top: 0;bottom: 0;right: 0;left: 0"
         >
           <div class="big_pic">
-            <div style="position: absolute; inset: 0;padding-bottom: 8px">
+            <div style="position: absolute; inset: 0">
               <img
                 class="bigpic_img"
                 alt="酒店图片"
@@ -256,7 +256,8 @@ body {
 
 .head_album .child_box {
   display: inline-block;
-  width: 35%;
+  width: 33%;
+  float: right;
   height: 100%;
 }
 
