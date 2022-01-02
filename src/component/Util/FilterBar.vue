@@ -27,40 +27,48 @@ const disabledDate = (select: Date) => {
   return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
 };
 const priceRangeClick = (index: number) => {
-  currentPriceIndex.value = index;
-  switch (priceRangeList[index]) {
-    case '200元以下':
-      filterPriceLower.value = 0;
-      filterPriceUpper.value = 200;
-      showFilterPrice.value = '200元以下';
-      break;
-    case '200-300元':
-      filterPriceLower.value = 200;
-      filterPriceUpper.value = 300;
-      showFilterPrice.value = '200-300元';
-      break;
-    case '300-500元':
-      filterPriceLower.value = 300;
-      filterPriceUpper.value = 500;
-      showFilterPrice.value = '300-500元';
-      break;
-    case '500-1000元':
-      filterPriceLower.value = 500;
-      filterPriceUpper.value = 1000;
-      showFilterPrice.value = '500-1000元';
-      break;
-    case '1000-2000元':
-      filterPriceLower.value = 1000;
-      filterPriceUpper.value = 2000;
-      showFilterPrice.value = '1000-2000元';
-      break;
-    case '2000元以上':
-      filterPriceLower.value = 2000;
-      filterPriceUpper.value = 20000000000000;
-      showFilterPrice.value = '2000元以上';
-      break;
-    default:
-      break;
+  if (currentPriceIndex.value === index) {
+    console.log('重置');
+    currentPriceIndex.value = -1;
+    filterPriceLower.value = 0;
+    filterPriceUpper.value = 999999;
+    showFilterPrice.value = '预期价格';
+  } else {
+    currentPriceIndex.value = index;
+    switch (priceRangeList[index]) {
+      case '200元以下':
+        filterPriceLower.value = 0;
+        filterPriceUpper.value = 200;
+        showFilterPrice.value = '200元以下';
+        break;
+      case '200-300元':
+        filterPriceLower.value = 200;
+        filterPriceUpper.value = 300;
+        showFilterPrice.value = '200-300元';
+        break;
+      case '300-500元':
+        filterPriceLower.value = 300;
+        filterPriceUpper.value = 500;
+        showFilterPrice.value = '300-500元';
+        break;
+      case '500-1000元':
+        filterPriceLower.value = 500;
+        filterPriceUpper.value = 1000;
+        showFilterPrice.value = '500-1000元';
+        break;
+      case '1000-2000元':
+        filterPriceLower.value = 1000;
+        filterPriceUpper.value = 2000;
+        showFilterPrice.value = '1000-2000元';
+        break;
+      case '2000元以上':
+        filterPriceLower.value = 2000;
+        filterPriceUpper.value = 999999;
+        showFilterPrice.value = '2000元以上';
+        break;
+      default:
+        break;
+    }
   }
   console.log('filterPriceLower: ' + filterPriceLower.value);
   console.log('filterPriceUpper: ' + filterPriceUpper.value);
@@ -101,11 +109,13 @@ const setPriceDiyLow = (event: events) => {
   }
   console.log(parseInt(priceDiyLow.value));
   filterPriceLower.value = +(priceDiyLow.value);
+  filterPriceUpper.value = +(priceDiyHigh.value);
 };
 const setPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
   priceDiyHigh.value = event.currentTarget.value;
   console.log(parseInt(priceDiyHigh.value));
+  filterPriceLower.value = +(priceDiyLow.value);
   filterPriceUpper.value = +(priceDiyHigh.value);
 };
 const resetPriceDiyHigh = (event: events) => {
@@ -139,7 +149,7 @@ const clearLocation = () => {
 };
 const resetLocation = () => {
   if (filterLocation.value == '') {
-    filterLocation.value = '酒店地址';
+    filterLocation.value = '酒店商圈';
   }
 };
 const screen = () => {
@@ -165,7 +175,11 @@ const screen = () => {
         break;
     }
   }
-  emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0 ? 0 : value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+  if (value.value === null)
+    emit('screen', filterLocation.value, 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+  else
+    emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0
+      ? 0 : value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
 };
 </script>
 <template>
@@ -374,17 +388,11 @@ const screen = () => {
   display: flex;
   flex-direction: row;
   width: 190px;
-}
-
-.locationArea:hover {
   cursor: pointer;
 }
 
 .dateArea {
   width: 390px;
-}
-
-.dateArea:hover {
   cursor: pointer;
 }
 
@@ -392,9 +400,6 @@ const screen = () => {
   display: flex;
   flex-direction: row;
   width: 115px;
-}
-
-.priceArea:hover {
   cursor: pointer;
 }
 
@@ -402,9 +407,6 @@ const screen = () => {
   display: flex;
   flex-direction: row;
   width: 170px;
-}
-
-.moreOptionArea:hover {
   cursor: pointer;
 }
 
@@ -437,9 +439,6 @@ const screen = () => {
   margin-left: 10px;
   background-color: rgb(81, 179, 109);
   color: white;
-}
-
-.FilterSearch:hover {
   cursor: pointer;
 }
 
@@ -616,9 +615,6 @@ const screen = () => {
   flex-direction: row;
   align-content: center;
   align-items: center;
-}
-
-.rateCheck:hover {
   cursor: pointer;
 }
 

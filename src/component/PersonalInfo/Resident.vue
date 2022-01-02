@@ -112,9 +112,6 @@ const deleteResident = async () => {
   display: flex;
   flex-direction: row;
   position: relative;
-}
-
-.personInfoCard:hover {
   cursor: pointer;
 }
 

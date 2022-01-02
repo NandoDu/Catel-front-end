@@ -7,6 +7,7 @@ import {useAsyncState} from '@vueuse/core';
 import {GetHotelListAPI, luckyAPI} from '../api/hotelApi';
 import router from '../router';
 import dateFormat from 'dateformat';
+import {ElMessage} from 'element-plus';
 
 const {state: luckyInfo} = useAsyncState(luckyAPI, null);
 let {state: hotelsList} = useAsyncState(GetHotelListAPI({}), []);
@@ -28,12 +29,10 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
     filterPriceLower: priceLow === 0 ? undefined : priceLow,
     filterPriceUpper: priceHigh === 999999 ? undefined : priceHigh,
   }).then((res) => {
-    console.log('收到结果');
-    console.log(res);
+    ElMessage.success('已成功筛选出符合条件的酒店');
     hotelsList.value = res;
-    console.log('赋值结果');
-    console.log(hotelsList.value);
   }).catch(() => {
+    ElMessage.error('backend failure');
     console.log('后端报错');
   },
   );
