@@ -46,6 +46,7 @@ interface CouponListItemO {
   name: string,
   condition: string,
   amount: number,
+  available: boolean,
 }
 
 interface BookInfoO {

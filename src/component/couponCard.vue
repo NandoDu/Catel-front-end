@@ -11,6 +11,7 @@ const selectCoupon = (currentIndex: number, activeIndex: number) => {
 <template>
   <div
     class="coupon-card-container"
+    :class="coupon.available? 'coupon-available' : 'coupon-unavailable'"
     @click="selectCoupon(index,activeIndex)"
   >
     <div class="coupon-content">
@@ -57,8 +58,13 @@ const selectCoupon = (currentIndex: number, activeIndex: number) => {
   background-color: #f5f7fa;
   margin-top: 20px;
   border-radius: 8px;
-  cursor: pointer;
   box-sizing: border-box;
+}
+.coupon-available{
+  cursor: pointer;
+}
+.coupon-unavailable{
+  cursor: not-allowed;
 }
 
 .coupon-content {
