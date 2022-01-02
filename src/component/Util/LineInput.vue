@@ -8,6 +8,7 @@ const props = defineProps<{
   height?: number;
   modelValue?: string;
   password?: boolean;
+  placeholder?: string;
 }>();
 const emit = defineEmits<{ (e: 'update:modelValue'): void }>();
 const inputType = props.password ? 'password' : 'text';
@@ -27,6 +28,7 @@ defineExpose({focus});
       v-model="model"
       autocomplete="off"
       ref="theInput"
+      :placeholder="placeholder"
     >
   </div>
 </template>
