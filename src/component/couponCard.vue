@@ -4,15 +4,15 @@ import {CircleCheck, CircleCheckFilled} from '@element-plus/icons';
 
 defineProps<{ coupon: CouponListItemO, index: number, activeIndex: number }>();
 const emit = defineEmits(['select']);
-const selectCoupon = (currentIndex: number, activeIndex: number) => {
-  emit('select', currentIndex, activeIndex);
+const selectCoupon = (currentIndex: number, activeIndex: number, couponId: number) => {
+  emit('select', currentIndex, activeIndex, couponId);
 };
 </script>
 <template>
   <div
     class="coupon-card-container"
     :class="coupon.available? 'coupon-available' : 'coupon-unavailable'"
-    @click="selectCoupon(index,activeIndex)"
+    @click="selectCoupon(index,activeIndex,coupon.id)"
   >
     <div class="coupon-content">
       <div class="coupon-ti-dis">
@@ -31,7 +31,7 @@ const selectCoupon = (currentIndex: number, activeIndex: number) => {
         v-if="activeIndex === index"
       >
         <el-icon
-          size="40"
+          :size="40"
           :color="'#0086f6'"
         >
           <circle-check-filled />
@@ -42,7 +42,7 @@ const selectCoupon = (currentIndex: number, activeIndex: number) => {
         v-else
       >
         <el-icon
-          size="40"
+          :size="40"
         >
           <circle-check />
         </el-icon>
@@ -79,7 +79,8 @@ const selectCoupon = (currentIndex: number, activeIndex: number) => {
   display: flex;
   flex-direction: column;
   margin-left: 50px;
-  flex-grow: 6;
+  /*flex-grow: 4;*/
+  width: 350px;
 }
 
 

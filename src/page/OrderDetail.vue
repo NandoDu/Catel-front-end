@@ -14,35 +14,6 @@ import {disabledDate} from '../util/globalMap';
 
 const selectedCoupon = ref(-1);
 const couponChosen = ref<number[]>([]);
-const selectCoupon = (selectedIndex: number, activeIndex: number) => {
-  activeIndex === selectedIndex ? selectedCoupon.value = -1 : selectedCoupon.value = selectedIndex;
-  couponChosen.value = [selectedIndex];
-};
-const couponListTest = ref([{id: 1, type: 'Multiple', name: '你好', condition: '满减优惠券', amount: 100}, {
-  id: 1,
-  type: 'Multiple',
-  name: '你好',
-  condition: '满减优惠券',
-  amount: 200,
-}, {id: 1, type: 'Multiple', name: '你好', condition: '满减优惠券', amount: 300}, {
-  id: 1,
-  type: 'Multiple',
-  name: '你好',
-  condition: '满减优惠券',
-  amount: 400,
-}, {
-  id: 1,
-  type: 'Multiple',
-  name: '你好',
-  condition: '满减优惠券',
-  amount: 500,
-}, {
-  id: 1,
-  type: 'Multiple',
-  name: '你好',
-  condition: '满减优惠券',
-  amount: 600,
-}]);
 const store = useTypedStore();
 const id = store.getters['user/userId'];
 let router = useRouter();
@@ -50,7 +21,6 @@ let route = useRoute();
 let hotelId = ref(0);
 let roomId = ref(0);
 let maxRoomNum = ref(0);
-const couponList = ref([]);
 
 const formatDate = (date: Date) => dateFormat(date, 'mm/dd/yyyy');
 
@@ -111,6 +81,7 @@ const getArgs = () => {
     checkOutDate: formatDate(orderArgs.endDate),
     configId: roomId.value,
     residents: selectedResident.value,
+    selectedCoupons: couponChosen.value,
   };
 };
 
@@ -124,6 +95,17 @@ const callPrice = async () => {
   } catch (e) {
     console.log('后端报错');
   }
+};
+
+const selectCoupon = (selectedIndex: number, activeIndex: number, couponId: number) => {
+  if (activeIndex === selectedIndex) {
+    selectedCoupon.value = -1;
+    couponChosen.value = [];
+  } else {
+    selectedCoupon.value = selectedIndex;
+    couponChosen.value = [couponId];
+  }
+  callPrice();
 };
 
 let options = new Array(5).fill(0).map((_, i) => ({value: i + 1, label: i + 1}));
@@ -343,7 +325,7 @@ const book = async () => {
               class="coupon-list"
             >
               <CouponCard
-                v-for="(coupon, index) in couponListTest"
+                v-for="(coupon, index) in preview?.availableCoupons"
                 :key="index"
                 :coupon="coupon"
                 :index="index"
@@ -460,7 +442,9 @@ const book = async () => {
                         class="price_cell"
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
-                        <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">{{ '-￥' + preview?.discountTotal }}</span>
+                        <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">{{
+                            '-￥' + preview?.discountTotal
+                                                                                       }}</span>
                       </span>
                     </div>
                   </li>
@@ -506,4 +490,4 @@ const book = async () => {
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped/>
+<style src="./OrderDetail.scss" lang="scss" scoped />
