@@ -6,7 +6,7 @@ import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
 import {useAsyncState} from '@vueuse/core';
 import {ordersOfUserAPI} from '../api/orderApi';
 import {useTypedStore} from '../store';
-import {userCreditHistoryAPI, userResidentsAPI} from '../api/userApi';
+import {getUserAPI, userCreditHistoryAPI, userResidentsAPI} from '../api/userApi';
 import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
 import ModifyPassword from '../component/PersonalInfo/ModifyPassword.vue';
@@ -27,6 +27,7 @@ const premium2msg = {
 const fetchOrders = () => ordersOfUserAPI({id: userState.userId!});
 const fetchResidents = () => userResidentsAPI({id: userState.userId!});
 const fetchCreditHistory = () => userCreditHistoryAPI({userId: userState.userId!});
+const fetchUser = () => getUserAPI({id: userState.userId!});
 const {state: orders} = useAsyncState(fetchOrders, []);
 const {state: residents} = useAsyncState(fetchResidents, []);
 const {state: creditHistory} = useAsyncState(fetchCreditHistory, []);
@@ -36,6 +37,9 @@ const refreshResident = async () => {
 const refreshOrder = async () => {
   orders.value = await fetchOrders();
   creditHistory.value = await fetchCreditHistory();
+};
+const refreshUser = async () => {
+  await store.dispatch('user/refreshUser', {id: userState.userId});
 };
 
 const activatedOrders = reactive<number[]>([]);
@@ -218,21 +222,23 @@ const showModifyInfo = () => modifyInfo.value.open();
       </div>
     </div>
   </div>
-  
+
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
+
   <VirryModal ref="modifyPassword">
     <ModifyPassword />
   </VirryModal>
+
   <VirryModal ref="chargeVip">
-    <ChargeVIP
-      @need-refresh="changeVipType"
-    />
+    <ChargeVIP @need-refresh="refreshUser" />
   </VirryModal>
+
   <VirryModal ref="modifyInfo">
-    <ModifyInfo is-update />
+    <ModifyInfo @need-refresh="refreshUser" />
   </VirryModal>
+
 </template>
 
-<style src="./PersonalInfo.scss" lang="scss" scoped/>
+<style src="./PersonalInfo.scss" lang="scss" scoped />

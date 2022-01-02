@@ -46,21 +46,21 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
-  ModifyUserInfoAPI({
-    id: +(userInfo.idNo),
-    name: userInfo.name,
-    email: userInfo.email,
-  }).then(() => {
+  try {
+    await ModifyUserInfoAPI({
+      id: +(userInfo.idNo),
+      name: userInfo.name,
+      email: userInfo.email,
+    });
     ElMessage.success({
       message: ('修改个人信息成功'),
       center: true,
     });
-  }).catch((e) => {
+    closeModal?.();
+    emit('needRefresh');
+  } catch (e) {
     console.log(e);
-  });
-  console.log('修改信息');
-  closeModal?.();
-  emit('needRefresh');
+  }
 };
 </script>
 
@@ -73,7 +73,7 @@ const submitModify = async () => {
       v-model="userInfo.name"
       ref="firstInput"
     />
-    
+
     <LineInput
       label="用户邮箱"
       :placeholder="userInfo.email"

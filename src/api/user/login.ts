@@ -15,11 +15,11 @@ interface LoginO {
   avatar: string;
 }
 
-const login = apiCon<LoginI, LoginO>(HttpMethod.Post, '/user/login');
+const loginAPI = apiCon<LoginI, LoginO>(HttpMethod.Post, '/user/login');
 
 
 export {
   LoginI,
   LoginO,
-  login,
+  loginAPI,
 };
