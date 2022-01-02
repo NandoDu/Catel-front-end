@@ -6,6 +6,7 @@ import {ref} from 'vue';
 import {ElMessage} from 'element-plus';
 import VirryModal from '../Util/VirryModal.vue';
 import ResidentDetail from './ResidentDetail.vue';
+import ModifyResident from './ModifyResident.vue';
 
 const prop = defineProps<{
   residentInfo: UserResident
@@ -20,6 +21,8 @@ const emit = defineEmits<{
 const message = useTranslation(['sureToDelete', 'deleteOk']);
 const conformModal = ref();
 const residentDetail = ref();
+const modifyResident = ref();
+const showModifyResident = () => modifyResident.value.open();
 const showConfirm = () => conformModal.value.open();
 const showDetail = () => residentDetail.value.open();
 const deleteResident = async () => {
@@ -70,7 +73,7 @@ const deleteResident = async () => {
             查看
           </div>
         </div>
-        <div class="personModifyOperation">
+        <div class="personModifyOperation" @click="showModifyResident">
           <div class="personModifyIcon">
             B
           </div>
@@ -99,6 +102,9 @@ const deleteResident = async () => {
     </ConfirmModal>
     <VirryModal ref="residentDetail">
       <ResidentDetail :resident-info="residentInfo" />
+    </VirryModal>
+    <VirryModal ref="modifyResident">
+      <ModifyResident :resident-info="residentInfo" />
     </VirryModal>
   </div>
 </template>

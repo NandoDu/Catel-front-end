@@ -89,10 +89,26 @@ interface chargeVipI {
 }
 
 const ChargeVipAPI = apiCon<chargeVipI>(HttpMethod.Put, '/user/');
+
+interface modifyUserInfoI {
+  id: number,
+  name: string,
+  email: string,
+}
+
+interface modifyResidentInfoI {
+  residentId: number,
+  name: string,
+  phoneNumber: string,
+}
+
+const ModifyUserInfoAPI = apiCon<modifyUserInfoI>(HttpMethod.Put, '/user/');
+const ModifyResidentInfoAPI = apiCon<modifyResidentInfoI>(HttpMethod.Put, '/person/');
 export {
   RoomInfoItemO, RoomInfoO, HotelInfoI, HotelInfoO, HotelInfoAPI,
   GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
   CarouselI, CarouselItemO, CarouselO, GetCarouselAPI,
   changePassI, ChangePassAPI,
   chargeVipI, ChargeVipAPI,
+  modifyUserInfoI, modifyResidentInfoI, ModifyResidentInfoAPI, ModifyUserInfoAPI,
 };
