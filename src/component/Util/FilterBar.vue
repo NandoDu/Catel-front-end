@@ -175,7 +175,7 @@ const screen = () => {
         break;
     }
   }
-  if (value.value === null)
+  if (!value.value)
     emit('screen', filterLocation.value, 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
   else
     emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0

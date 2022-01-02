@@ -10,6 +10,7 @@ import {Ref, ref} from 'vue';
 import {GetCommentO, HotelInfoO, RoomInfoO} from '../api/userApi';
 import {useRoute, useRouter} from 'vue-router';
 import {roomTypeMap} from '../util/globalMap';
+import {ElMessage} from 'element-plus';
 
 const store = useTypedStore();
 const route = useRoute();
@@ -84,6 +85,7 @@ const changeBreakfast = (param: number) => {
   } else {
     displayRoomList.value = selectedRoomList.value;
   }
+  ElMessage.success('早餐状态修改成功！');
 };
 const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast: number) => {
   const temp = roomInfoList.value;
@@ -97,6 +99,7 @@ const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast
       selectedRoomList.value.push(room);
   }
   changeBreakfast(breakfast);
+  ElMessage.success('房型筛选成功！');
 };
 const book = (roomId: number) => {
   console.log(roomId);

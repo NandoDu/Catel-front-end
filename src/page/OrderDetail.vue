@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, computed, reactive, watch} from 'vue';
+import {ref, computed, reactive, watch, Ref} from 'vue';
 import {userResidentsAPI} from '../api/userApi';
 import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
@@ -9,8 +9,39 @@ import {useRoute, useRouter} from 'vue-router';
 import {ElMessage} from 'element-plus';
 import {BriefHotelInfoAPI, GetRoomInfoAPI} from '../api/hotelApi';
 import {hotelStarMap, roomTypeMap} from '../util/globalMap';
-import CouponList from '../component/couponList.vue';
+import CouponCard from '../component/couponCard.vue';
 
+const selectedCoupon = ref(-1);
+const couponChosen = ref<number[]>([]);
+const selectCoupon = (selectedIndex: number, activeIndex: number) => {
+  activeIndex === selectedIndex ? selectedCoupon.value = -1 : selectedCoupon.value = selectedIndex;
+  couponChosen.value = [selectedIndex];
+};
+const couponListTest = ref([{id: 1, type: 'Multiple', name: '你好', condition: '满减优惠券', amount: 100}, {
+  id: 1,
+  type: 'Multiple',
+  name: '你好',
+  condition: '满减优惠券',
+  amount: 200,
+}, {id: 1, type: 'Multiple', name: '你好', condition: '满减优惠券', amount: 300}, {
+  id: 1,
+  type: 'Multiple',
+  name: '你好',
+  condition: '满减优惠券',
+  amount: 400,
+}, {
+  id: 1,
+  type: 'Multiple',
+  name: '你好',
+  condition: '满减优惠券',
+  amount: 500,
+}, {
+  id: 1,
+  type: 'Multiple',
+  name: '你好',
+  condition: '满减优惠券',
+  amount: 600,
+}]);
 const store = useTypedStore();
 const id = store.getters['user/userId'];
 let router = useRouter();
@@ -306,7 +337,18 @@ const book = async () => {
             <h3 style="font-size: 20px;line-height: 26px;margin-top: 10px">
               优惠券
             </h3>
-            <CouponList :coupon-list="couponList" />
+            <div
+              class="coupon-list"
+            >
+              <CouponCard
+                v-for="(coupon, index) in couponListTest"
+                :key="index"
+                :coupon="coupon"
+                :index="index"
+                :active-index="selectedCoupon"
+                @select="selectCoupon"
+              />
+            </div>
           </div>
           <div class="payment">
             <div
@@ -448,9 +490,9 @@ const book = async () => {
                 >
                   <span style="font-weight: 700;display: inline-flex;padding-right: 15px">配置:</span>
                   <div style="display: inline-flex;flex-direction: row">
-                    <span style="padding-right: 15px">房间最多容纳{{ singleRoomInfo.peopleMax }}人</span>
+                    <span style="padding-right: 15px">每间{{ singleRoomInfo.peopleMax }}人</span>
                     <span style="padding-right: 15px">{{ singleRoomInfo.breakfast ? '有' : '无' }}早餐</span>
-                    <span style="padding-right: 15px">目前剩余{{ singleRoomInfo.total }}间</span>
+                    <span style="padding-right: 15px">剩{{ singleRoomInfo.total }}间</span>
                   </div>
                 </li>
               </ul>
@@ -462,4 +504,4 @@ const book = async () => {
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped />
+<style src="./OrderDetail.scss" lang="scss" scoped/>

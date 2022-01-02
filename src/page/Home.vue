@@ -30,7 +30,10 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
     filterPriceUpper: priceHigh === 999999 ? undefined : priceHigh,
   }).then((res) => {
     const num = res.length;
-    ElMessage.success('已成功筛选出' + num + '所符合条件的酒店');
+    if (num === 0)
+      ElMessage.warning('很抱歉，没有找到符合条件的酒店');
+    else
+      ElMessage.success('已成功筛选出' + num + '所符合条件的酒店');
     hotelsList.value = res;
   }).catch(() => {
     ElMessage.error('backend failure');
