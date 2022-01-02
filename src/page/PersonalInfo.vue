@@ -6,7 +6,7 @@ import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
 import {useAsyncState} from '@vueuse/core';
 import {ordersOfUserAPI} from '../api/orderApi';
 import {useTypedStore} from '../store';
-import {userResidentsAPI} from '../api/userApi';
+import {userCreditHistoryAPI, userResidentsAPI} from '../api/userApi';
 import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
 import ModifyPassword from '../component/PersonalInfo/ModifyPassword.vue';
@@ -25,6 +25,9 @@ const premium2msg = {
 
 const {state: orders} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
 const {state: residents} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
+
+const {state: creditHistory} = useAsyncState(userCreditHistoryAPI({userId: userState.userId!}), []);
+
 
 const refreshResident = async () => {
   residents.value = await userResidentsAPI({id: userState.userId!});
@@ -91,7 +94,7 @@ const showChargeVip = () => chargeVip.value.open();
             <div class="userAvatarAndName">
               <div class="userAvatar">
                 <img
-                  src="src/asset/cat.jpeg"
+                  :src="userState.avatar"
                   class="userAvatarImg"
                   alt=""
                 >
@@ -197,7 +200,8 @@ const showChargeVip = () => chargeVip.value.open();
             <CreditEntry
               v-for="(record, index) in orders"
               :key="index"
-              :record="{index, ...record}"
+              :record="record"
+              :index="index"
             />
             <div class="noCreditEntry" v-show="orders.length === 0">
               <img src="src/asset/empty.png" class="noCreditEntryIcon">

@@ -10,6 +10,7 @@ interface UserState {
   credit?: number,
   userType?: string,
   premium?: string,
+  avatar?: string,
 }
 
 const user: Module<UserState, unknown> = {
@@ -27,6 +28,7 @@ const user: Module<UserState, unknown> = {
       state.credit = userInfo.credit;
       state.userType = userInfo.userType;
       state.premium = userInfo.vipType;
+      state.avatar = userInfo.avatar;
     },
     logout: (state) => {
       state.logged = false;
