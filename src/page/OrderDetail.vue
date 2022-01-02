@@ -49,9 +49,12 @@ const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
 }), []);
 let selectedResident = ref<string[]>([]);
 
-let dataRange = ref<Date[]>([]);
+let dataRange = ref<Date[]>([orderArgs.startDate, orderArgs.endDate]);
 
 watch(dataRange, () => {
+  if (!dataRange.value) {
+    return;
+  }
   orderArgs.startDate = dataRange.value[0];
   orderArgs.endDate = dataRange.value[1];
 });
@@ -231,8 +234,6 @@ const book = async () => {
                 type="daterange"
                 unlink-panels
                 range-separator="至"
-                :start-placeholder="dateFormat(orderArgs.startDate, 'yyyy年mm月dd日')"
-                :end-placeholder="dateFormat(orderArgs.endDate, 'yyyy年mm月dd日')"
                 format="YYYY年MM月DD日"
               />
               <div
@@ -459,4 +460,4 @@ const book = async () => {
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped/>
+<style src="./OrderDetail.scss" lang="scss" scoped />
