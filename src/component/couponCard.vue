@@ -2,8 +2,10 @@
 import {CouponListItemO} from '../api/orderApi';
 import {CircleCheck, CircleCheckFilled} from '@element-plus/icons';
 import {ElMessage} from 'element-plus';
+import {couponTypeMap} from '../util/globalMap';
 
-defineProps<{ coupon: CouponListItemO, index: number, activeIndex: number }>();
+const props = defineProps<{ coupon: CouponListItemO, index: number, activeIndex: number }>();
+console.log(props.coupon);
 const emit = defineEmits(['select']);
 const selectCoupon = (currentIndex: number, activeIndex: number, couponId: number, available: boolean) => {
   if (!available)
@@ -20,9 +22,14 @@ const selectCoupon = (currentIndex: number, activeIndex: number, couponId: numbe
   >
     <div class="coupon-content">
       <div class="coupon-ti-dis">
-        <h3>
-          {{ coupon.name }}
-        </h3>
+        <div class="coupon-tag">
+          <h3>
+            {{ coupon.name }}
+          </h3>
+          <el-tag size="small" style="margin-left: 10px">
+            {{ couponTypeMap[coupon.type] }}
+          </el-tag>
+        </div>
         <p>
           {{ coupon.condition }}
         </p>
@@ -64,10 +71,12 @@ const selectCoupon = (currentIndex: number, activeIndex: number, couponId: numbe
   border-radius: 8px;
   box-sizing: border-box;
 }
-.coupon-available{
+
+.coupon-available {
   cursor: pointer;
 }
-.coupon-unavailable{
+
+.coupon-unavailable {
   cursor: not-allowed;
   filter: grayscale(1);
 }
@@ -78,6 +87,11 @@ const selectCoupon = (currentIndex: number, activeIndex: number, couponId: numbe
   align-items: center;
   width: 600px;
   height: 100px;
+}
+
+.coupon-tag {
+  display: flex;
+  flex-direction: row;
 }
 
 .coupon-ti-dis {

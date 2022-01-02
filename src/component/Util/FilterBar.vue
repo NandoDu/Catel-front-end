@@ -2,7 +2,7 @@
 import {reactive, ref} from 'vue';
 import * as events from 'events';
 import dateFormat from 'dateformat';
-import {disabledDate} from '../../util/globalMap';
+import {disabledDate, reverseBizRegionMap} from '../../util/globalMap';
 
 let priceRangeList = reactive([
   '200元以下',
@@ -78,7 +78,7 @@ const priceDiyHigh = ref('0');
 const setPriceDiyLow = (event: events) => {
   currentPriceIndex.value = -1;
   priceDiyLow.value = (parseInt(event.currentTarget.value)).toString();
-  if(priceDiyLow.value === 'NaN') {
+  if (priceDiyLow.value === 'NaN') {
     priceDiyLow.value = '';
   }
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
@@ -91,7 +91,7 @@ const setPriceDiyLow = (event: events) => {
 const setPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
   priceDiyHigh.value = parseInt(event.currentTarget.value).toString();
-  if(priceDiyHigh.value === 'NaN') {
+  if (priceDiyHigh.value === 'NaN') {
     priceDiyHigh.value = '';
   }
   console.log(parseInt(priceDiyHigh.value));
@@ -139,12 +139,12 @@ const clearFilterPrice = () => {
   showFilterPrice.value = '预期价格';
   priceDiyLow.value = '0';
   priceDiyHigh.value = '0';
-}
+};
 const clearFilterRateAndStar = () => {
   rateValue.value = '0';
   filterRate.value = 6;
   starList.value = [];
-}
+};
 const screen = () => {
   let star = '';
   for (let item of starList.value) {
@@ -169,9 +169,9 @@ const screen = () => {
     }
   }
   if (!value.value)
-    emit('screen', filterLocation.value, 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+    emit('screen', reverseBizRegionMap[filterLocation.value as '西单'], 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
   else
-    emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0
+    emit('screen', reverseBizRegionMap[filterLocation.value as '西单'], value.value.length === 0 ? 0 : value.value[0], value.value.length === 0
       ? 0 : value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
 };
 </script>
@@ -279,7 +279,10 @@ const screen = () => {
               >
             </div>
           </div>
-          <div class="resetDiyPrice" @click="clearFilterPrice">
+          <div
+            class="resetDiyPrice"
+            @click="clearFilterPrice"
+          >
             重置价格设定
           </div>
         </el-popover>
@@ -356,7 +359,10 @@ const screen = () => {
               </el-checkbox-group>
             </div>
           </div>
-          <div class="resetMoreOptions" @click="clearFilterRateAndStar">
+          <div
+            class="resetMoreOptions"
+            @click="clearFilterRateAndStar"
+          >
             重置设定
           </div>
         </el-popover>
@@ -674,6 +680,7 @@ const screen = () => {
   opacity: .3;
   background-color: #cccccc;
 }
+
 .resetDiyPrice {
   width: 85px;
   height: 25px;
@@ -686,9 +693,11 @@ const screen = () => {
   color: white;
   font-size: 12px;
 }
+
 .resetDiyPrice:hover {
   cursor: pointer;
 }
+
 .resetMoreOptions {
   width: 85px;
   height: 25px;
@@ -701,6 +710,7 @@ const screen = () => {
   color: white;
   font-size: 12px;
 }
+
 .resetMoreOptions:hover {
   cursor: pointer;
 }

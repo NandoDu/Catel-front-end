@@ -2,20 +2,23 @@
 import {inject, reactive, ref} from 'vue';
 import LineInput from '../Util/LineInput.vue';
 import BiggerButton from '../Header/BiggerButton.vue';
-import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import useTranslation from '../../config/i18n/useTranslation';
-import {UserState} from '../../store/user';
-import {ModifyUserInfoAPI} from '../../api/userApi';
+import {UserResident} from '../../api/user/userResidents';
+import {ModifyResidentInfoAPI} from '../../api/userApi';
+
+const prop = defineProps<{
+  residentInfo: UserResident
+}>();
 
 
 const emit = defineEmits<{
   (e: 'needRefresh'): void
 }>();
-
-const store = useTypedStore();
+const info = reactive(prop.residentInfo);
+// const store = useTypedStore();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
-const userState: UserState = store.getters['user/all'];
+// const userState: UserState = store.getters['user/all'];
 
 
 const message = useTranslation([
@@ -24,20 +27,12 @@ const message = useTranslation([
   'AlterResident',
 ]);
 
-class UserInfo {
-  idNo = userState.userId!;
-  name = userState.username!;
-  email = userState.email!;
-  userType = userState.userType!;
-}
-
-const userInfo = reactive(new UserInfo());
 
 const firstInput = ref();
 
 const submitModify = async () => {
-  if (userInfo.name == '' ||
-    userInfo.email == '') {
+  if (info.realName == '' ||
+    info.phoneNumber == '') {
     ElMessage.error({
       message: message.value.fieldMissing,
       center: true,
@@ -46,10 +41,10 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
-  ModifyUserInfoAPI({
-    id: +(userInfo.idNo),
-    name: userInfo.name,
-    email: userInfo.email,
+  ModifyResidentInfoAPI({
+    residentId: info.id,
+    name: info.realName,
+    phoneNumber: info.phoneNumber,
   }).then(() => {
     ElMessage.success({
       message: ('修改个人信息成功'),
@@ -66,25 +61,33 @@ const submitModify = async () => {
 
 <template>
   <section class="info-modification">
-    <h3>修改个人信息</h3>
+    <h3>修改入住人信息</h3>
     <LineInput
-      label="用户姓名"
-      :placeholder="userInfo.name"
-      v-model="userInfo.name"
+      label="入住人姓名"
+      :placeholde="info.realName"
+      v-model="info.realName"
       ref="firstInput"
     />
     
     <LineInput
-      label="用户邮箱"
-      :placeholder="userInfo.email"
-      v-model="userInfo.email"
+      label="用户电话"
+      :placeholder="info.phoneNumber"
+      v-model="info.phoneNumber"
     />
     <div style="width: 100%;padding-left: 10px">
       <div style="margin-top: 10px;margin-bottom: 10px">
-        用户类型
+        用户身份证号
+      </div>
+      <div style="margin-bottom: 10px;padding-left: 4px">
+        {{ info.idNo }}
+      </div>
+    </div>
+    <div style="width: 100%;padding-left: 10px">
+      <div style="margin-top: 10px;margin-bottom: 10px">
+        用户生日
       </div>
       <div style="margin-bottom: 20px;padding-left: 4px">
-        {{ userInfo.userType }}
+        {{ info.birthday }}
       </div>
     </div>
     <div class="inline">
