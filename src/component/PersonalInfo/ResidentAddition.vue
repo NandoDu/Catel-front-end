@@ -8,9 +8,6 @@ import {ElMessage} from 'element-plus';
 import dateFormat from 'dateformat';
 import useTranslation from '../../config/i18n/useTranslation';
 
-defineProps<{
-  isUpdate: boolean
-}>();
 const emit = defineEmits<{
   (e: 'needRefresh'): void
 }>();
@@ -62,7 +59,7 @@ const submitModify = async () => {
     });
     closeModal?.();
     ElMessage.success({
-      message: ('message.addOk'),
+      message: '入住人添加成功',
       center: true,
     });
     emit('needRefresh');

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {OrderItemInfo} from '../../api/orderApi';
+import {OrderItemInfo, annulOrderAPI} from '../../api/orderApi';
 import useTranslation from '../../config/i18n/useTranslation';
 import VirryModal from '../Util/VirryModal.vue';
 import ConfirmModal from '../Util/ConfirmModal.vue';
 import OrderComment from './OrderComment.vue';
 import {ref} from 'vue';
-import {deleteResidentAPI} from "../../api/user/deleteResident";
-import {ElMessage} from "element-plus";
+import {ElMessage} from 'element-plus';
 
-defineProps<{
+const props = defineProps<{
   orderInfo: OrderItemInfo
   index: number
   ifOperationShow: boolean
 }>();
 const emit = defineEmits<{
   (e: 'toggle', index: number): void
+  (e: 'needRefresh'): void
 }>();
 
 const orderComment = ref();
@@ -30,9 +30,20 @@ const state2msg = {
   Canceled: 'canceled',
   Available: 'orderAvailable',
 };
-const deleteResident = async () => {
+const annulOrder = async () => {
   console.log('delete');
-  conformModal.value.close();
+  console.log(props.orderInfo.id);
+  try {
+    await annulOrderAPI({orderId: props.orderInfo.id});
+    ElMessage.success({
+      message: '成功撤销订单',
+      center: true,
+    });
+    conformModal.value.close();
+    emit('needRefresh');
+  } catch (e) {
+    console.log(e);
+  }
 };
 </script>
 
@@ -146,8 +157,8 @@ const deleteResident = async () => {
       </div>
     </div>
     <ConfirmModal
-        ref="conformModal"
-        @confirmed="deleteResident"
+      ref="conformModal"
+      @confirmed="annulOrder"
     >
       {{ message.sureToWithdrawOrder }}
     </ConfirmModal>

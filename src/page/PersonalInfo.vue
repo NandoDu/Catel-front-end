@@ -29,6 +29,9 @@ const {state: residents} = useAsyncState(userResidentsAPI({id: userState.userId!
 const refreshResident = async () => {
   residents.value = await userResidentsAPI({id: userState.userId!});
 };
+const refreshOrder = async () => {
+  orders.value = await ordersOfUserAPI({id: userState.userId!});
+};
 
 const activatedOrders = reactive<number[]>([]);
 const activatedResidents = reactive<number[]>([]);
@@ -69,6 +72,7 @@ const showChargeVip = () => chargeVip.value.open();
             :index="index"
             :if-operation-show="activatedOrders.includes(index)"
             @toggle="activeOrderItem"
+            @needRefresh="refreshOrder"
           />
         </div>
       </div>
