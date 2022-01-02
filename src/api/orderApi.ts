@@ -1,5 +1,7 @@
 import apiCon, {HttpMethod} from './apiCon';
 
+export * from './order/annulOrder';
+
 interface OrdersOfUserI {
   id: number;
 }
