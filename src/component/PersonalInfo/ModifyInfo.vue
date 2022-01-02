@@ -67,14 +67,6 @@ const submitModify = async () => {
 <template>
   <section class="info-modification">
     <h3>修改个人信息</h3>
-    <div style="width: 100%;margin-left: 10px">
-      <div style="margin-bottom: 10px">
-        用户ID
-      </div>
-      <div style="margin-bottom: 10px;padding-left: 4px">
-        {{ userInfo.idNo }}
-      </div>
-    </div>
     <LineInput
       label="用户姓名"
       :placeholder="userInfo.name"
