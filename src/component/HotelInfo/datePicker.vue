@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import dateFormat from 'dateformat';
+import {disabledDate} from '../../util/globalMap';
 
 defineProps<{ userMaxRoomNum: number, userMaxPeoplePerRoom: number }>();
 const emit = defineEmits(['startSearch', 'changeBreak']);
@@ -10,10 +11,6 @@ let roomNum = ref(1);
 let breakfast = ref(2);
 let breakInfo = ref('是否早餐');
 let current = ref(new Date());
-const disabledDate = (select: Date) => {
-  let now = new Date().getTime();
-  return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
-};
 const changeBreak = () => {
   breakfast.value = (breakfast.value + 1) % 3;
   if (breakfast.value == 1) {
@@ -27,10 +24,6 @@ const changeBreak = () => {
   console.log('改变早餐状态emit已送出');
 };
 const startSearch = () => {
-  if (value.value === '') console.log('empty');
-  else {
-    console.log(value.value);
-  }
   emit('startSearch', value.value, peopleNum.value, roomNum.value, breakfast.value);
 };
 </script>
@@ -45,8 +38,8 @@ const startSearch = () => {
           type="daterange"
           unlink-panels
           range-separator="至"
-          :start-placeholder="dateFormat(current.getTime(),'yyyy年mm月dd日')"
-          :end-placeholder="dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日' )"
+          :start-placeholder="current.getHours()>=13 ? dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日' ):dateFormat(current.getTime(),'yyyy年mm月dd日')"
+          :end-placeholder="current.getHours()>=13 ? dateFormat(current.getTime()+ 2000*60*60*24,'yyyy年mm月dd日' ):dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日')"
           format="YYYY年MM月DD日"
           :disabled-date="disabledDate"
         />

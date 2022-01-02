@@ -35,7 +35,7 @@ interface BookHotelI {
   hotelId: number,
   checkInDate: string,
   checkOutDate: string,
-  couponChosen?: number[],
+  selectedCoupons?: number[],
   configId: number,
   residents: string[]
 }
@@ -50,6 +50,8 @@ interface CouponListItemO {
 
 interface BookInfoO {
   totalPrice: number,
+  actualPrice: number,
+  discountTotal: number,
   availableCoupon: CouponListItemO[]
 }
 

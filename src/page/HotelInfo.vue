@@ -85,11 +85,10 @@ const changeBreakfast = (param: number) => {
   } else {
     displayRoomList.value = selectedRoomList.value;
   }
-  ElMessage.success('早餐状态修改成功！');
 };
 const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast: number) => {
   const temp = roomInfoList.value;
-  if (time !== '') {
+  if (time !== '' && !time) {
     selectedTime.value = time;
   }
   roomNum.value = roomNumber;
@@ -98,6 +97,7 @@ const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast
     if (room.peopleMax >= peopleNum && room.total >= roomNumber)
       selectedRoomList.value.push(room);
   }
+  //TODO  按照时间筛选房间型号
   changeBreakfast(breakfast);
   ElMessage.success('房型筛选成功！');
 };
@@ -115,11 +115,15 @@ const book = (roomId: number) => {
       },
     });
   else {
-    let time = current.value.getTime();
-    time = time + 1000 * 60 * 60 * 24;
+    let start = current.value.getTime();
+    let end = start + 1000 * 60 * 60 * 24;
+    if (current.value.getHours() >= 14) {
+      start += 1000 * 60 * 60 * 24;
+      end = start + 1000 * 60 * 60 * 24;
+    }
     router.push({
       path: '/order',
-      query: {roomId: roomId, start: current.value.getTime(), end: time, num: roomNum.value, hotelId: hotelId},
+      query: {roomId: roomId, start: start, end: end, num: roomNum.value, hotelId: hotelId},
     });
   }
 };

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, computed, reactive, watch, Ref} from 'vue';
+import {ref, computed, reactive, watch} from 'vue';
 import {userResidentsAPI} from '../api/userApi';
 import {BookHotelAPI, PreviewHotelAPI} from '../api/orderApi';
 import {useAsyncState} from '@vueuse/core';
@@ -10,6 +10,7 @@ import {ElMessage} from 'element-plus';
 import {BriefHotelInfoAPI, GetRoomInfoAPI} from '../api/hotelApi';
 import {hotelStarMap, roomTypeMap} from '../util/globalMap';
 import CouponCard from '../component/couponCard.vue';
+import {disabledDate} from '../util/globalMap';
 
 const selectedCoupon = ref(-1);
 const couponChosen = ref<number[]>([]);
@@ -267,6 +268,7 @@ const book = async () => {
                 unlink-panels
                 range-separator="至"
                 format="YYYY年MM月DD日"
+                :disabled-date="disabledDate"
               />
               <div
                 class="room_num"
@@ -368,7 +370,7 @@ const book = async () => {
                   class="price_content"
                   style="margin-left:5px; display: inline-flex;align-items: center;justify-content: center"
                 >
-                  {{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}
+                  {{ selectedResident.length === 0 ? '请先选择入住人' : '￥' + preview?.actualPrice }}
                 </span>
               </div>
             </div>
@@ -422,7 +424,7 @@ const book = async () => {
                       >
                         <span
                           style="color: #287dfa;font-weight: 700;"
-                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}</span>
+                        >{{ selectedResident.length === 0 ? '选择入住人' : '￥' + preview?.actualPrice }}</span>
                       </div>
                     </span>
                   </li>
@@ -441,7 +443,7 @@ const book = async () => {
                       >
                         <span
                           style="color: #0f294d;font-weight: 400;font-size: 14px;"
-                        >{{ preview?.totalPrice === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}</span>
+                        >{{ selectedResident.length === 0 ? '请先选择入住人' : '￥' + preview?.totalPrice }}</span>
                       </span>
                     </div>
                   </li>
@@ -458,7 +460,7 @@ const book = async () => {
                         class="price_cell"
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
-                        <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">- ¥ 200</span>
+                        <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">{{ '-￥' + preview?.discountTotal }}</span>
                       </span>
                     </div>
                   </li>

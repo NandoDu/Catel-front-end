@@ -2,6 +2,7 @@
 import {reactive, ref} from 'vue';
 import * as events from 'events';
 import dateFormat from 'dateformat';
+import {disabledDate} from '../../util/globalMap';
 
 let priceRangeList = reactive([
   '200元以下',
@@ -22,10 +23,6 @@ const currentPriceIndex = ref(-1);
 const filterLocation = ref('酒店商圈');
 const showFilterPrice = ref('预期价格');
 const emit = defineEmits(['screen']);
-const disabledDate = (select: Date) => {
-  let now = new Date().getTime();
-  return (now && select.getTime() < now - 3600 * 1000 * 24 || select.getTime() > now + 3600 * 1000 * 28 * 24);
-};
 const priceRangeClick = (index: number) => {
   if (currentPriceIndex.value === index) {
     console.log('重置');
