@@ -201,27 +201,24 @@ const showModifyInfo = () => modifyInfo.value.open();
             信用值变更
           </div>
           <div class="creditRecordListPart">
+            <el-empty
+              :image-size="80"
+              description="没有信用值变更记录哦！"
+              v-if="creditHistory.length === 0"
+            />
             <CreditEntry
               v-for="(entry, index) in creditHistory"
               :key="index"
               :record="entry"
               :index="index"
+              v-else
             />
-            <div
-              class="noCreditEntry"
-              v-if="creditHistory.length === 0"
-            >
-              <img
-                src="src/asset/empty.png"
-                class="noCreditEntryIcon"
-              >
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
@@ -238,4 +235,4 @@ const showModifyInfo = () => modifyInfo.value.open();
   </VirryModal>
 </template>
 
-<style src="./PersonalInfo.scss" lang="scss" scoped />
+<style src="./PersonalInfo.scss" lang="scss" scoped/>
