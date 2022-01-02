@@ -52,7 +52,7 @@ interface BookInfoO {
   totalPrice: number,
   actualPrice: number,
   discountTotal: number,
-  availableCoupon: CouponListItemO[]
+  availableCoupons: CouponListItemO[]
 }
 
 interface BookHotelO {
