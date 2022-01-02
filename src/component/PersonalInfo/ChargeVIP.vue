@@ -4,11 +4,7 @@ import BiggerButton from '../Header/BiggerButton.vue';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import {ChargeVipAPI} from '../../api/userApi';
-import user from '../../store/user';
 
-defineProps<{
-  isUpdate: boolean
-}>();
 const emit = defineEmits<{
   (e: 'needRefresh'): void
 }>();

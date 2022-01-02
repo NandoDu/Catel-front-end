@@ -8,10 +8,6 @@ import {ElMessage} from 'element-plus';
 import useTranslation from '../../config/i18n/useTranslation';
 import {ChangePassAPI} from '../../api/userApi';
 
-defineProps<{
-  isUpdate: boolean
-}>();
-
 const store = useTypedStore();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
 const userId = computed(() => store.getters['user/userId']);
