@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import {CouponListItemO} from '../api/orderApi';
 import {CircleCheck, CircleCheckFilled} from '@element-plus/icons';
+import {ElMessage} from 'element-plus';
 
 defineProps<{ coupon: CouponListItemO, index: number, activeIndex: number }>();
 const emit = defineEmits(['select']);
-const selectCoupon = (currentIndex: number, activeIndex: number, couponId: number) => {
-  emit('select', currentIndex, activeIndex, couponId);
+const selectCoupon = (currentIndex: number, activeIndex: number, couponId: number, available: boolean) => {
+  if (!available)
+    ElMessage.warning('不满足该优惠券要求');
+  else
+    emit('select', currentIndex, activeIndex, couponId);
 };
 </script>
 <template>
   <div
     class="coupon-card-container"
     :class="coupon.available? 'coupon-available' : 'coupon-unavailable'"
-    @click="selectCoupon(index,activeIndex,coupon.id)"
+    @click="selectCoupon(index,activeIndex,coupon.id,coupon.available)"
   >
     <div class="coupon-content">
       <div class="coupon-ti-dis">
@@ -65,6 +69,7 @@ const selectCoupon = (currentIndex: number, activeIndex: number, couponId: numbe
 }
 .coupon-unavailable{
   cursor: not-allowed;
+  filter: grayscale(1);
 }
 
 .coupon-content {
