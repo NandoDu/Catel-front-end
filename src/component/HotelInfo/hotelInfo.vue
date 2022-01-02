@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {hotelStarMap, bizRegionMap} from '../../util/globalMap';
 
-defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string }>();
+const props =
+defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
+console.log(props.hotelPortrait);
 </script>
 <template>
   <section
@@ -45,78 +47,80 @@ defineProps<{ hotelName: string, description: string, hotelStar: string, address
               <img
                 class="bigpic_img"
                 alt="酒店图片"
-                src="//ak-d.tripcdn.com/images/fd/hotel/g3/M07/8F/43/CggYGVX55jyAWTnGAA0-M7m4m2s797_R_600_400_R5_D.jpg"
+                :src="hotelLandscape"
                 style="height: 100%;width: 100%"
               >
             </div>
           </div>
           <div class="child_box">
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic1"
-                />
-              </div>
-            </div>
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic2"
-                />
-              </div>
-            </div>
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic3"
-                />
-              </div>
-            </div>
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic4"
-                />
-              </div>
-            </div>
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic5"
-                />
-              </div>
-            </div>
-            <div class="album_item">
-              <div
-                class="m_pic"
-                style="width: 100%; height: 100%"
-              >
-                <div
-                  class="m_pic_item"
-                  id="pic6"
-                />
-              </div>
-            </div>
+            <img :src="hotelPortrait" alt="" style="height: 100%; width: 100%">
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                >-->
+<!--                  <img src="//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                  id="pic2"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                  id="pic3"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                  id="pic4"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                  id="pic5"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="album_item">-->
+<!--              <div-->
+<!--                class="m_pic"-->
+<!--                style="width: 100%; height: 100%"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="m_pic_item"-->
+<!--                  id="pic6"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </div>
       </div>
@@ -245,14 +249,14 @@ body {
 
 .head_album .big_pic {
   position: relative;
-  width: 59.8%;
+  width: 65%;
   height: 100%;
   display: inline-block;
 }
 
 .head_album .child_box {
   display: inline-block;
-  width: 40.2%;
+  width: 35%;
   height: 100%;
 }
 
@@ -288,7 +292,7 @@ body {
 }
 
 #pic1 {
-  background-image: url("//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg");
+  /*background-image: url("//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg");*/
 }
 
 #pic2 {

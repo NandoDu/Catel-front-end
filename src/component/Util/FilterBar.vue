@@ -100,7 +100,7 @@ const priceDiyLow = ref('0');
 const priceDiyHigh = ref('0');
 const setPriceDiyLow = (event: events) => {
   currentPriceIndex.value = -1;
-  priceDiyLow.value = event.currentTarget.value;
+  priceDiyLow.value = event.currentTar-get.value;
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value;
   }

@@ -139,6 +139,8 @@ const book = (roomId: number) => {
       :comment-count="commentList?.length"
       :announcement="hotelInfo?.announcement"
       :biz-region="hotelInfo?.bizRegion"
+      :hotel-landscape="hotelInfo?.landscape"
+      :hotel-portrait="hotelInfo?.portrait"
     />
     <DatePicker
       @changeBreak="changeBreakfast"
