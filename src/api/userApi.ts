@@ -5,6 +5,7 @@ export * from './user/userResidents';
 export * from './user/addResident';
 export * from './user/deleteResident';
 export * from './user/register';
+export * from './user/userCreditHistory';
 
 interface RoomInfoItemO {
   id: number,
