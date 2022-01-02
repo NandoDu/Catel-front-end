@@ -114,8 +114,8 @@ let roomNumber = ref('');
 const book = async () => {
   try {
     const result = await BookHotelAPI(getArgs());
-    ElMessage.success({message: '下单成功,系统将在3s后自动跳转订单详情', center: true});
-    setTimeout(() => router.push(`/order-detail/${result}`), 3000);
+    ElMessage.success({message: '下单成功,系统将在1.5s后自动跳转订单详情', center: true});
+    setTimeout(() => router.push(`/order-detail/${result}`), 1500);
   } catch (_) {
     console.log('后端错误');
   }
@@ -322,6 +322,7 @@ const book = async () => {
               优惠券
             </h3>
             <div
+              v-if="preview?.availableCoupons.length !== 0"
               class="coupon-list"
             >
               <CouponCard
@@ -333,6 +334,10 @@ const book = async () => {
                 @select="selectCoupon"
               />
             </div>
+            <el-empty
+              description="没有可用的优惠券哦！"
+              v-else
+            />
           </div>
           <div class="payment">
             <div
@@ -443,8 +448,8 @@ const book = async () => {
                         style="display: inline-block;flex: 1;text-align: right;"
                       >
                         <span style="color: #ff6f00;font-weight: 400;font-size: 14px;">{{
-                            '-￥' + preview?.discountTotal
-                                                                                       }}</span>
+                          '-￥' + preview?.discountTotal
+                        }}</span>
                       </span>
                     </div>
                   </li>
@@ -490,4 +495,4 @@ const book = async () => {
   </div>
 </template>
 
-<style src="./OrderDetail.scss" lang="scss" scoped />
+<style src="./OrderDetail.scss" lang="scss" scoped/>
