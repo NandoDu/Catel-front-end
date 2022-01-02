@@ -6,7 +6,7 @@ import CreditEntry from '../component/PersonalInfo/CreditEntry.vue';
 import {useAsyncState} from '@vueuse/core';
 import {ordersOfUserAPI} from '../api/orderApi';
 import {useTypedStore} from '../store';
-import {userResidentsAPI} from '../api/userApi';
+import {userCreditHistoryAPI, userResidentsAPI} from '../api/userApi';
 import VirryModal from '../component/Util/VirryModal.vue';
 import ResidentAddition from '../component/PersonalInfo/ResidentAddition.vue';
 import ModifyPassword from '../component/PersonalInfo/ModifyPassword.vue';
@@ -27,8 +27,14 @@ const premium2msg = {
 const {state: orders} = useAsyncState(ordersOfUserAPI({id: userState.userId!}), []);
 const {state: residents} = useAsyncState(userResidentsAPI({id: userState.userId!}), []);
 
+const {state: creditHistory} = useAsyncState(userCreditHistoryAPI({userId: userState.userId!}), []);
+
+
 const refreshResident = async () => {
   residents.value = await userResidentsAPI({id: userState.userId!});
+};
+const refreshOrder = async () => {
+  orders.value = await ordersOfUserAPI({id: userState.userId!});
 };
 
 const activatedOrders = reactive<number[]>([]);
@@ -72,6 +78,7 @@ const showModifyInfo = () => modifyInfo.value.open();
             :index="index"
             :if-operation-show="activatedOrders.includes(index)"
             @toggle="activeOrderItem"
+            @needRefresh="refreshOrder"
           />
         </div>
       </div>
@@ -93,7 +100,7 @@ const showModifyInfo = () => modifyInfo.value.open();
             <div class="userAvatarAndName">
               <div class="userAvatar">
                 <img
-                  src="src/asset/cat.jpeg"
+                  :src="userState.avatar"
                   class="userAvatarImg"
                   alt=""
                 >
@@ -199,7 +206,8 @@ const showModifyInfo = () => modifyInfo.value.open();
             <CreditEntry
               v-for="(record, index) in orders"
               :key="index"
-              :record="{index, ...record}"
+              :record="record"
+              :index="index"
             />
             <div
               class="noCreditEntry"
@@ -215,19 +223,21 @@ const showModifyInfo = () => modifyInfo.value.open();
       </div>
     </div>
   </div>
-
+  
   <VirryModal ref="residentAddition">
     <ResidentAddition @need-refresh="refreshResident" />
   </VirryModal>
   <VirryModal ref="modifyPassword">
-    <ModifyPassword is-update />
+    <ModifyPassword />
   </VirryModal>
   <VirryModal ref="chargeVip">
-    <ChargeVIP is-update />
+    <ChargeVIP
+      @need-refresh="changeVipType"
+    />
   </VirryModal>
   <VirryModal ref="modifyInfo">
     <ModifyInfo is-update />
   </VirryModal>
 </template>
 
-<style src="./PersonalInfo.scss" lang="scss" scoped />
+<style src="./PersonalInfo.scss" lang="scss" scoped/>

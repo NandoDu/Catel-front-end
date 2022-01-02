@@ -1,5 +1,7 @@
 import apiCon, {HttpMethod} from './apiCon';
 
+export * from './order/annulOrder';
+
 interface OrdersOfUserI {
   id: number;
 }
@@ -15,16 +17,6 @@ interface OrderItemInfo {
   roomType: string,
   breakfast: boolean,
   img: string,
-}
-
-interface CreditRecord {
-  orderState: string;
-  price: number;
-  hotelName: string;
-  hotelAddress: string;
-  checkInDate: string;
-  checkOutDate: string;
-  creditDelta: number;
 }
 
 type OrdersOfUserO = OrderItemInfo[];
@@ -63,7 +55,7 @@ interface BookHotelO {
 const PreviewHotelAPI = apiCon<BookHotelI, BookInfoO>(HttpMethod.Post, '/order/preview');
 const BookHotelAPI = apiCon<BookHotelI, BookHotelO>(HttpMethod.Post, '/order/');
 export {
-  OrdersOfUserI, OrderItemInfo, CreditRecord, OrdersOfUserO, ordersOfUserAPI,
+  OrdersOfUserI, OrderItemInfo, OrdersOfUserO, ordersOfUserAPI,
   BookHotelI, BookInfoO, CouponListItemO, BookHotelO, PreviewHotelAPI, BookHotelAPI,
 };
 

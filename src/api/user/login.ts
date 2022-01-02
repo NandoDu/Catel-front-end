@@ -12,6 +12,7 @@ interface LoginO {
   credit: number;
   userType: string;
   vipType: string;
+  avatar: string;
 }
 
 const login = apiCon<LoginI, LoginO>(HttpMethod.Post, '/user/login');

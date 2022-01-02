@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import {CreditRecord} from '../../api/orderApi';
+import {CreditEntry} from '../../api/userApi';
 
-defineProps<{
-  record: CreditRecord | { index: number }
+const prop = defineProps<{
+  record: CreditEntry
+  index: number
 }>();
+
+console.log(prop.record);
 
 </script>
 
@@ -13,7 +16,7 @@ defineProps<{
   >
     <div
       class="creditRecordCard"
-      :class="{'creditRecordFirst' : record.index === 0}"
+      :class="{'creditRecordFirst' : index === 0}"
       v-if="record.orderState !== 'Available'"
     >
       <div
@@ -93,83 +96,99 @@ defineProps<{
   display: flex;
   flex-direction: row;
 }
+
 .creditRecordFirst {
   margin-top: 1px;
 }
+
 .addCreditIcon {
   align-self: center;
   margin-left: 20px;
 }
+
 .addCreditImg {
   width: 25px;
   height: 25px;
   margin-top: 5px;
 }
+
 .addCreditNum {
   align-self: center;
   color: red;
   width: 70px;
 }
+
 .minusCreditIcon {
   align-self: center;
   margin-left: 20px;
 }
+
 .minusCreditImg {
   width: 25px;
   height: 25px;
   margin-top: 5px;
 }
+
 .minusCreditNum {
   align-self: center;
   color: green;
   width: 70px;
 }
+
 .recordHotelNameAndAddress {
   display: flex;
   flex-direction: column;
   margin-left: 25px;
 }
+
 .recordHotelName {
   width: 160px;
   margin-top: 5px;
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
   color: black;
   opacity: .7;
   font-size: 14px;
 }
+
 .recordHotelAddress {
   margin-top: 5px;
   display: flex;
   flex-direction: row;
 }
+
 .recordHotelAddressText {
   width: 160px;
   text-overflow: ellipsis;
-  white-space:nowrap;
-  overflow:hidden;
+  white-space: nowrap;
+  overflow: hidden;
   color: #999999;
   font-size: 12px;
 }
+
 .recordDateInfo {
   margin-left: 35px;
   display: flex;
   flex-direction: column;
 }
+
 .recordDateInInfo {
   display: flex;
   flex-direction: row;
 }
+
 .recordDateOutInfo {
   display: flex;
   flex-direction: row;
 }
+
 .recordDateIn {
   margin-top: 5px;
   margin-left: 5px;
   font-size: 14px;
 }
+
 .recordDateInIcon {
   margin-top: 5px;
   background-color: orange;
@@ -180,11 +199,13 @@ defineProps<{
   color: white;
   font-size: 11px;
 }
+
 .recordDateOut {
   margin-top: 5px;
   margin-left: 5px;
   font-size: 14px;
 }
+
 .recordDateOutIcon {
   margin-top: 5px;
   background-color: dodgerblue;
@@ -195,6 +216,7 @@ defineProps<{
   color: white;
   font-size: 11px;
 }
+
 .recordSeparatingLine {
   width: 1px;
   height: 38px;
