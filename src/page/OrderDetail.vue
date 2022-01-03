@@ -108,9 +108,6 @@ const selectCoupon = (selectedIndex: number, activeIndex: number, couponId: numb
   callPrice();
 };
 
-let options = new Array(5).fill(0).map((_, i) => ({value: i + 1, label: i + 1}));
-let roomNumber = ref('');
-
 const book = async () => {
   try {
     const result = await BookHotelAPI(getArgs());
@@ -244,7 +241,7 @@ const book = async () => {
             <div class="date_and_room">
               <el-date-picker
                 size="large"
-                style="border-radius: 10px;"
+                style="border-radius: 10px;margin-left: 170px"
                 v-model="dataRange"
                 type="daterange"
                 unlink-panels
@@ -254,31 +251,12 @@ const book = async () => {
               />
               <div
                 class="room_num"
-                style="min-width: 175px;display: flex;flex-direction: row;align-items: center"
+                style="min-width: 0;display: none;"
               >
-                <div
-                  class="num_tile"
-                  style="color:#455873;font-size: 16px;font-weight: 400;letter-spacing: 0;margin-right: 8px"
-                >
-                  房间数
-                </div>
                 <div
                   class="num_content"
                   style="display: inline-block;"
-                >
-                  <el-select
-                    v-model="roomNumber"
-                    placeholder="请选择房间数"
-                    size="medium"
-                  >
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    />
-                  </el-select>
-                </div>
+                />
               </div>
             </div>
             <h3 style="font-size: 20px;line-height: 26px;margin: 0">
@@ -288,7 +266,7 @@ const book = async () => {
               class="attention"
               style="color: #8592a6;font-size: 14px;line-height: 18px;padding-top: 8px"
             >
-              请按实际入住人数填写，姓名与证件保持一致
+              每个房间仅需提供一位入住人信息，入住人数对应房间数，办理入住时需要出示对应入住人身份的身份证件
             </div>
             <div
               class="input_info"

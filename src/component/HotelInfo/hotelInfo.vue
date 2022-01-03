@@ -2,7 +2,7 @@
 import {hotelStarMap, bizRegionMap} from '../../util/globalMap';
 
 const props =
-defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
+  defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
 console.log(props.hotelPortrait);
 </script>
 <template>
@@ -53,74 +53,11 @@ console.log(props.hotelPortrait);
             </div>
           </div>
           <div class="child_box">
-            <img :src="hotelPortrait" alt="" style="height: 100%; width: 100%">
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                >-->
-<!--                  <img src="//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg" alt="">-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                  id="pic2"-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                  id="pic3"-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                  id="pic4"-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                  id="pic5"-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="album_item">-->
-<!--              <div-->
-<!--                class="m_pic"-->
-<!--                style="width: 100%; height: 100%"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="m_pic_item"-->
-<!--                  id="pic6"-->
-<!--                />-->
-<!--              </div>-->
-<!--            </div>-->
+            <img
+              :src="hotelPortrait"
+              alt=""
+              style="height: 100%; width: 100%"
+            >
           </div>
         </div>
       </div>
@@ -261,7 +198,7 @@ body {
   height: 100%;
 }
 
-.child_box .album_item {
+.child_box {
   background-size: cover;
   width: 50%;
   height: 33.3%;
@@ -269,51 +206,6 @@ body {
   padding-left: 8px;
   padding-bottom: 8px;
   box-sizing: border-box;
-}
-
-.album_item .m_pic {
-  display: inline-flex;
-  opacity: 1;
-  transition: all .45s cubic-bezier(.645, .045, .355, 1) 0s;
-  justify-content: center;
-  align-items: center;
-}
-
-.m_pic .m_pic_item {
-  background-size: cover;
-  width: 100%;
-  font-family: PingFangSC-Regular, serif;
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  text-align: center;
-  height: 100%;
-  /*background-image: url("//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg");*/
-  background-position: center center;
-  background-repeat: no-repeat no-repeat;
-}
-
-#pic1 {
-  /*background-image: url("//ak-d.tripcdn.com/images/020011200082g4a9a08D4_R_200_150_R5_D.jpg");*/
-}
-
-#pic2 {
-  background-image: url("//ak-d.tripcdn.com/images/20070k000000bcvg79B6B_R_200_150_R5_D.jpg");
-}
-
-#pic3 {
-  background-image: url("//ak-d.tripcdn.com/images/0205d1200081to4imF6B9_R_200_150_R5_D.jpg");
-}
-
-#pic4 {
-  background-image: url("//ak-d.tripcdn.com/images/0204h1200082k5mb52B78_R_200_150_R5_D.jpg");
-}
-
-#pic5 {
-  background-image: url("//ak-d.tripcdn.com/images/0204h1200081tq5ic5F4B_R_200_150_R5_D.jpg");
-}
-
-#pic6 {
-  background-image: url("//ak-d.tripcdn.com/images/fd/hotel/g2/M03/2B/E3/Cghzf1TccJCAG_ZUAAvd3wXU1Yg329_R_200_150_R5_D.jpg");
 }
 
 .head_context {
