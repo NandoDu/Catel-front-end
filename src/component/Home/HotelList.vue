@@ -18,19 +18,17 @@ const showMoreLines = () => {
     v-show="lineNum < showLines"
   >
     <div
-      v-for="(hotel, index) in hotelsList"
-      :key="index"
+      v-for="(hotel, index) in hotelsList.slice(lineNum*5,(lineNum+1)*5)"
+      :key="hotel.id"
     >
       <div
-        v-if="index / (hotelLine * 5) < 1 && index >= (hotelLine - 1) * 5"
+        style="position: relative"
       >
         <div
           class="hotelItem"
           :class="{'hotelItemHead' : index % 5 === 0}"
         >
-          <h4
-            style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0 #383838"
-          >
+          <h4>
             {{ hotel['name'].length > 8 ? hotel['name'].substring(0, 7) + '...' : hotel['name'] }} >
           </h4>
           <img
@@ -44,7 +42,7 @@ const showMoreLines = () => {
       </div>
     </div>
   </div>
-  
+
   <div
     class="showMore"
     @click="showMoreLines"
@@ -78,10 +76,12 @@ const showMoreLines = () => {
 .hotelList {
   display: flex;
   flex-direction: row;
+  gap: 20px;
+  width: 100%;
 }
 
 .firstLine {
-  margin-top: -60px;
+  margin-top: 0;
 }
 
 .showMore {
@@ -92,9 +92,6 @@ const showMoreLines = () => {
   color: #515151;
   cursor: pointer;
   font-weight: bolder;
-}
-
-.showMore:hover {
 }
 
 .showMore:hover .showMoreImg {
@@ -136,22 +133,14 @@ const showMoreLines = () => {
   height: 350px;
   width: 199px;
   border-radius: 10px;
-  margin-left: 20px;
-}
 
-//.hotelItem:hover {
-//  cursor: pointer;
-//}
-
-//.hotelItemHead:hover {
-//  cursor: pointer;
-//}
-
-.hotelItemHead {
-  height: 350px;
-  width: 199px;
-  border-radius: 10px;
-  margin-left: 0;
+  h4 {
+    position: absolute;
+    left: 10px;
+    color: white;
+    font-size: 18px;
+    text-shadow: 1px 1px 0 #383838;
+  }
 }
 
 .showAll {
@@ -161,7 +150,7 @@ const showMoreLines = () => {
   font-size: 15px;
 }
 
-.hotelItemPic{
+.hotelItemPic {
   cursor: pointer;
 }
 </style>
