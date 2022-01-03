@@ -38,8 +38,8 @@ const startSearch = () => {
           type="daterange"
           unlink-panels
           range-separator="至"
-          :start-placeholder="current.getHours()>=13 ? dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日' ):dateFormat(current.getTime(),'yyyy年mm月dd日')"
-          :end-placeholder="current.getHours()>=13 ? dateFormat(current.getTime()+ 2000*60*60*24,'yyyy年mm月dd日' ):dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日')"
+          :start-placeholder="dateFormat(current.getTime(),'yyyy年mm月dd日')"
+          :end-placeholder="dateFormat(current.getTime()+ 1000*60*60*24,'yyyy年mm月dd日')"
           format="YYYY年MM月DD日"
           :disabled-date="disabledDate"
         />

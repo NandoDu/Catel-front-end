@@ -5,10 +5,7 @@ const couponTypeMap = {'Multiple': '多间优惠券', 'Vip': '会员优惠券', 
 const reverseBizRegionMap = {'西单': 'XiDan', '东单': 'DongDan'};
 const disabledDate = (select: Date) => {
   const current = new Date();
-  if (current.getHours() >= 14)
-    return (current && select.getTime() < current.getTime() || select.getTime() > current.getTime() + 3600 * 1000 * 28 * 24);
-  else
-    return (current && select.getTime() < current.getTime() - 3600 * 1000 * 24 || select.getTime() > current.getTime() + 3600 * 1000 * 28 * 24);
+  return (current && select.getTime() < current.getTime() - 3600 * 1000 * 24 || select.getTime() > current.getTime() + 3600 * 1000 * 180 * 24);
 };
 
 
