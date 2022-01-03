@@ -134,10 +134,16 @@ const annulOrder = async () => {
           class="cancelOperation"
           @click="showConfirm"
         >
-          <div class="cancelIcon" v-show="orderInfo.orderState === 'Available'">
+          <div
+            class="cancelIcon"
+            v-show="orderInfo.orderState === 'Available'"
+          >
             B
           </div>
-          <div class="cancelText" v-show="orderInfo.orderState === 'Available'">
+          <div
+            class="cancelText"
+            v-show="orderInfo.orderState === 'Available'"
+          >
             撤销
           </div>
         </div>
@@ -145,10 +151,16 @@ const annulOrder = async () => {
           class="reviewOperation"
           @click="showCommentModal"
         >
-          <div class="reviewIcon" v-show="orderInfo.orderState === 'Finished' || orderInfo.orderState === 'Canceled'">
+          <div
+            class="reviewIcon"
+            v-show="orderInfo.orderState === 'Finished'"
+          >
             B
           </div>
-          <div class="reviewText" v-show="orderInfo.orderState === 'Finished' || orderInfo.orderState === 'Canceled'">
+          <div
+            class="reviewText"
+            v-show="orderInfo.orderState === 'Finished'"
+          >
             评价
           </div>
         </div>

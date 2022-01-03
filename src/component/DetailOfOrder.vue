@@ -60,37 +60,11 @@ console.log(hotelInfo);
         :value="hotelInfo.checkInDate"
       />
       <SmallBox
-        title="结束日期"
+        title="退房日期"
         :value="hotelInfo.checkOutDate"
       />
     </div>
     <hr style="width: 100%; border-top: 1px solid gray;">
-<!--    <div class="detail">-->
-<!--      <div class="hotelArea">-->
-<!--        <div class="hotelIcon">-->
-<!--          <img src="/src/asset/jiudian.png" class="hotelIconPic">-->
-<!--        </div>-->
-<!--        <div class="hotel">-->
-<!--          酒店：{{ hotelInfo.hotelName }}-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="creditDeltaArea">-->
-<!--        <div class="creditDeltaArea">-->
-<!--          <img src="/src/asset/xinyongka.png" class="creditDeltaIconPic">-->
-<!--        </div>-->
-<!--        <div class="creditDelta">-->
-<!--          信用值变更：{{ hotelInfo.creditDelta }}-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="priceArea">-->
-<!--        <div class="priceIcon">-->
-<!--          <img src="/src/asset/jiageqian.png" class="priceIconPic">-->
-<!--        </div>-->
-<!--        <div class="price">-->
-<!--          价格：{{ hotelInfo.price }}-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
   </div>
 </template>
 
