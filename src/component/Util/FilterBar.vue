@@ -2,6 +2,7 @@
 import {reactive, ref} from 'vue';
 import * as events from 'events';
 import dateFormat from 'dateformat';
+import {disabledDate} from '../../util/globalMap';
 
 let priceRangeList = reactive([
   '200元以下',
@@ -382,6 +383,7 @@ const screen = () => {
   flex-direction: row;
   width: 190px;
   cursor: pointer;
+  margin-left: -30px;
 }
 
 .dateArea {

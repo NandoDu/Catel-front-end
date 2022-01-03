@@ -11,6 +11,7 @@ import {BriefHotelInfoAPI, GetRoomInfoAPI} from '../api/hotelApi';
 import {hotelStarMap, roomTypeMap} from '../util/globalMap';
 import CouponCard from '../component/couponCard.vue';
 import {disabledDate} from '../util/globalMap';
+import {PriceTag} from '@element-plus/icons';
 
 const selectedCoupon = ref(-1);
 const couponChosen = ref<number[]>([]);
@@ -175,6 +176,14 @@ const book = async () => {
                   </div>
                   <div class="text">
                     <span>{{ singleRoomInfo.breakfast ? '有' : '无' }}早餐</span>
+                  </div>
+                </div>
+                <div class="facility_item">
+                  <div style="margin-right: 8px;font-size: 16px">
+                    <el-icon><price-tag /></el-icon>
+                  </div>
+                  <div class="text">
+                    <span>房间单价￥{{ singleRoomInfo.price }}元</span>
                   </div>
                 </div>
               </div>

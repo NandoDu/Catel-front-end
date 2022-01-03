@@ -78,14 +78,6 @@ const submitModify = async () => {
       :placeholder="userInfo.email"
       v-model="userInfo.email"
     />
-    <div style="width: 100%;padding-left: 10px">
-      <div style="margin-top: 10px;margin-bottom: 10px">
-        用户类型
-      </div>
-      <div style="margin-bottom: 20px;padding-left: 4px">
-        {{ userInfo.userType }}
-      </div>
-    </div>
     <div class="inline">
       <BiggerButton
         color="red"
