@@ -1,3 +1,7 @@
 @mixin light {
   box-shadow: 2px 2px 12px 0 rgba(0, 0, 0, 0.2);
 }
+
+.shadow-3d {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.06) 0 1px 2px 0;
+}

@@ -77,7 +77,7 @@ $duration: 200ms;
 
   ul {
     all: unset;
-    @include Shadow.light;
+    @extend .shadow-3d;
     position: absolute;
     width: 100%;
     left: 0;
