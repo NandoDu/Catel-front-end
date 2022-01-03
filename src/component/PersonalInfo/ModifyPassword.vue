@@ -6,7 +6,7 @@ import BiggerButton from '../Header/BiggerButton.vue';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import useTranslation from '../../config/i18n/useTranslation';
-import {ChangePassAPI} from '../../api/userApi';
+import {changePassAPI} from '../../api/userApi';
 
 const store = useTypedStore();
 const closeModal = inject<{ (): void } | undefined>('VirryModal.close', undefined);
@@ -40,31 +40,30 @@ const submitModify = async () => {
     firstInput.value.focus();
     return;
   }
-  if (pwdInfo.oldPwd != pwdInfo.newPwd) {
+  
+  if (pwdInfo.newPwd != pwdInfo.confirm) {
     ElMessage.error({
       message: '两次新密码输入不一致',
       center: true,
     });
+    return;
   }
-  ChangePassAPI({
-    id: userId.value,
-    oldPass: pwdInfo.oldPwd,
-    newPass: pwdInfo.newPwd,
-  }).then(() => {
+  
+  try {
+    await changePassAPI({
+      id: userId.value,
+      oldPass: pwdInfo.oldPwd,
+      newPass: pwdInfo.newPwd,
+    });
     ElMessage.success({
       message: ('修改成功'),
       center: true,
     });
-  }).catch((e) => {
+    console.log('修改密码');
+    closeModal?.();
+  } catch (e) {
     console.log(e);
-  });
-  // await xxAPI({
-  //   id: pwdInfo.id,
-  //   oldPwd: pwdInfo.oldPwd,
-  //   newPwd: pwdInfo.newPwd
-  // });
-  console.log('修改密码');
-  closeModal?.();
+  }
 };
 </script>
 
@@ -73,17 +72,20 @@ const submitModify = async () => {
     <h3>修改密码</h3>
     <LineInput
       label="原密码"
+      password
       placeholder="请输入原有密码"
       v-model="pwdInfo.oldPwd"
       ref="firstInput"
     />
-    
+
     <LineInput
       label="新密码"
+      password
       placeholder="请输入新密码"
       v-model="pwdInfo.newPwd"
     />
     <LineInput
+      password
       label="确认新密码"
       placeholder="请再次确认新密码"
       v-model="pwdInfo.confirm"

@@ -6,6 +6,8 @@ export * from './user/addResident';
 export * from './user/deleteResident';
 export * from './user/register';
 export * from './user/userCreditHistory';
+export * from './user/get/user';
+export * from './user/post/pwd';
 
 interface RoomInfoItemO {
   id: number,
@@ -75,14 +77,6 @@ interface CarouselItemO {
 type CarouselO = CarouselItemO[]
 const GetCarouselAPI = apiCon<CarouselI, CarouselO>(HttpMethod.Get, '/hotel/hot');
 
-interface changePassI {
-  id: number,
-  oldPass: string,
-  newPass: string
-}
-
-const ChangePassAPI = apiCon<changePassI>(HttpMethod.Post, '/user/pwd');
-
 interface chargeVipI {
   id: number,
   vipType: string,
@@ -108,7 +102,6 @@ export {
   RoomInfoItemO, RoomInfoO, HotelInfoI, HotelInfoO, HotelInfoAPI,
   GetCommentI, GetCommentItemO, GetCommentO, GetCommentAPI,
   CarouselI, CarouselItemO, CarouselO, GetCarouselAPI,
-  changePassI, ChangePassAPI,
   chargeVipI, ChargeVipAPI,
   modifyUserInfoI, modifyResidentInfoI, ModifyResidentInfoAPI, ModifyUserInfoAPI,
 };
