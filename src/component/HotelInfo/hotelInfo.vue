@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import {hotelStarMap} from '../../util/globalMap';
+import {ElMessageBox} from 'element-plus';
 
 const props =
-  defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
+  defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string }>();
+
+const showDescription = (description: string) => {
+  ElMessageBox.alert(description, '酒店简介', {
+    showConfirmButton: false,
+    closeOnClickModal: true,
+    closeOnPressEscape: true,
+  });
+};
 </script>
 <template>
   <section
@@ -120,7 +129,7 @@ const props =
           style="min-height: 130px"
         >
           <span class="hotel_desc">
-            {{ description }}
+            {{ description.length >= 125 ? description.substring(0, 126) + '...' : description }}
           </span>
         </div>
         <div class="amenity_container">
@@ -139,8 +148,11 @@ const props =
             class="amenity_show_more"
             style="text-align: right"
           >
-            <span class="amenity-link">
-              显示所有设施
+            <span
+              class="amenity-link"
+              @click="showDescription(description)"
+            >
+              显示完整简介
             </span>
           </div>
         </div>
@@ -367,6 +379,7 @@ body {
   letter-spacing: 0;
   line-height: 18px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .detail {

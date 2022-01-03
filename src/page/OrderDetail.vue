@@ -301,6 +301,7 @@ const book = async () => {
             <div
               class="attention"
               style="color: #8592a6;font-size: 14px;line-height: 18px;padding-bottom: 8px"
+              v-if="preview?.availableCoupons.length >= 5"
             >
               下拉查看更多优惠券
             </div>
