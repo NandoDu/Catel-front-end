@@ -46,24 +46,6 @@ const getDone = () => {
   selectedRoomList.value = roomInfoList.value;
   checkMaxNum();
 };
-// const {state: hotelInfo} = useAsyncState(HotelInfoAPI({id: +(hotelId)}), {
-//   id: 0,
-//   name: '加载中',
-//   address: '加载中',
-//   bizRegion: '加载中',
-//   hotelStar: 'Five',
-//   rate: 5,
-//   description: '加载中',
-//   phoneNumber: '加载中',
-//   landscape: '',
-//   portrait: '',
-//   creditBound: 100,
-//   announcement: '加载中',
-//   rooms: [],
-//   rateDist: [],
-// }, getDone);
-
-
 store.dispatch('hotel/getHotelInfo', {id: hotelId}).then(() => {
   hotelInfo.value = store.getters['hotel/hotelInfo'];
   getDone();
@@ -164,10 +146,6 @@ const book = (roomId: number) => {
   else {
     let start = current.value.getTime();
     let end = start + 1000 * 60 * 60 * 24;
-    if (current.value.getHours() >= 14) {
-      start += 1000 * 60 * 60 * 24;
-      end = start + 1000 * 60 * 60 * 24;
-    }
     router.push({
       path: '/order',
       query: {roomId: roomId, start: start, end: end, num: roomNum.value, hotelId: hotelId},
