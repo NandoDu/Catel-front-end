@@ -24,7 +24,7 @@ const allowLogged: NavigationGuard = (to, from) => {
 };
 
 const preventRecommit: NavigationGuard = (to, from) => {
-  const recommit = from.matched[0].path === '/order-detail/:orderId';
+  const recommit = from.matched[0]?.path === '/order-detail/:orderId';
   if (!recommit) return;
   ElMessage.warning({
     message: '订单已提交，可在个人中心内查看',
