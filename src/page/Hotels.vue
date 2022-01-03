@@ -38,7 +38,7 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
       style="margin-top: 20px;z-index: 0"
       @screen="screenHotel"
     />
-    <div style="display: block;margin-top: 30px;">
+    <div style="display: block;margin-top: 30px; width: 1070px">
       <HotelList
         :hotels-list="hotelsList"
         v-if="hotelsList.length !== 0"

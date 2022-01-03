@@ -12,7 +12,7 @@ defineProps<{ text: string, to: string }>();
 @use 'src/util/Color';
 
 $duration: 200ms;
-$mainColor: Color.$purple;
+$mainColor: Color.$bingo;
 
 a {
   all: unset;
