@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BiggerButton from '../Header/BiggerButton.vue';
+import BiggerButton from '../Util/BiggerButton.vue';
 import useTranslation from '../../config/i18n/useTranslation';
 import {inject, reactive} from 'vue';
 import {publishCommentAPI} from '../../api/comment/publish';

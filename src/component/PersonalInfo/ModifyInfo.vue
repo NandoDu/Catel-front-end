@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {inject, reactive, ref} from 'vue';
 import LineInput from '../Util/LineInput.vue';
-import BiggerButton from '../Header/BiggerButton.vue';
+import BiggerButton from '../Util/BiggerButton.vue';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import useTranslation from '../../config/i18n/useTranslation';

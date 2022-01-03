@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   text: string
-  color: 'red' | 'green'
+  color?: 'red' | 'green' | 'blue' | 'purple' | 'brown'
   size?: 'big' | 'small'
 }>();
 
@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <button
     class="bigger-button"
-    :class="[`color-${color}`, `size-${size ?? 'big'}`]"
+    :class="[`color-${color ?? 'blue'}`, `size-${size ?? 'big'}`]"
   >
     {{ text }}
   </button>
@@ -49,7 +49,7 @@ $duration: 200ms;
   border: 1px solid $baseColor;
   border-radius: 20px;
   padding: (2 * 4px) $baseSize;
-  
+
   &:hover {
     color: white;
     background-color: $lightColor;

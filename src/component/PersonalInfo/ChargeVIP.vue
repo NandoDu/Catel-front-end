@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, inject, ref} from 'vue';
-import BiggerButton from '../Header/BiggerButton.vue';
+import BiggerButton from '../Util/BiggerButton.vue';
 import {useTypedStore} from '../../store';
 import {ElMessage} from 'element-plus';
 import {ChargeVipAPI} from '../../api/userApi';

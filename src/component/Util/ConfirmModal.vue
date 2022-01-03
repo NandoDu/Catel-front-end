@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import VirryModal from './VirryModal.vue';
-import BiggerButton from '../Header/BiggerButton.vue';
+import BiggerButton from './BiggerButton.vue';
 import useTranslation from '../../config/i18n/useTranslation';
 import {ref} from 'vue';
 

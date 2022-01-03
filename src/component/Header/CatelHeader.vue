@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MenuLink from './MenuLink.vue';
-import BiggerButton from './BiggerButton.vue';
+import BiggerButton from '../Util/BiggerButton.vue';
 import FlexSpace from '../Util/FlexSpace.vue';
 import {useRouter} from 'vue-router';
 import {useTypedStore} from '../../store';
