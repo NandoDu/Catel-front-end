@@ -29,7 +29,8 @@ const showMoreLines = () => {
           :class="{'hotelItemHead' : index % 5 === 0}"
         >
           <h4
-            style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0 #383838"
+            style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0 #383838;cursor: pointer;"
+            @click="$router.push(`/hotel/${hotel.id}`)"
           >
             {{ hotel['name'].length > 8 ? hotel['name'].substring(0, 7) + '...' : hotel['name'] }} >
           </h4>
@@ -37,7 +38,7 @@ const showMoreLines = () => {
             alt="hotelPic"
             :src="hotel['portrait']"
             class="hotelItemPic"
-            style="width: 100%; height: 100%; border-radius: 10px;"
+            style="width: 100%; height: 100%; border-radius: 10px;cursor: pointer"
             @click="$router.push(`/hotel/${hotel.id}`)"
           >
         </div>
@@ -161,7 +162,4 @@ const showMoreLines = () => {
   font-size: 15px;
 }
 
-.hotelItemPic{
-  cursor: pointer;
-}
 </style>
