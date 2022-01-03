@@ -39,8 +39,8 @@ const zh = {
   title: '标题',
   confirm: '确认',
   sureToDelete: '确认要删除该项吗',
-  sureToWithdrawOrder: '确认要撤回订单吗',
-  alterResident: '修改入住人信息'
+  sureToWithdrawOrder: '确认要撤回订单吗，该操作会扣除您的信用值',
+  alterResident: '修改入住人信息',
 };
 
 export default zh;

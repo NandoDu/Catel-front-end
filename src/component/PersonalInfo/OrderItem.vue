@@ -88,7 +88,7 @@ const annulOrder = async () => {
             alt="Location Icon"
           >
           <div class="orderHotelAddressText">
-            {{ orderInfo.hotelAddress }}
+            {{ orderInfo.hotelAddress.substring(9) }}
           </div>
         </div>
       </div>
