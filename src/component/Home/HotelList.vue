@@ -2,7 +2,7 @@
 import {ref} from 'vue';
 import {hotelListItemO} from '../../api/hotelApi';
 
-defineProps<{hotelsList: hotelListItemO[]}>();
+defineProps<{ hotelsList: hotelListItemO[] }>();
 const showLines = ref(2);
 const showMoreLines = () => {
   showLines.value = showLines.value + 2;
@@ -31,7 +31,7 @@ const showMoreLines = () => {
           <h4
             style="position: relative; top: 65px; left: 20px; color: white; font-size: 18px; text-shadow: 1px 1px 0 #383838"
           >
-            {{ hotel['name'] }} >
+            {{ hotel['name'].length > 8 ? hotel['name'].substring(0, 7) + '...' : hotel['name'] }} >
           </h4>
           <img
             alt="hotelPic"
@@ -153,12 +153,14 @@ const showMoreLines = () => {
   border-radius: 10px;
   margin-left: 0;
 }
+
 .showAll {
   margin-top: 80px;
   display: flex;
   align-self: center;
   font-size: 15px;
 }
+
 .hotelItemPic:hover {
   cursor: pointer;
 }

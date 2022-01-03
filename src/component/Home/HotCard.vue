@@ -28,7 +28,7 @@ const rateDesc = computed(() =>
         {{ card.name }}
       </div>
       <div class="cardHotelAddress">
-        {{ card.address }}
+        {{ card.address.substring(9) }}
       </div>
       <div class="cardHotelStar">
         <div class="cardHotelStarNum">

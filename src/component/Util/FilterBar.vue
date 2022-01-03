@@ -2,7 +2,6 @@
 import {reactive, ref} from 'vue';
 import * as events from 'events';
 import dateFormat from 'dateformat';
-import {disabledDate, reverseBizRegionMap} from '../../util/globalMap';
 
 let priceRangeList = reactive([
   '200元以下',
@@ -158,9 +157,9 @@ const screen = () => {
     }
   }
   if (!value.value)
-    emit('screen', reverseBizRegionMap[filterLocation.value as '西单'], 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
+    emit('screen', filterLocation.value, 0, 0, filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
   else
-    emit('screen', reverseBizRegionMap[filterLocation.value as '西单'], value.value.length === 0 ? 0 : value.value[0], value.value.length === 0
+    emit('screen', filterLocation.value, value.value.length === 0 ? 0 : value.value[0], value.value.length === 0
       ? 0 : value.value[1], filterPriceLower.value, filterPriceUpper.value, filterRate.value, star);
 };
 </script>
@@ -456,7 +455,7 @@ const screen = () => {
   outline: none;
 }
 
-.locationTitle >>> .el-input__inner {
+.locationTitle > > > .el-input__inner {
   border: 0;
 }
 
@@ -613,7 +612,7 @@ const screen = () => {
 }
 
 .rateRange {
-
+  
 }
 
 .rateRangeSelectArea {
