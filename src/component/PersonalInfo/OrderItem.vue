@@ -31,8 +31,6 @@ const state2msg = {
   Available: 'orderAvailable',
 };
 const annulOrder = async () => {
-  console.log('delete');
-  console.log(props.orderInfo.id);
   try {
     await annulOrderAPI({orderId: props.orderInfo.id});
     ElMessage.success({

@@ -42,7 +42,6 @@ const submitModify = async () => {
       message: message.value.fieldMissing,
       center: true,
     });
-    console.log(firstInput.value);
     firstInput.value.focus();
     return;
   }

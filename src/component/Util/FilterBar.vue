@@ -25,7 +25,6 @@ const showFilterPrice = ref('预期价格');
 const emit = defineEmits(['screen']);
 const priceRangeClick = (index: number) => {
   if (currentPriceIndex.value === index) {
-    console.log('重置');
     currentPriceIndex.value = -1;
     filterPriceLower.value = 0;
     filterPriceUpper.value = 999999;
@@ -67,8 +66,6 @@ const priceRangeClick = (index: number) => {
         break;
     }
   }
-  console.log('filterPriceLower: ' + filterPriceLower.value);
-  console.log('filterPriceUpper: ' + filterPriceUpper.value);
 };
 const rateChange = () => {
   filterRate.value = +(rateValue.value);
@@ -84,7 +81,6 @@ const setPriceDiyLow = (event: events) => {
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value;
   }
-  console.log(parseInt(priceDiyLow.value));
   filterPriceLower.value = +(priceDiyLow.value);
   filterPriceUpper.value = +(priceDiyHigh.value);
 };
@@ -94,7 +90,6 @@ const setPriceDiyHigh = (event: events) => {
   if (priceDiyHigh.value === 'NaN') {
     priceDiyHigh.value = '';
   }
-  console.log(parseInt(priceDiyHigh.value));
   filterPriceLower.value = +(priceDiyLow.value);
   filterPriceUpper.value = +(priceDiyHigh.value);
 };
@@ -102,27 +97,21 @@ const resetPriceDiyHigh = (event: events) => {
   currentPriceIndex.value = -1;
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value;
-    console.log('priceDiyLow > priceDiyHigh');
   }
   if (isNaN(parseInt(priceDiyHigh.value))) {
     priceDiyHigh.value = priceDiyLow.value;
   }
   showFilterPrice.value = priceDiyLow.value + '-' + priceDiyHigh.value + '元';
-  console.log('priceDiyLow: ' + priceDiyLow.value);
-  console.log('priceDiyHigh: ' + priceDiyHigh.value);
 };
 const resetPriceDiyLow = (event: events) => {
   currentPriceIndex.value = -1;
   if (parseInt(priceDiyLow.value) > parseInt(priceDiyHigh.value)) {
     priceDiyHigh.value = priceDiyLow.value;
-    console.log('priceDiyLow > priceDiyHigh');
   }
   if (isNaN(parseInt(priceDiyLow.value))) {
     priceDiyLow.value = '0';
   }
   showFilterPrice.value = priceDiyLow.value + '-' + priceDiyHigh.value + '元';
-  console.log('priceDiyLow: ' + priceDiyLow.value);
-  console.log('priceDiyHigh: ' + priceDiyHigh.value);
 };
 const clearLocation = () => {
   filterLocation.value = '';

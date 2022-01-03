@@ -47,7 +47,6 @@ const {state: singleRoomInfo} = useAsyncState(GetRoomInfoAPI({id: roomId.value})
   breakfast: false,
 });
 const {state: personInfoList} = useAsyncState(userResidentsAPI({id}).then(r => {
-  console.log(r);
   return r;
 }), []);
 let selectedResident = ref<string[]>([]);

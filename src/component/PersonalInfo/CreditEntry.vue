@@ -12,8 +12,6 @@ const up = computed(() => prop.record.creditDelta > 0);
 const color = computed(() => up.value ? 'green' : 'brown');
 const classes = computed(() => ['credit-entry', up.value ? 'up' : 'down']);
 
-console.log(prop.record);
-
 </script>
 
 <template>

@@ -137,15 +137,12 @@ const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast
       roomNumber: roomNumber,
     }).then((res) => {
       temp = res;
-      console.log(res);
       selectedRoomList.value = [];
       for (let room of temp) {
         if (room.peopleMax >= peopleNum)
           selectedRoomList.value.push(room);
       }
-      console.log(selectedRoomList.value);
       changeBreakfastWithoutMessage(breakfast);
-      console.log(displayRoomList.value);
       ElMessage.success('房型筛选成功！');
     }).catch(() => {
       console.log('后端报错');
@@ -153,7 +150,6 @@ const startSearch = (time: any, peopleNum: number, roomNumber: number, breakfast
   }
 };
 const book = (roomId: number) => {
-  console.log(roomId);
   if (selectedTime.value.length !== 0)
     router.push({
       path: '/order',

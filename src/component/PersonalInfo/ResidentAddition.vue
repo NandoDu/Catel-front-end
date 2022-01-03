@@ -42,13 +42,11 @@ const submitModify = async () => {
       message: message.value.fieldMissing,
       center: true,
     });
-    console.log(firstInput.value);
     firstInput.value.focus();
     return;
   }
 
   const dataString = dateFormat(residentInfo.birthday, 'mm/dd/yyyy');
-  console.log(dataString);
   try {
     await addResidentAPI({
       realName: residentInfo.name,

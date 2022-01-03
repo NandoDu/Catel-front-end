@@ -37,7 +37,6 @@ const submitModify = async () => {
       message: message.value.fieldMissing,
       center: true,
     });
-    console.log(firstInput.value);
     firstInput.value.focus();
     return;
   }
@@ -53,7 +52,6 @@ const submitModify = async () => {
   }).catch((e) => {
     console.log(e);
   });
-  console.log('修改信息');
   closeModal?.();
   emit('needRefresh');
 };

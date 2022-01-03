@@ -20,7 +20,6 @@ const user: Module<UserState, unknown> = {
   },
   mutations: {
     afterLogin: (state, userInfo: LoginO) => {
-      console.log(userInfo);
       state.logged = true;
       state.userId = userInfo.id;
       state.email = userInfo.email;

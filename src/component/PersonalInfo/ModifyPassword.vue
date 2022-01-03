@@ -36,7 +36,6 @@ const submitModify = async () => {
       message: message.value.fieldMissing,
       center: true,
     });
-    console.log(firstInput.value);
     firstInput.value.focus();
     return;
   }
@@ -59,7 +58,6 @@ const submitModify = async () => {
       message: ('修改成功'),
       center: true,
     });
-    console.log('修改密码');
     closeModal?.();
   } catch (e) {
     console.log(e);

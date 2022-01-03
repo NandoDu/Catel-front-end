@@ -40,7 +40,7 @@ const submitCharge = async () => {
   }).catch((e) => {
     console.log(e);
   });
-  console.log('充值会员');
+  
   closeModal?.();
   emit('needRefresh');
 };

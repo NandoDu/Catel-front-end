@@ -11,7 +11,6 @@ const store = useTypedStore();
 const user = store.getters['user/all'] as UserState;
 const orderId = route.params.orderId as unknown as number;
 const hotelInfo = await hotelDetailAPI({orderId});
-console.log(hotelInfo);
 </script>
 
 <template>

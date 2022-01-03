@@ -5,7 +5,6 @@ import {ElMessage} from 'element-plus';
 import {couponTypeMap} from '../util/globalMap';
 
 const props = defineProps<{ coupon: CouponListItemO, index: number, activeIndex: number }>();
-console.log(props.coupon);
 const emit = defineEmits(['select']);
 const selectCoupon = (currentIndex: number, activeIndex: number, couponId: number, available: boolean) => {
   if (!available)

@@ -26,7 +26,6 @@ const showModifyResident = () => modifyResident.value.open();
 const showConfirm = () => conformModal.value.open();
 const showDetail = () => residentDetail.value.open();
 const deleteResident = async () => {
-  console.log('delete');
   try {
     await deleteResidentAPI({residentId: prop.residentInfo.id});
     ElMessage.success({

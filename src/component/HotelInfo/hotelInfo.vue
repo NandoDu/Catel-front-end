@@ -3,7 +3,6 @@ import {hotelStarMap, bizRegionMap} from '../../util/globalMap';
 
 const props =
   defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
-console.log(props.hotelPortrait);
 </script>
 <template>
   <section

@@ -21,7 +21,6 @@ const changeBreak = () => {
     breakInfo.value = '不供早餐';
   }
   emit('changeBreak', breakfast.value);
-  console.log('改变早餐状态emit已送出');
 };
 const startSearch = () => {
   emit('startSearch', value.value, peopleNum.value, roomNum.value, breakfast.value);
