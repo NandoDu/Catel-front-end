@@ -299,6 +299,12 @@ const book = async () => {
               优惠券
             </h3>
             <div
+              class="attention"
+              style="color: #8592a6;font-size: 14px;line-height: 18px;padding-bottom: 8px"
+            >
+              下拉查看更多优惠券
+            </div>
+            <div
               v-if="preview?.availableCoupons.length !== 0"
               class="coupon-list"
             >
