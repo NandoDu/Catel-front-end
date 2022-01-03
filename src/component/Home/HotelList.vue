@@ -161,7 +161,7 @@ const showMoreLines = () => {
   font-size: 15px;
 }
 
-.hotelItemPic:hover {
+.hotelItemPic{
   cursor: pointer;
 }
 </style>

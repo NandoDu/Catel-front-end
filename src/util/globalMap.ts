@@ -12,7 +12,7 @@ const roomTypeMap = {
 const couponTypeMap = {'Multiple': '多间优惠券', 'Vip': '会员优惠券', 'Reduction': '满减优惠券'};
 const disabledDate = (select: Date) => {
   const current = new Date();
-  return (current && select.getTime() < current.getTime() - 3600 * 1000 * 24 || select.getTime() > current.getTime() + 3600 * 1000 * 180 * 24);
+  return (current && select.getTime() < current.getTime() - 3600 * 1000 * 24 || select.getTime() > current.getTime() + 3600 * 1000 * 30 * 24);
 };
 
 

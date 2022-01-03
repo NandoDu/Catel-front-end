@@ -35,12 +35,17 @@ const screenHotel = (location: string, start: number, end: number, priceLow: num
 <template>
   <div class="hotels-page">
     <FilterBar
-      style="margin-top: 20px"
+      style="margin-top: 20px;z-index: 0"
       @screen="screenHotel"
     />
-    <div style="display: block;margin-top: 50px">
+    <div style="display: block;margin-top: 30px;">
       <HotelList
         :hotels-list="hotelsList"
+        v-if="hotelsList.length !== 0"
+      />
+      <el-empty
+        description="没有符合您要求的酒店哦！"
+        v-else
       />
     </div>
   </div>
