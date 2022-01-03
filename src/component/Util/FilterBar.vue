@@ -19,7 +19,7 @@ const filterPriceLower = ref(0);
 const filterPriceUpper = ref(999999);
 const filterRate = ref(6);
 const currentPriceIndex = ref(-1);
-const filterLocation = ref('酒店商圈');
+const filterLocation = ref('酒店名称或商圈');
 const showFilterPrice = ref('预期价格');
 const emit = defineEmits(['screen']);
 const priceRangeClick = (index: number) => {
@@ -117,7 +117,7 @@ const clearLocation = () => {
 };
 const resetLocation = () => {
   if (filterLocation.value == '') {
-    filterLocation.value = '酒店商圈';
+    filterLocation.value = '酒店名称或商圈';
   }
 };
 const clearFilterPrice = () => {

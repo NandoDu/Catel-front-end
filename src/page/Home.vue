@@ -13,7 +13,7 @@ const {state: luckyInfo} = useAsyncState(luckyAPI, null);
 let {state: hotelsList} = useAsyncState(GetHotelListAPI({}), []);
 const screenHotel = (location: string, start: number, end: number, priceLow: number, priceHigh: number, rate: number, star: string) => {
   GetHotelListAPI({
-    filterLocation: location === '酒店商圈' ? undefined : location,
+    filterLocation: location === '酒店名称或商圈' ? undefined : location,
     filterRate: rate === 6 ? undefined : rate,
     filterInDate: start === 0 ? undefined : dateFormat(start, 'mm/dd/yyyy'),
     filterOutDate: end === 0 ? undefined : dateFormat(end, 'mm/dd/yyyy'),
