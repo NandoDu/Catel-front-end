@@ -184,7 +184,7 @@ const showModifyInfo = () => modifyInfo.value.open();
               <div class="addPersonIcon">
                 <img
                   class="addPersonImg"
-                  src="src/asset/icon/add.png"
+                  src="../asset/icon/add.png"
                   alt="Add Sign"
                 >
               </div>

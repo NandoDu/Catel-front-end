@@ -181,7 +181,7 @@ const screen = () => {
       <div class="locationArea">
         <div class="locationIcon">
           <img
-            src="src/asset/location.png"
+            src="../../asset/location.png"
             style="width: 15px"
             alt="location"
           >
@@ -467,7 +467,7 @@ const screen = () => {
   outline: none;
 }
 
-.locationTitle > > > .el-input__inner {
+.locationTitle >>> .el-input__inner {
   border: 0;
 }
 
@@ -624,7 +624,7 @@ const screen = () => {
 }
 
 .rateRange {
-  
+
 }
 
 .rateRangeSelectArea {

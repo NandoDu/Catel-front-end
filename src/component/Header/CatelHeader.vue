@@ -48,6 +48,10 @@ let ifRegister = ref(false);
       >
       <span class="logo-name">Catel</span>
     </div>
+    <MenuLink
+      :text="message.aboutUs"
+      to="/about-us"
+    />
     <LocaleSelect v-if="false" />
     <FlexSpace />
     <nav>
@@ -56,17 +60,8 @@ let ifRegister = ref(false);
         to="/"
       />
       <MenuLink
-        :text="message.aboutUs"
-        to="/about-us"
-      />
-      <MenuLink
         :text="message.hotel"
         to="/hotels"
-      />
-      <MenuLink
-        v-if="logged"
-        :text="message.order"
-        to="/"
       />
       <MenuLink
         v-if="logged"

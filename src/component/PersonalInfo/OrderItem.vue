@@ -85,7 +85,7 @@ const annulOrder = async () => {
         </div>
         <div class="orderHotelAddress">
           <img
-            src="src/asset/locationIcon.png"
+            src="../../asset/locationIcon.png"
             style="width: 15px; height: 15px; align-self: center"
             alt="Location Icon"
           >

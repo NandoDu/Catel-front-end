@@ -53,12 +53,12 @@ const showMoreLines = () => {
     <div class="showMoreIcon">
       <img
         alt="showMore"
-        src="src/asset/showMore.png"
+        src="../../asset/showMore.png"
         class="showMoreImg"
       >
       <img
         alt="showMoreHover"
-        src="src/asset/showMoreHover.png"
+        src="../../asset/showMoreHover.png"
         class="showMoreHoverImg"
       >
     </div>
