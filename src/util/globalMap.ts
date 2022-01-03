@@ -1,5 +1,4 @@
 const hotelStarMap = {'Five': 5, 'Four': 4, 'Three': 3, 'Two': 2, 'One': 1};
-const bizRegionMap = {'XiDan': '西单', 'DongDan': '东单'};
 const roomTypeMap = {
   'BigBed': '大床房',
   'DoubleBed': '标准双床房',
@@ -17,4 +16,4 @@ const disabledDate = (select: Date) => {
 };
 
 
-export {roomTypeMap, hotelStarMap, bizRegionMap, couponTypeMap, disabledDate};
+export {roomTypeMap, hotelStarMap, couponTypeMap, disabledDate};

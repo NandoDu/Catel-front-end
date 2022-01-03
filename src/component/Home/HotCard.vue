@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {CarouselItemO} from '../../api/userApi';
-import {computed, reactive, ref, unref} from 'vue';
+import {computed, reactive} from 'vue';
 
 const props = defineProps<{
   card: CarouselItemO,
@@ -28,7 +28,7 @@ const rateDesc = computed(() =>
         {{ card.name }}
       </div>
       <div class="cardHotelAddress">
-        {{ card.address.substring(9) }}
+        {{ card['address'].length >= 30 ? card['address'].substring(9) : card['address'].substring(9, 31) + '...' }}
       </div>
       <div class="cardHotelStar">
         <div class="cardHotelStarNum">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {hotelStarMap, bizRegionMap} from '../../util/globalMap';
+import {hotelStarMap} from '../../util/globalMap';
 
 const props =
   defineProps<{ hotelName: string, description: string, hotelStar: string, address: string, rate: number, commentCount: number, announcement: string, bizRegion: string, hotelLandscape: string, hotelPortrait: string}>();
@@ -29,7 +29,7 @@ const props =
               <i class="el-icon-location" />
             </div>
             <span class="position_info">
-              <span class="position_text">位于{{ address }},在{{ bizRegionMap[bizRegion] }}中</span>
+              <span class="position_text">位于{{ address }},在<b>{{ bizRegion }}</b>商圈中</span>
             </span>
           </div>
         </div>
