@@ -99,7 +99,7 @@ const showDescription = (description: string) => {
                   class="review_all"
                   style="margin-bottom: 10px;margin-top: 10px"
                 >
-                  显示全部{{ commentCount }}条评论
+                  共有 {{ commentCount }}用户评论了该酒店
                 </p>
                 <p
                   class="review_quality"
